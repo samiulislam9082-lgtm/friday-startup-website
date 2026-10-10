@@ -4,7 +4,7 @@
   launchAt must include an explicit timezone (ISO 8601).
 */
 window.FRIDAY_STARTUP_CONFIG = {
-  // Replace with the real company inbox before accepting live inquiries.
+  // Keep this set to the official company inbox before accepting live inquiries.
   contactEmail: "hello@fridaystartup.com",
 
   // Leave empty until each official Friday Startup profile is ready.
@@ -25,7 +25,10 @@ window.FRIDAY_STARTUP_CONFIG = {
     bookingUrl: ""
   },
 
-  // Announcements appear automatically 48 hours before launchAt.
+  // Approved newsroom stories appear at publishAt. Future-dated items show as upcoming.
+  newsItems: [],
+
+  // Product previews appear in News 48 hours before launchAt.
   // At launchAt, the product moves into the right-to-left logo lineup.
   launches: []
 };
