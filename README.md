@@ -1,36 +1,45 @@
 # Friday Startup
 
-A responsive, static website for the Friday Startup venture-studio brand: build digital products under one umbrella and partner with other businesses on considered growth.
+A responsive, static website for Friday Startup: a venture-building umbrella for launching digital businesses and a partner for companies working on their next stage of growth.
 
 ## Run locally
 
-No build step or package install is needed:
+No build step or package installation is required:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Then open `http://localhost:8080`.
+Open `http://localhost:8080`.
 
 ## Update the site
 
-- `index.html` — page content, layout, responsive styling, navigation, FAQ, and interaction.
-- `assets/site-config.js` — editable contact inbox, official social URLs, optional contact methods, and scheduled launches.
-- `assets/friday-startup-emblem.png` — the supplied F/orbit/star emblem isolated on a transparent background. The header and footer place “Friday Startup” beside it as live text; the emblem artwork is not redrawn.
-- `assets/social-*.svg` — the six requested platform marks.
+- `index.html` — homepage content, design, navigation, venture portfolio, approach, FAQs, and Help.
+- `news.html` — separate News & updates page, including confirmed product previews and dated studio news.
+- `assets/site-config.js` — current contact inbox, official social URLs, optional contact methods, approved news stories, and product launch details.
+- `assets/friday-startup-emblem.png` — the supplied emblem on a transparent background. The page renders “Friday Startup” beside it as live text; the emblem is not redrawn.
+- `assets/social-*.svg` — Facebook, Instagram, Gmail, X, LinkedIn, and WhatsApp marks. All six are kept in the Help section and remain inactive until official destinations are added.
 - `assets/*.jpg` — Pexels photography; credits and source pages are below.
 
 ### Help & contact
 
-All social icons and their future links are confined to the **Help & contact** section. Before inviting real inquiries, replace `contactEmail` in `assets/site-config.js` with the verified company inbox. The form asks for name, email, inquiry type, and a short message; company/site is optional. It prepares a message in the visitor's default email app. This static site does not receive, store, or send submissions. The visitor reviews and sends the draft themselves.
+Keep `contactEmail` in `assets/site-config.js` set to the official company inbox before inviting real inquiries. The focused form asks for name, email, inquiry type, and a short message; company/site is optional. The page prepares an email draft in the visitor’s mail app and does not store or send submissions.
 
-Add official account destinations under `socials` in the same file. Facebook, Instagram, X, and LinkedIn should use verified profile URLs; `gmail` should be the company email address; `whatsapp` should be the official business `wa.me` or WhatsApp profile URL. Icons remain visibly marked “Not connected” and unclickable while a destination is blank. Optional `phone`, `whatsapp`, and `bookingUrl` contact shortcuts appear only after they are configured.
+Add only official account destinations under `socials`: verified Facebook, Instagram, X, LinkedIn, a company Gmail address, and the official WhatsApp link. Optional phone, WhatsApp, and booking shortcuts appear only when configured.
 
-### Schedule a product announcement
+### News and launches
 
-Add an approved item to `launches` in `assets/site-config.js`:
+Add an approved studio story to `newsItems` in `assets/site-config.js` with a title, summary, category, and ISO 8601 `publishAt` value. It appears on `news.html` at or after that time. Product teasers use `launches`: enter an approved name, accurate summary, real local logo path, timezone-aware `launchAt`, and optional HTTPS URL. A product preview appears in News only during the 48 hours before launch; after launch, the product and its logo appear in the homepage portfolio. Do not add a product or date until it is approved.
 
 ```js
+newsItems: [
+  {
+    title: "Approved update title",
+    summary: "A short, accurate update.",
+    category: "Studio news",
+    publishAt: "2027-02-01T10:00:00+06:00"
+  }
+],
 launches: [
   {
     name: "Product name",
@@ -42,26 +51,17 @@ launches: [
 ]
 ```
 
-Use the real logo file and an ISO 8601 launch date with its timezone. The announcement becomes visible 48 hours before launch, with a countdown. At launch time, the product and its mark move into the right-to-left logo lineup. The list is empty for now, so the page shows clearly labelled placeholder slots—not fictitious products. The motion can be paused, and reduced-motion preferences are respected.
-
-## Research behind the inquiry flow
-
-The contact experience follows [HubSpot's contact-page guidance](https://blog.hubspot.com/service/best-contact-us-pages) and [Formidable Forms' contact-form best practices](https://formidableforms.com/research-based-tips-improve-contact-form-conversions/): make contact easy to find, keep the initial form focused, use responsive fields, and avoid requesting unnecessary personal information. Details and maintenance steps are in [`docs/website-research-and-maintenance.md`](docs/website-research-and-maintenance.md).
-
-The social icons are from [Simple Icons](https://github.com/simple-icons/simple-icons); review its [legal disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md). Each platform's marks remain its property; they identify intended contact destinations and do not imply endorsement.
+The launch list is empty until a product is approved for announcement. Placeholder marks are labelled as such, never as live products or customer results.
 
 ## Photo credits
 
 - Team collaboration — [fauxels on Pexels](https://www.pexels.com/photo/people-working-in-front-of-the-computer-3184357/)
 - Product building — [Mizuno K on Pexels](https://www.pexels.com/photo/discussion-about-software-development-in-office-12899191/)
 - Growth partnership — [Vitaly Gariev on Pexels](https://www.pexels.com/photo/creative-team-brainstorming-in-modern-office-39205102/)
+- Venture workshop — [Kindel Media on Pexels](https://www.pexels.com/photo/planning-a-business-7688454/)
 
-Images link to their photographers' pages. Review the [Pexels license](https://www.pexels.com/license/) for current terms.
+Images remain local to the site. Review the [Pexels license](https://www.pexels.com/license/) for current terms.
 
 ## Deployment
 
-This plain static site can be hosted on any static host. The temporary preview for this task is created with:
-
-```bash
-npx --yes wrangler@4.102.0 deploy --temporary
-```
+The existing Vercel project serves production from this repository’s `main` branch. The container copies only the public website files (`index.html`, `news.html`, and `assets/`) into the web root; repository documents, previews, and unrelated archives are not copied.

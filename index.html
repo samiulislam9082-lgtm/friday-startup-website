@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6faff">
-  <meta name="description" content="Friday Startup builds digital ventures under one brand and partners with ambitious companies on thoughtful growth.">
-  <meta property="og:title" content="Friday Startup — Build what’s next">
-  <meta property="og:description" content="A home for new digital ventures. A hands-on growth partner for ambitious teams.">
+  <meta name="theme-color" content="#fbfaf7">
+  <meta name="description" content="Friday Startup builds digital ventures under one umbrella and partners with companies on thoughtful, practical growth.">
+  <meta property="og:title" content="Friday Startup — Venture studio & growth partner">
+  <meta property="og:description" content="We build digital ventures under one umbrella and partner with companies on their next thoughtful move.">
   <meta property="og:type" content="website">
-  <title>Friday Startup — Build what’s next</title>
+  <title>Friday Startup — Venture studio &amp; growth partner</title>
+  <link rel="icon" type="image/png" href="assets/friday-startup-emblem.png">
   <link rel="preload" as="image" href="assets/friday-startup-emblem.png">
   <link rel="preload" as="image" href="assets/team-collaboration.jpg" fetchpriority="high">
   <style>
@@ -110,22 +111,6 @@
     .venture-tile small { display: block; color: #738196; font-size: 10px; margin-top: 4px; }
     .logo-wall-note { color: #a7bad2; padding: 14px 28px 0; margin: 0; font-size: 11px; }
     @keyframes venture-marquee { to { transform: translateX(-50%); } }
-    .launches { background: #f2f7ff; }
-    .launches-top { display: flex; justify-content: space-between; align-items: end; gap: 28px; margin-bottom: 30px; }
-    .launches-top .section-heading { max-width: 730px; }
-    .launches-top .section-heading h2 { font-size: clamp(35px,4.2vw,52px); }
-    .launches-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
-    .launch-card { padding: 24px; border: 1px solid #dae7f7; border-radius: 20px; background: #fff; box-shadow: 0 14px 36px rgba(20,52,92,.06); }
-    .launch-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
-    .launch-label { color: #47627f; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 800; }
-    .countdown { border-radius: 999px; padding: 7px 10px; background: #edf4ff; color: #1a5bd1; font-size: 10px; font-weight: 800; white-space: nowrap; }
-    .launch-card h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.04em; }
-    .launch-card p { color: #5d6b7e; font-size: 13px; line-height: 1.7; margin-bottom: 14px; }
-    .launch-card time { color: #526a87; font-size: 11px; font-weight: 700; }
-    .launch-empty { display: flex; align-items: flex-start; gap: 16px; padding: 23px; border: 1px solid #dce8f8; border-radius: 19px; background: rgba(255,255,255,.78); }
-    .launch-empty-mark { flex: 0 0 40px; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 13px; color: var(--blue); background: #eaf2ff; font-size: 18px; font-weight: 800; }
-    .launch-empty strong { display: block; font-size: 13px; margin: 1px 0 4px; }
-    .launch-empty p { color: #6b7a8e; font-size: 12px; line-height: 1.65; margin: 0; }
     .capabilities { background: #fff; }
     .capability-top { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 36px; }
     .capability-top .section-heading { max-width: 660px; }
@@ -243,13 +228,12 @@
       .value-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding: 21px 0; gap: 12px; }
       .value-list { justify-content: flex-start; gap: 9px 17px; }
       section { padding: 72px 0; }
-      .venture-intro, .capability-top, .launches-top { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .venture-intro, .capability-top { align-items: flex-start; flex-direction: column; gap: 8px; }
       .venture-note { width: auto; max-width: 460px; }
       .logo-wall { border-radius: 21px; padding-top: 22px; }
       .logo-wall-head { padding-inline: 17px; }
       .logo-wall-note { padding-inline: 17px; }
       .venture-tile { width: 250px; }
-      .launches-grid { grid-template-columns: 1fr; }
       .capability-grid { grid-template-columns: 1fr; gap: 12px; }
       .capability-card { min-height: unset; padding: 23px; }
       .capability-card h3 { margin-top: 18px; }
@@ -280,6 +264,161 @@
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
       .logo-track { animation: none !important; }
     }
+
+    /* Friday Startup visual refresh: editorial, confident, and intentionally original. */
+    :root {
+      --ink: #11182a; --muted: #5e687b; --blue: #315cf5; --cyan: #14b8a6;
+      --paper: #fbfaf7; --white: #fff; --line: #e5e2db; --navy: #10182b;
+      --max: 1220px; --radius: 26px; --shadow: 0 26px 72px rgba(18,31,57,.13);
+    }
+    body { background: var(--paper); color: var(--ink); }
+    .wrap { width: min(var(--max), calc(100% - 52px)); }
+    .site-header { background: rgba(251,250,247,.93); border-bottom-color: rgba(219,219,214,.8); }
+    .nav { min-height: 88px; gap: 20px; }
+    .brand { gap: 10px; }
+    .brand img { width: 62px; }
+    .nav-links { gap: 17px; font-size: 12px; }
+    .button { border-radius: 999px; padding: 14px 21px; background: var(--blue); border-color: var(--blue); }
+    .button:hover { background: #214be0; }
+    .button.secondary { border-radius: 999px; background: rgba(255,255,255,.72); border-color: #d4d8e2; }
+    .hero { padding: 82px 0 74px; background: radial-gradient(ellipse at 83% 18%,rgba(49,92,245,.14),transparent 35%), radial-gradient(ellipse at 7% 95%,rgba(20,184,166,.08),transparent 32%), linear-gradient(145deg,#f8f8f4 4%,#eff4ff 100%); }
+    .hero::before { width: 490px; height: 490px; border-color: rgba(49,92,245,.10); box-shadow: 0 0 0 48px rgba(49,92,245,.03),0 0 0 96px rgba(49,92,245,.025); }
+    .hero-grid { grid-template-columns: 1.04fr .96fr; gap: 60px; }
+    .eyebrow { color: #445571; font-size: 10px; letter-spacing: .18em; }
+    .eyebrow::before { width: 25px; background: var(--cyan); }
+    h1 { font-size: clamp(50px,6vw,76px); letter-spacing: -.072em; line-height: .99; margin: 24px 0; }
+    .blue-text { color: var(--blue); }
+    .hero-copy { max-width: 570px; color: #586479; line-height: 1.7; font-size: clamp(16px,1.45vw,18px); }
+    .hero-actions { gap: 13px; }
+    .hero-note { color: #526178; font-size: 11px; }
+    .status-dot { background: var(--cyan); box-shadow: 0 0 0 4px rgba(20,184,166,.13); }
+    .hero-visual { min-height: 510px; }
+    .hero-photo { inset: 0 22px 26px 0; border-radius: 34px; background: #b8c9d4; }
+    .hero-photo img { object-position: 55% 42%; filter: saturate(.94); }
+    .hero-photo::after { inset: 24% 0 0; background: linear-gradient(0deg,rgba(8,18,37,.84),rgba(8,18,37,0) 100%); }
+    .photo-caption { left: 30px; bottom: 30px; }
+    .photo-caption span { color: #95e4dc; }
+    .photo-caption strong { font-size: 23px; }
+    .studio-card { top: 38px; right: -3px; width: 225px; border-radius: 20px; box-shadow: 0 22px 52px rgba(16,31,57,.18); }
+    .studio-card h2 { font-size: 17px; }
+    .mini-step { font-size: 10px; }
+    .float-chip { left: -13px; top: 39px; bottom: auto; border: 1px solid rgba(255,255,255,.18); border-radius: 15px; font-size: 11px; }
+    .float-chip b { color: #9ae8de; font-size: 9px; }
+    .value-strip { background: var(--navy); }
+    .value-inner { min-height: 76px; }
+    .value-intro { color: #bbcadc; font-size: 10px; }
+    .value-list { color: #f7f8fc; font-size: 11px; gap: 12px 25px; }
+    .value-list span::before { background: var(--cyan); }
+    section { padding: 92px 0; }
+    .section-heading h2, .growth-copy h2 { letter-spacing: -.06em; }
+    .section-heading p { color: #687386; font-size: 15px; }
+    .studio-model { background: #f2f4fa; overflow: hidden; }
+    .model-heading { max-width: 770px; margin-bottom: 34px; }
+    .model-heading h2 { font-size: clamp(40px,4.9vw,60px); }
+    .model-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+    .model-card { overflow: hidden; border: 1px solid rgba(213,219,231,.9); border-radius: 24px; background: #fff; box-shadow: 0 16px 42px rgba(20,37,68,.055); }
+    .model-media { position: relative; height: 250px; margin: 0; overflow: hidden; background: #d8e0ed; }
+    .model-media::after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(0deg,rgba(12,23,44,.55),transparent); }
+    .model-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .model-card:hover .model-media img { transform: scale(1.035); }
+    .model-media figcaption { position: absolute; left: 22px; bottom: 18px; z-index: 1; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .model-copy { padding: 26px 28px 29px; }
+    .model-kicker { display: block; margin-bottom: 8px; color: #4261b6; font-size: 9px; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+    .model-copy h3 { max-width: 450px; margin: 0 0 10px; font-size: 25px; line-height: 1.12; letter-spacing: -.045em; }
+    .model-copy p { margin: 0 0 16px; color: #667186; font-size: 12px; line-height: 1.75; }
+    .model-copy ul { display: grid; gap: 7px; margin: 0 0 19px; padding: 0; list-style: none; }
+    .model-copy li { color: #39475e; font-size: 11px; font-weight: 700; }
+    .model-copy li::before { content: "↗"; margin-right: 9px; color: var(--cyan); font-weight: 900; }
+    .text-link { color: var(--blue); font-size: 11px; font-weight: 800; }
+    .text-link span { display: inline-block; margin-left: 4px; transition: transform .2s; }
+    .text-link:hover span { transform: translateX(4px); }
+    .ventures { background: #fff; }
+    .logo-wall { border-radius: 24px; background: #111a2e; }
+    .venture-tile { border-radius: 15px; }
+    .capabilities { background: #fff; }
+    .capability-grid { gap: 14px; }
+    .capability-card { min-height: 218px; border-radius: 21px; border-color: #e2e5ec; background: linear-gradient(145deg,#fff,#fafbff); }
+    .capability-card:hover { border-color: #b8caff; box-shadow: 0 20px 46px rgba(19,59,108,.09); }
+    .cap-number { color: #fff; border-radius: 50%; background: var(--blue); }
+    .growth { background: #eaf1ff; }
+    .growth-visual img { border-radius: 28px; }
+    .growth-badge { border-radius: 18px; }
+    .approach { background: #fbfaf7; }
+    .approach-grid { grid-template-columns: .92fr 1.08fr; gap: 70px; align-items: start; }
+    .approach-aside .section-heading { position: static; }
+    .approach-photo { position: relative; margin: 23px 24px 0 0; height: 235px; overflow: hidden; border-radius: 22px; background: #cfd8e1; }
+    .approach-photo::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(0deg,rgba(9,20,38,.7),transparent); }
+    .approach-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 48%; }
+    .approach-photo figcaption { position: absolute; bottom: 17px; left: 18px; z-index: 1; color: white; font-size: 10px; font-weight: 750; }
+    .approach-steps { border-top-color: #dfe3eb; }
+    .approach-step { grid-template-columns: 48px 1fr; gap: 14px; padding: 23px 0; }
+    .step-no { display: grid; place-items: center; width: 35px; height: 35px; padding: 0; border-radius: 50%; color: var(--blue); background: #e9eeff; }
+    .approach-step h3 { font-size: 17px; }
+    .news-invite { padding: 54px 0; background: var(--navy); color: #fff; }
+    .news-invite-row { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .news-invite .eyebrow { color: #b3c7e0; }
+    .news-invite h2 { margin: 12px 0 7px; font-size: clamp(28px,3.2vw,38px); letter-spacing: -.045em; }
+    .news-invite p { margin: 0; color: #bac8da; font-size: 12px; }
+    .news-invite .button.secondary { flex: 0 0 auto; color: var(--navy); background: #fff; border-color: #fff; }
+    .principles { background: #f2f4fa; }
+    .principles-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+    .principle-card { min-height: 190px; padding: 25px; border: 1px solid #dfe4ed; border-radius: 21px; background: rgba(255,255,255,.86); }
+    .principle-no { display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 20px; border-radius: 50%; color: var(--blue); background: #e8edff; font-size: 10px; font-weight: 850; }
+    .principle-card h3 { margin: 0 0 8px; font-size: 17px; letter-spacing: -.035em; }
+    .principle-card p { margin: 0; color: #667186; font-size: 12px; line-height: 1.7; }
+    .faq { background: #f4f5f8; }
+    .faq-list { border-top-color: #d9deea; }
+    .faq-list details { border-bottom-color: #d9deea; }
+    .contact { background: #111a2e; }
+    footer { background: #0b1221; }
+    @media (max-width: 980px) {
+      .wrap { width: min(100% - 42px,var(--max)); }
+      .nav-links { gap: 12px; font-size: 11px; }
+      .hero-grid { gap: 36px; } .hero-visual { min-height: 450px; }
+      .studio-card { width: 205px; right: 0; } .float-chip { left: 3px; }
+      .approach-grid { gap: 42px; }
+    }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px,var(--max)); }
+      .nav { min-height: 76px; } .brand img { width: 55px; }
+      .nav-links { gap: 0; font-size: 13px; }
+      .hero { padding: 58px 0 52px; } .hero-grid { grid-template-columns: 1fr; gap: 34px; }
+      h1 { font-size: clamp(48px,11.5vw,70px); } .hero-visual { min-height: min(110vw,470px); }
+      .hero-photo { inset: 0 8px 15px 0; border-radius: 26px; } .float-chip { display: none; }
+      section { padding: 72px 0; }
+      .model-grid { grid-template-columns: 1fr; gap: 14px; } .model-media { height: min(58vw,270px); }
+      .venture-intro,.capability-top { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .capability-grid { grid-template-columns: 1fr; gap: 12px; } .capability-card { min-height: unset; padding: 23px; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .growth-grid { grid-template-columns: 1fr; gap: 36px; }
+      .approach-grid { grid-template-columns: 1fr; gap: 30px; } .approach-photo { height: min(60vw,260px); margin-right: 12px; }
+      .news-invite-row { align-items: flex-start; flex-direction: column; }
+      .footer-main { grid-template-columns: 1fr; gap: 20px; } .footer-meta { flex-direction: column; gap: 9px; }
+    }
+    @media (max-width: 420px) {
+      .wrap { width: calc(100% - 30px); } .hero-actions .button { width: 100%; }
+      .hero-visual { min-height: 390px; } .studio-card { width: 174px; }
+      .photo-caption { left: 20px; bottom: 21px; } .model-copy { padding: 23px 21px 25px; }
+      .form-grid { grid-template-columns: 1fr; } .field.full { grid-column: auto; }
+      .contact-form,.contact-aside { padding: 19px; } .footer-links { gap: 14px; }
+    }
+    /* Keep the supplied emblem intact; make the live-text brand lockup easier to read. */
+    .site-header .brand { gap: 14px; padding: 7px 13px 7px 7px; border: 1px solid rgba(52,80,111,.15); border-radius: 18px; background: rgba(255,255,255,.98); box-shadow: 0 7px 20px rgba(17,37,66,.08); }
+    .site-header .brand img { width: 92px; height: 64px; padding: 4px; object-fit: contain; border: 1px solid #dce7f3; border-radius: 12px; background: linear-gradient(135deg,#eff7ff,#fff); }
+    .site-header .brand-wordmark { font-size: 20px; font-weight: 850; letter-spacing: -.04em; }
+    .site-header .brand-wordmark strong { color: #155ee6; }
+    @media (max-width: 760px) {
+      .site-header .nav { min-height: 84px; }
+      .site-header .brand { gap: 10px; padding: 5px 9px 5px 5px; border-radius: 16px; }
+      .site-header .brand img { width: 76px; height: 52px; padding: 3px; }
+      .site-header .brand-wordmark { font-size: 17px; }
+    }
+    @media (max-width: 420px) {
+      .site-header .nav { gap: 12px; }
+      .site-header .brand { gap: 8px; padding: 4px 7px 4px 4px; }
+      .site-header .brand img { width: 68px; height: 46px; }
+      .site-header .brand-wordmark { font-size: 15px; }
+    }
   </style>
 </head>
 <body>
@@ -293,9 +432,10 @@
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav">☰</button>
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="#studio">The studio</a>
+        <a href="#model">Our model</a>
         <a href="#ventures">Ventures</a>
-        <a href="#launches">Launch updates</a>
-        <a href="#growth">Growth partnerships</a>
+        <a href="news.html">News</a>
+        <a href="#growth">Growth</a>
         <a href="#faq">FAQs</a>
         <a class="button" href="#help">Help &amp; contact <span class="arrow" aria-hidden="true">↗</span></a>
       </nav>
@@ -307,29 +447,29 @@
       <div class="wrap hero-grid">
         <div class="hero-copy-wrap">
           <div class="eyebrow">Venture studio · Growth partner</div>
-          <h1>Build boldly.<br><span class="blue-text">Grow together.</span></h1>
-          <p class="hero-copy">Friday Startup builds and launches digital ventures under one brand—and partners with companies ready for a thoughtful next stage of growth.</p>
+          <h1>Build ventures.<br><span class="blue-text">Grow together.</span></h1>
+          <p class="hero-copy">Friday Startup is a venture-building umbrella for launching digital businesses—and a growth partner for companies looking for a clear, thoughtful next move.</p>
           <div class="hero-actions">
-            <a class="button" href="#ventures">Explore the venture wall <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="button secondary" href="#growth">How we help teams <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="button" href="#model">Explore our model <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="button secondary" href="news.html">News &amp; updates <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
-          <div class="hero-note"><span class="status-dot" aria-hidden="true"></span>Early by design. Focused on the next good idea.</div>
+          <div class="hero-note"><span class="status-dot" aria-hidden="true"></span>One studio. Two ways to move an idea forward.</div>
         </div>
         <div class="hero-visual" aria-label="A team working together on a digital product">
           <figure class="hero-photo">
             <img src="assets/team-collaboration.jpg" alt="A team collaborating around computers in a modern office" width="1800" height="1201" fetchpriority="high">
-            <figcaption class="photo-caption"><span>From first thought to real product</span><strong>Ideas are the beginning.<br>Building is the point.</strong></figcaption>
+            <figcaption class="photo-caption"><span>Build · launch · learn</span><strong>Ideas move forward<br>when they’re made real.</strong></figcaption>
           </figure>
           <aside class="studio-card" aria-label="How the studio works">
-            <div class="card-kicker">One studio approach</div>
-            <h2>Make room for what’s next.</h2>
+            <div class="card-kicker">A venture studio &amp; growth partner</div>
+            <h2>Two paths.<br>One thoughtful mindset.</h2>
             <div class="mini-steps">
-              <div class="mini-step">Build <span>01</span></div>
-              <div class="mini-step">Launch <span>02</span></div>
-              <div class="mini-step">Grow <span>03</span></div>
+              <div class="mini-step">Build new ventures <span>01</span></div>
+              <div class="mini-step">Partner for growth <span>02</span></div>
+              <div class="mini-step">Learn and adapt <span>03</span></div>
             </div>
           </aside>
-          <div class="float-chip"><span class="float-mark" aria-hidden="true">↗</span><div>Independent ventures<b>One Friday Startup umbrella</b></div></div>
+          <div class="float-chip"><span class="float-mark" aria-hidden="true">↗</span><div>Built under one umbrella<b>Distinct products. Shared builder mindset.</b></div></div>
         </div>
       </div>
     </section>
@@ -341,6 +481,44 @@
       </div>
     </div>
 
+    <section class="studio-model" id="model" aria-labelledby="model-title">
+      <div class="wrap">
+        <div class="section-heading model-heading">
+          <div class="eyebrow">A clear way to work</div>
+          <h2 id="model-title">Two paths.<br><span class="blue-text">One builder’s mindset.</span></h2>
+          <p>We create digital businesses under the Friday Startup umbrella—and work alongside companies that want to make a considered next move.</p>
+        </div>
+        <div class="model-grid">
+          <article class="model-card">
+            <figure class="model-media">
+              <img src="assets/venture-workshop.jpg" alt="A team reviewing plans and charts together around a table" width="1800" height="1350" loading="lazy">
+              <figcaption>01 / Venture studio</figcaption>
+            </figure>
+            <div class="model-copy">
+              <span class="model-kicker">Built under Friday Startup</span>
+              <h3>Turn a useful idea into a digital venture.</h3>
+              <p>We explore opportunities, shape focused products, and bring new digital businesses to market under one umbrella. Each venture can have a distinct name and identity when it is ready to share.</p>
+              <ul><li>Explore a real customer need</li><li>Shape the product’s first release</li><li>Prepare to launch and learn</li></ul>
+              <a class="text-link" href="#ventures">See the venture portfolio <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="model-card">
+            <figure class="model-media">
+              <img src="assets/growth-partnership.jpg" alt="Two colleagues discussing a growth dashboard and business ideas" width="1600" height="900" loading="lazy">
+              <figcaption>02 / Growth partnerships</figcaption>
+            </figure>
+            <div class="model-copy">
+              <span class="model-kicker">Built alongside your team</span>
+              <h3>Find a more thoughtful next move.</h3>
+              <p>For companies working through a growth challenge, we start by understanding the business and its customers—then explore practical ways to move forward.</p>
+              <ul><li>Clarify positioning and go-to-market foundations</li><li>Explore customer acquisition experiments</li><li>Improve customer journeys and retention opportunities</li></ul>
+              <a class="text-link" href="#growth">Explore growth partnerships <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="ventures" id="ventures" aria-labelledby="ventures-title">
       <div class="wrap">
         <div class="venture-intro">
@@ -349,11 +527,11 @@
             <h2 id="ventures-title">One umbrella.<br><span class="blue-text">Many possibilities.</span></h2>
             <p>Friday Startup is the brand for the digital products we build and launch. Each venture can have its own identity while sharing this home and a builder’s mindset.</p>
           </div>
-          <p class="venture-note">This portfolio is being prepared for future launches. Product names and marks will appear here when they are ready to share.</p>
+          <p class="venture-note">Only products that have launched will appear here, with their own logo. Until then, this space stays clearly marked as a placeholder.</p>
         </div>
         <div class="logo-wall">
           <div class="logo-wall-head">
-            <div><strong>Venture lineup</strong><span>New product marks move into this space as launches happen.</span></div>
+            <div><strong>Launched ventures</strong><span>Each live product appears with its own identity.</span></div>
             <button class="motion-button" type="button" id="motion-toggle" aria-pressed="false">Pause motion</button>
           </div>
           <div class="logo-viewport" aria-label="Right-to-left lineup of launched product logos">
@@ -364,32 +542,19 @@
       </div>
     </section>
 
-    <section class="launches" id="launches" aria-labelledby="launches-title">
-      <div class="wrap">
-        <div class="launches-top">
-          <div class="section-heading">
-            <div class="eyebrow">02 / Launch radar</div>
-            <h2 id="launches-title">A first look, right before launch.</h2>
-            <p>Schedule an approved product preview and it appears here 48 hours before launch, with a live countdown. Once it goes live, its logo joins the venture lineup above.</p>
-          </div>
-        </div>
-        <div class="launches-grid" id="launches-grid" aria-live="polite"></div>
-      </div>
-    </section>
-
     <section class="capabilities" id="studio" aria-labelledby="studio-title">
       <div class="wrap">
         <div class="capability-top">
           <div class="section-heading">
-            <div class="eyebrow">03 / What we do</div>
-            <h2 id="studio-title">From first spark to the next stage.</h2>
-            <p>We bring product-building and growth thinking together, with a clear focus on the work that moves an idea forward.</p>
+            <div class="eyebrow">02 / What we do</div>
+            <h2 id="studio-title">Make the next step count.</h2>
+            <p>From an early product idea to a company’s next growth question, we focus on practical work that helps a team learn and move forward.</p>
           </div>
         </div>
         <div class="capability-grid">
-          <article class="capability-card"><span class="cap-number">01</span><h3>Build new ventures</h3><p>Explore promising ideas, understand the problem, and shape a digital business worth building.</p></article>
-          <article class="capability-card"><span class="cap-number">02</span><h3>Launch useful products</h3><p>Turn a clear opportunity into an intentional first product—with the essentials in place to learn from real users.</p></article>
-          <article class="capability-card"><span class="cap-number">03</span><h3>Partner for growth</h3><p>Work alongside ambitious companies to explore sharper positioning, thoughtful acquisition, and better customer journeys.</p></article>
+          <article class="capability-card"><span class="cap-number">01</span><h3>Start with the opportunity</h3><p>Get specific about the people a digital product could serve and the problem it should solve.</p></article>
+          <article class="capability-card"><span class="cap-number">02</span><h3>Shape a useful first version</h3><p>Choose a focused product direction, make the first experience clear, and learn before adding complexity.</p></article>
+          <article class="capability-card"><span class="cap-number">03</span><h3>Explore deliberate growth</h3><p>Work with a company’s team to examine positioning, acquisition ideas, and customer journeys—without promising shortcuts.</p></article>
         </div>
       </div>
     </section>
@@ -401,32 +566,61 @@
           <div class="growth-badge"><strong>Good growth starts with listening.</strong><span>Every partnership begins with your people, your customers, and the challenge in front of you.</span></div>
         </div>
         <div class="growth-copy">
-          <div class="eyebrow">04 / Growth partnerships</div>
-          <h2 id="growth-title">Make your next move a considered one.</h2>
-          <p>When a company is ready to grow, we help its team find the right questions before racing toward answers. Together, we can test opportunities and build a practical path forward—without promising shortcuts or one-size-fits-all results.</p>
+          <div class="eyebrow">03 / Growth partnerships</div>
+          <h2 id="growth-title">Growth should fit the business you’re growing.</h2>
+          <p>When a company is ready for its next stage, we help its team get clear on the challenge before choosing a response. Together, we can explore practical next steps that fit the business—without promising shortcuts or one-size-fits-all results.</p>
           <ul class="growth-list">
             <li><span class="check" aria-hidden="true">✓</span><span>Positioning and go-to-market foundations</span></li>
             <li><span class="check" aria-hidden="true">✓</span><span>Customer acquisition experiments</span></li>
             <li><span class="check" aria-hidden="true">✓</span><span>Conversion and customer journeys</span></li>
             <li><span class="check" aria-hidden="true">✓</span><span>Product and retention opportunities</span></li>
           </ul>
-          <a class="button" href="#contact">Explore a partnership <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="button" href="#contact">Talk about a growth challenge <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
 
     <section class="approach" aria-labelledby="approach-title">
       <div class="wrap approach-grid">
-        <div class="section-heading">
-          <div class="eyebrow">05 / How we work</div>
-          <h2 id="approach-title">Clear thinking.<br>Small steps.<br><span class="blue-text">Real progress.</span></h2>
-          <p>Whether we’re building a venture or working with an existing business, the work starts with curiosity and gets better through honest learning.</p>
+        <div class="approach-aside">
+          <div class="section-heading">
+            <div class="eyebrow">04 / How we work</div>
+            <h2 id="approach-title">Clear thinking.<br>Small steps.<br><span class="blue-text">Real progress.</span></h2>
+            <p>Whether we are building a venture or working with an existing business, the work begins with curiosity and improves through honest learning.</p>
+          </div>
+          <figure class="approach-photo">
+            <img src="assets/product-building.jpg" alt="Product builders discussing code together at a laptop" width="1400" height="2100" loading="lazy">
+            <figcaption>Make, test, learn—then decide what comes next.</figcaption>
+          </figure>
         </div>
         <div class="approach-steps">
           <article class="approach-step"><div class="step-no">01</div><div><h3>Understand the opportunity</h3><p>Get close to the customer, the context, and what would make a solution matter.</p></div></article>
-          <article class="approach-step"><div class="step-no">02</div><div><h3>Choose a focused next step</h3><p>Define what to build or test first, and what evidence would help us decide what comes next.</p></div></article>
-          <article class="approach-step"><div class="step-no">03</div><div><h3>Build, learn, and adapt</h3><p>Make progress in practical increments—then use what we learn to shape the next move.</p></div></article>
+          <article class="approach-step"><div class="step-no">02</div><div><h3>Choose a focused next step</h3><p>Decide what to build or test first, and what we need to learn from it.</p></div></article>
+          <article class="approach-step"><div class="step-no">03</div><div><h3>Build and learn</h3><p>Make progress in practical increments, using feedback and evidence to guide the work.</p></div></article>
+          <article class="approach-step"><div class="step-no">04</div><div><h3>Adapt with intent</h3><p>Use what we learn to shape the next move—whether that means refining, launching, or growing.</p></div></article>
         </div>
+      </div>
+    </section>
+
+    <section class="principles" aria-labelledby="principles-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">05 / How we think</div>
+          <h2 id="principles-title">The principles behind<br><span class="blue-text">every next move.</span></h2>
+          <p>Each venture and partnership brings its own context. These principles keep the work curious, considered, and grounded.</p>
+        </div>
+        <div class="principles-grid">
+          <article class="principle-card"><span class="principle-no">01</span><h3>People before assumptions</h3><p>Start from the customer, their context, and the problem—not from a feature list.</p></article>
+          <article class="principle-card"><span class="principle-no">02</span><h3>Useful before complicated</h3><p>Choose a focused first version, learn what matters, and earn the next layer of complexity.</p></article>
+          <article class="principle-card"><span class="principle-no">03</span><h3>Growth that fits</h3><p>Explore opportunities that make sense for a company’s customers, strengths, and stage.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="news-invite" aria-labelledby="news-invite-title">
+      <div class="wrap news-invite-row">
+        <div><div class="eyebrow">News &amp; updates</div><h2 id="news-invite-title">What we’re building next.</h2><p>See the kinds of updates we plan to share—and confirmed announcements when they are ready.</p></div>
+        <a class="button secondary" href="news.html">Visit the News page <span class="arrow" aria-hidden="true">↗</span></a>
       </div>
     </section>
 
@@ -494,9 +688,9 @@
     <div class="wrap">
       <div class="footer-main">
         <a class="brand footer-brand" href="#top" aria-label="Friday Startup home"><img src="assets/friday-startup-emblem.png" alt="" width="68" height="46"><span class="brand-wordmark"><span>Friday</span><strong>Startup</strong></span></a>
-        <nav class="footer-links" aria-label="Footer navigation"><a href="#studio">The studio</a><a href="#ventures">Ventures</a><a href="#launches">Launch updates</a><a href="#growth">Growth</a><a href="#faq">FAQs</a><a href="#help">Help &amp; contact</a></nav>
+        <nav class="footer-links" aria-label="Footer navigation"><a href="#studio">The studio</a><a href="#model">Our model</a><a href="#ventures">Ventures</a><a href="news.html">News</a><a href="#growth">Growth</a><a href="#faq">FAQs</a><a href="#help">Help &amp; contact</a></nav>
       </div>
-      <div class="footer-meta"><span>© <span id="year">2026</span> Friday Startup. Building what’s next.</span><span>Photography: <a href="https://www.pexels.com/photo/people-working-in-front-of-the-computer-3184357/" target="_blank" rel="noreferrer">fauxels</a>, <a href="https://www.pexels.com/photo/discussion-about-software-development-in-office-12899191/" target="_blank" rel="noreferrer">Mizuno K</a> &amp; <a href="https://www.pexels.com/photo/creative-team-brainstorming-in-modern-office-39205102/" target="_blank" rel="noreferrer">Vitaly Gariev</a> via <a href="https://www.pexels.com/license/" target="_blank" rel="noreferrer">Pexels</a>.</span></div>
+      <div class="footer-meta"><span>© <span id="year">2026</span> Friday Startup. Building what’s next.</span><span>Photography: <a href="https://www.pexels.com/photo/people-working-in-front-of-the-computer-3184357/" target="_blank" rel="noreferrer">fauxels</a>, <a href="https://www.pexels.com/photo/discussion-about-software-development-in-office-12899191/" target="_blank" rel="noreferrer">Mizuno K</a> &amp; <a href="https://www.pexels.com/photo/creative-team-brainstorming-in-modern-office-39205102/" target="_blank" rel="noreferrer">Vitaly Gariev</a>, <a href="https://www.pexels.com/@kindelmedia/" target="_blank" rel="noreferrer">Kindel Media</a> via <a href="https://www.pexels.com/license/" target="_blank" rel="noreferrer">Pexels</a>.</span></div>
     </div>
   </footer>
 
@@ -505,7 +699,6 @@
     (() => {
       const config = window.FRIDAY_STARTUP_CONFIG || {};
       const launches = Array.isArray(config.launches) ? config.launches : [];
-      const ANNOUNCEMENT_LEAD_MS = 48 * 60 * 60 * 1000;
       const byId = (id) => document.getElementById(id);
       const allowedHosts = {
         facebook: ['facebook.com'],
@@ -633,7 +826,7 @@
         if (!placeholder && typeof item.logo === 'string' && item.logo.startsWith('assets/')) {
           const image = document.createElement('img');
           image.src = item.logo;
-          image.alt = '';
+          image.alt = placeholder ? '' : (item.name || 'Launched product logo');
           image.loading = 'lazy';
           mark.append(image);
         } else {
@@ -650,7 +843,7 @@
       }
 
       function renderPortfolio(now) {
-        const launched = launches.filter((item) => Number.isFinite(getLaunchDate(item)) && getLaunchDate(item) <= now && typeof item.name === 'string' && item.name.trim());
+        const launched = launches.filter((item) => Number.isFinite(getLaunchDate(item)) && getLaunchDate(item) <= now && typeof item.name === 'string' && item.name.trim() && typeof item.logo === 'string' && item.logo.startsWith('assets/'));
         const items = launched.length ? launched : Array.from({ length: 4 }, () => ({}));
         const track = byId('venture-track');
         track.replaceChildren();
@@ -667,59 +860,8 @@
           : 'The tiles are clearly marked placeholders—not live products or customer results.';
       }
 
-      function countdownText(ms) {
-        const totalMinutes = Math.max(0, Math.floor(ms / 60000));
-        const days = Math.floor(totalMinutes / 1440);
-        const hours = Math.floor((totalMinutes % 1440) / 60);
-        const minutes = totalMinutes % 60;
-        if (days) return `${days}d ${hours}h to launch`;
-        if (hours) return `${hours}h ${minutes}m to launch`;
-        return `${minutes}m to launch`;
-      }
-
-      function renderLaunches(now) {
-        const list = launches.filter((item) => {
-          const date = getLaunchDate(item);
-          return Number.isFinite(date) && date > now && date - ANNOUNCEMENT_LEAD_MS <= now && typeof item.name === 'string' && item.name.trim();
-        });
-        const grid = byId('launches-grid');
-        grid.replaceChildren();
-        if (!list.length) {
-          const empty = document.createElement('div');
-          empty.className = 'launch-empty';
-          empty.innerHTML = '<span class="launch-empty-mark" aria-hidden="true">48h</span><div><strong>No launch is scheduled just yet.</strong><p>New product previews will appear here two days before their published launch time.</p></div>';
-          grid.append(empty);
-          return;
-        }
-        for (const item of list) {
-          const date = getLaunchDate(item);
-          const card = document.createElement('article');
-          card.className = 'launch-card';
-          const top = document.createElement('div');
-          top.className = 'launch-card-top';
-          const label = document.createElement('span');
-          label.className = 'launch-label';
-          label.textContent = 'Scheduled product preview';
-          const counter = document.createElement('span');
-          counter.className = 'countdown';
-          counter.textContent = countdownText(date - now);
-          top.append(label, counter);
-          const title = document.createElement('h3');
-          title.textContent = item.name;
-          const summary = document.createElement('p');
-          summary.textContent = item.summary || 'A new product from Friday Startup is almost ready to meet the world.';
-          const time = document.createElement('time');
-          time.dateTime = item.launchAt;
-          time.textContent = `Launch time: ${new Date(date).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}`;
-          card.append(top, title, summary, time);
-          grid.append(card);
-        }
-      }
-
       function renderLaunchState() {
-        const now = Date.now();
-        renderPortfolio(now);
-        renderLaunches(now);
+        renderPortfolio(Date.now());
       }
 
       function prepareEmail() {
