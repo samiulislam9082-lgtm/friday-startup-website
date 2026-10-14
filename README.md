@@ -16,16 +16,17 @@ Open `http://localhost:8080`.
 
 - `index.html` — homepage content, design, navigation, venture portfolio, approach, FAQs, and Help.
 - `news.html` — separate News & updates page, including confirmed product previews and dated studio news.
-- `assets/site-config.js` — current contact inbox, official social URLs, optional contact methods, approved news stories, and product launch details.
-- `assets/friday-startup-emblem.png` — the supplied emblem on a transparent background. The page renders “Friday Startup” beside it as live text; the emblem is not redrawn.
-- `assets/social-*.svg` — Facebook, Instagram, Gmail, X, LinkedIn, and WhatsApp marks. All six are kept in the Help section and remain inactive until official destinations are added.
+- `assets/site-config.js` — the published email address, the four approved account links, approved news stories, and product launch details.
+- `assets/friday-startup-emblem.png` — an exact copy of the supplied original logo image. The page renders “Friday Startup” beside it as live text; the logo file is not redrawn or altered.
+- `assets/social-*.svg` — Facebook, Instagram, X, and Gmail marks used for the official account links.
+- `robots.txt`, `sitemap.xml`, and `llms.txt` — crawler access, canonical page discovery, and an accurate source-of-truth summary for AI systems.
 - `assets/*.jpg` — Pexels photography; credits and source pages are below.
 
 ### Help & contact
 
-Keep `contactEmail` in `assets/site-config.js` set to the official company inbox before inviting real inquiries. The focused form asks for name, email, inquiry type, and a short message; company/site is optional. The page prepares an email draft in the visitor’s mail app and does not store or send submissions.
+The single published email address is `fridaystartup1@gmail.com`. The Gmail button opens a Gmail compose window addressed to that inbox; the address is also shown in the contact section. There is no contact form. Use Gmail to contact Friday Startup; Facebook, Instagram, and X link to the supplied official accounts.
 
-Add only official account destinations under `socials`: verified Facebook, Instagram, X, LinkedIn, a company Gmail address, and the official WhatsApp link. Optional phone, WhatsApp, and booking shortcuts appear only when configured.
+Only Facebook, Instagram, X, and Gmail are published as account links. Do not add other account profiles or contact methods without an explicit site-owner request.
 
 ### News and launches
 
@@ -64,4 +65,4 @@ Images remain local to the site. Review the [Pexels license](https://www.pexels.
 
 ## Deployment
 
-The existing Vercel project serves production from this repository’s `main` branch. The container copies only the public website files (`index.html`, `news.html`, and `assets/`) into the web root; repository documents, previews, and unrelated archives are not copied.
+The existing Vercel project serves production from this repository’s `main` branch. The container copies the public pages, assets, and root discovery files (`robots.txt`, `sitemap.xml`, and `llms.txt`) into the web root; repository documents, previews, and unrelated archives are not copied.
