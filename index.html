@@ -749,7 +749,7 @@
           element.dataset.platform = item.key;
           if (href) {
             element.href = href;
-             if (href.startsWith('https:')) { element.target = '_blank'; element.rel = 'noopener noreferrer'; }
+            if (href.startsWith('https:')) { element.target = '_blank'; element.rel = 'noopener noreferrer'; }
           } else {
             element.setAttribute('aria-disabled', 'true');
             element.title = `${item.label} is not connected yet`;
