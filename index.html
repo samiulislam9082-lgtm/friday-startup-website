@@ -131,8 +131,8 @@
     .logo-wall-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 0 28px 20px; }
     .logo-wall-head strong { font-size: 14px; letter-spacing: -.02em; }
     .logo-wall-head span { display: block; color: #9db2cd; font-size: 11px; margin-top: 3px; }
-    .motion-button { padding: 8px 12px; border: 1px solid rgba(210,230,255,.24); border-radius: 999px; color: #eef6ff; background: transparent; font-size: 11px; font-weight: 700; cursor: pointer; }
-    .motion-button:hover { background: rgba(255,255,255,.1); }
+    
+    
     .logo-viewport { overflow: hidden; width: 100%; }
     .logo-track { display: flex; width: max-content; animation: venture-marquee 30s linear infinite; }
     .logo-track.is-paused { animation-play-state: paused; }
@@ -562,7 +562,7 @@
         <div class="logo-wall">
           <div class="logo-wall-head">
             <div><strong>Launched ventures</strong><span>Each live product appears with its own identity.</span></div>
-            <button class="motion-button" type="button" id="motion-toggle" aria-pressed="false">Pause motion</button>
+            
           </div>
           <div class="logo-viewport" aria-label="Right-to-left lineup of launched product logos">
             <div class="logo-track" id="venture-track"></div>
@@ -878,19 +878,19 @@
         menuButton.setAttribute('aria-label', 'Open navigation');
       }));
 
-      const motionButton = byId('motion-toggle');
+      
       const track = byId('venture-track');
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduceMotion) {
         track.classList.add('is-paused');
-        motionButton.setAttribute('aria-pressed', 'true');
-        motionButton.textContent = 'Resume motion';
+        
+        
       }
-      motionButton.addEventListener('click', () => {
-        const paused = track.classList.toggle('is-paused');
-        motionButton.setAttribute('aria-pressed', String(paused));
-        motionButton.textContent = paused ? 'Resume motion' : 'Pause motion';
-      });
+      
+        
+        
+        
+      
 
       configureContact();
       renderSocialLinks();
