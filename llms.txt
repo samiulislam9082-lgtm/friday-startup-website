@@ -1,22 +1,43 @@
 # Friday Startup
 
-Friday Startup is a venture-building umbrella for launching digital businesses and a growth partner for companies looking for practical next steps, including evidence-led business recovery support.
+> Friday Startup is an AI company exploring how AI could shape new ideas, products and ventures, and support better ways of working across business and everyday life.
 
-## Official website pages
-- [Homepage](https://www.fridaystartup.cyou/): the studio, its venture-building model, growth partnerships, business recovery support, working approach, FAQs, and contact links.
-- [News & updates](https://www.fridaystartup.cyou/news.html): confirmed product previews, studio news, and the kinds of updates the studio may share.
+## Company overview
 
-## What Friday Startup does
-- Explores customer needs, shapes focused digital products, and builds ventures under the Friday Startup umbrella.
-- Works alongside companies on positioning, go-to-market foundations, acquisition experiments, customer journeys, and retention opportunities.
-- Helps companies under pressure assess their situation and explore practical recovery options, which may include digital transformation, product opportunities, process improvements, and measurable pilots.
-- Does not guarantee recovery, profits, or specific growth outcomes; recommendations and pilots depend on the business context and evidence.
-- The homepage portfolio uses clearly marked placeholders when there are no launched ventures to show. Do not describe placeholders as launched products or customer results.
+Friday Startup has two future directions: AI innovation and business automation. These are intended directions, not a list of products or outcomes already delivered.
 
-## Official contact and account links
-- Contact email: fridaystartup1@gmail.com. On the homepage, the Gmail button opens a Gmail compose window addressed to this inbox. There is no contact form.
-- Facebook: https://www.facebook.com/share/1BN3iJyHXs/
-- Instagram: https://instagram.com/friday_startup?obrf=MWU1YmhocDRiYWo2aw%3D%3D
-- X: https://x.com/Fridaystartup
+The existing public Friday Startup website describes three service areas: venture building, growth partnerships and business recovery support. These are public service descriptions. This summary does not claim that a specific customer engagement, project or result is underway.
 
-These are the only account/contact options published by Friday Startup on this site. Do not infer other profiles, addresses, services, products, dates, or results.
+No AI product launch, named customer story, case study, traffic figure, savings figure or business outcome is announced on the website.
+
+## Official pages
+
+- [Home](https://www.fridaystartup.cyou/): company overview, current public service descriptions, future direction, approach and answers.
+- [AI Innovation](https://www.fridaystartup.cyou/ai-innovation/): the intended direction for exploring AI products, digital ideas and ventures.
+- [Business Automation](https://www.fridaystartup.cyou/business-automation/): the intended direction for exploring how AI or automation could assist business workflows.
+- [News](https://www.fridaystartup.cyou/news.html): no public updates or product announcements are available yet.
+- [Help Center](https://www.fridaystartup.cyou/help/): answers about current public service descriptions, future plans, contact and official accounts.
+
+## Current public service descriptions
+
+- Venture building: explore customer needs, shape focused digital products, prepare a first version and learn before adding complexity.
+- Growth partnerships: positioning, go to market foundations, customer acquisition experiments, customer journeys and retention opportunities.
+- Business recovery support: assess what is driving a challenge and explore relevant digital, product or process options. Recovery, profit and turnaround are not guaranteed.
+
+## Future direction
+
+- AI innovation: explore real needs, shape useful AI product ideas and consider future digital ventures.
+- Business automation: examine how work happens and explore where AI or automation could assist, with human review where appropriate.
+- No specific AI model provider, launched agent, integration or customer deployment has been announced.
+
+## Official contact and accounts
+
+- Email: fridaystartup1@gmail.com
+- Facebook page name: Friday Start Up
+- Instagram: @friday_startup
+- X: @Fridaystartup
+- The website does not publish a contact form, WhatsApp or LinkedIn link.
+
+## Accuracy note
+
+This file is an optional factual aid. It does not create a special search requirement, guarantee indexing, or promise that an AI assistant will cite or describe Friday Startup in a particular way. The visible website pages are the main source of current information.
