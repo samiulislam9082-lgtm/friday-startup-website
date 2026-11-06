@@ -330,11 +330,12 @@ main {
   aspect-ratio: 16 / 9;
   transform: translate(-50%, -50%);
   animation: hero-cinematic-dolly 9s var(--curve) infinite alternate;
+  container-type: inline-size;
 }
 
 @keyframes hero-cinematic-dolly {
   from { transform: translate(-50%, -50%) scale(1); }
-  to { transform: translate(-50%, -50%) scale(1.01); }
+  to { transform: translate(-50%, -50%) scale(1.003); }
 }
 
 @keyframes hero-cinematic-dolly-mobile {
@@ -346,6 +347,49 @@ main {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.hero-fixed-marker-cover,
+.hero-motion-marker {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-fixed-marker-cover {
+  z-index: 1;
+  top: 88.02%;
+  left: 73.4%;
+  width: clamp(5px, 2.5cqw, 36px);
+  height: clamp(5px, 2.5cqw, 36px);
+  border-radius: 0;
+  background-image: url('/assets/friday-startup-future-hero-still.png');
+  background-position: -69.44cqw -48.26cqw;
+  background-size: 100cqw 56.25cqw;
+  background-repeat: no-repeat;
+  -webkit-mask-image: radial-gradient(ellipse, #000 78%, transparent 100%);
+  mask-image: radial-gradient(ellipse, #000 78%, transparent 100%);
+  transform: translate(-50%, -50%);
+}
+
+.hero-motion-marker {
+  z-index: 2;
+  top: 88.02%;
+  left: 13.33%;
+  width: clamp(3px, 0.9cqw, 13px);
+  height: clamp(3px, 0.9cqw, 13px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(119, 224, 236, 0.9), 0 0 22px rgba(119, 224, 236, 0.55);
+  animation: hero-marker-sweep 4.6s var(--curve) infinite alternate;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+@keyframes hero-marker-sweep {
+  from { transform: translate(-50%, -50%) translateX(0); }
+  to { transform: translate(-50%, -50%) translateX(73.27cqw); }
 }
 
 .hero-semantic-copy {
@@ -420,6 +464,18 @@ main {
 }
 
 @media (min-width: 761px) {
+  .approved-hero {
+    min-height: 0;
+    height: min(56.25vw, 100vh, 810px);
+    height: min(56.25vw, 100svh, 810px);
+    aspect-ratio: auto;
+  }
+
+  .hero-frame {
+    width: min(100%, calc(100vh * 16 / 9), 1440px);
+    width: min(100%, calc(100svh * 16 / 9), 1440px);
+  }
+
   .hero-mobile-nav {
     position: absolute;
     z-index: 3;
@@ -1117,9 +1173,27 @@ main {
   transition: opacity 750ms var(--curve), transform 750ms var(--curve);
 }
 
+.js-ready .reveal + .reveal {
+  transition-delay: 90ms;
+}
+
+.js-ready .reveal + .reveal + .reveal {
+  transition-delay: 180ms;
+}
+
+.js-ready .reveal + .reveal + .reveal + .reveal {
+  transition-delay: 270ms;
+}
+
 .js-ready .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (min-width: 1400px) {
+  .hero-frame {
+    animation: none;
+  }
 }
 
 @media (min-width: 1500px) {
@@ -1522,6 +1596,13 @@ main {
     animation: none;
   }
 
+  .hero-motion-marker {
+    left: 73.4%;
+    animation: none;
+    transform: translate(-50%, -50%);
+    will-change: auto;
+  }
+
   *,
   *::before,
   *::after {
@@ -1529,6 +1610,7 @@ main {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 
   .tag-word {
