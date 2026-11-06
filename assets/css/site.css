@@ -348,6 +348,18 @@ main {
   object-fit: contain;
 }
 
+.hero-semantic-copy {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .hero-hotspots {
   position: absolute;
   inset: 0;
@@ -1219,6 +1231,10 @@ main {
     height: auto;
     aspect-ratio: auto;
     padding-top: 56.25vw;
+  }
+
+  .hero-semantic-copy {
+    display: none;
   }
 
   .hero-frame {
