@@ -2,27 +2,37 @@
   document.documentElement.classList.add('js-ready');
 
   const headers = document.querySelectorAll('[data-site-header]');
+  const closeMenu = (header) => {
+    const button = header.querySelector('.menu-toggle');
+    if (!button) return;
+    header.classList.remove('is-open');
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-label', 'Open navigation');
+  };
+
+  const closeAllMenus = () => headers.forEach(closeMenu);
+
   headers.forEach((header) => {
     const button = header.querySelector('.menu-toggle');
     const nav = header.querySelector('.site-nav');
     if (!button || !nav) return;
 
-    const closeMenu = () => {
-      header.classList.remove('is-open');
-      button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-label', 'Open navigation');
-    };
-
     button.addEventListener('click', () => {
-      const open = header.classList.toggle('is-open');
+      const open = !header.classList.contains('is-open');
+      closeAllMenus();
+      if (open) header.classList.add('is-open');
       button.setAttribute('aria-expanded', String(open));
       button.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
     });
 
-    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeMenu();
-    });
+    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMenu(header)));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const openHeader = [...headers].find((header) => header.classList.contains('is-open'));
+    closeAllMenus();
+    if (openHeader) openHeader.querySelector('.menu-toggle')?.focus();
   });
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
