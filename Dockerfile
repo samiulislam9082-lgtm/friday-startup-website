@@ -12,4 +12,5 @@ COPY assets/ /usr/share/nginx/html/assets/
 COPY robots.txt /usr/share/nginx/html/robots.txt
 COPY sitemap.xml /usr/share/nginx/html/sitemap.xml
 COPY llms.txt /usr/share/nginx/html/llms.txt
+COPY google1c3e0b7a53014830.html /usr/share/nginx/html/google1c3e0b7a53014830.html
 EXPOSE 80
