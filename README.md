@@ -60,6 +60,7 @@ The launch list is empty until a product is approved for announcement. Placehold
 - Product building — [Mizuno K on Pexels](https://www.pexels.com/photo/discussion-about-software-development-in-office-12899191/)
 - Growth partnership — [Vitaly Gariev on Pexels](https://www.pexels.com/photo/creative-team-brainstorming-in-modern-office-39205102/)
 - Venture workshop — [Kindel Media on Pexels](https://www.pexels.com/photo/planning-a-business-7688454/)
+- Aurora Horizon homepage background — [Tobias Bjørkli on Pexels, photo 2113566](https://www.pexels.com/photo/mountain-beside-body-of-water-with-aurora-borealis-2113566/)
 
 Images remain local to the site. Review the [Pexels license](https://www.pexels.com/license/) for current terms.
 
