@@ -1,0 +1,303 @@
+/* Aurora Horizon: a web-native, hero-only atmospheric animation. */
+.approved-hero.aurora-hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: auto;
+  min-height: min(100svh, 810px);
+  aspect-ratio: auto;
+  padding: 112px 24px 64px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000000;
+}
+
+.aurora-scene {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 38%;
+  filter: brightness(0.76) saturate(1.1);
+  animation: aurora-photo-drift 28s var(--curve) infinite alternate;
+  will-change: transform;
+}
+
+.aurora-shade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.aurora-art {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: translateY(-6%);
+}
+
+.aurora-ribbon,
+.aurora-thread,
+.aurora-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.aurora-ribbon--one {
+  animation: aurora-sway 24s var(--curve) infinite alternate;
+}
+
+.aurora-ribbon--two {
+  animation: aurora-sway 31s var(--curve) -9s infinite alternate;
+}
+
+.aurora-thread {
+  animation: aurora-thread-shift 18s var(--curve) infinite alternate;
+}
+
+.aurora-star {
+  animation: aurora-star-pulse 4.2s var(--curve) infinite alternate;
+}
+
+.aurora-star--two { animation-delay: -1.8s; }
+.aurora-star--three { animation-delay: -2.7s; }
+.aurora-star--four { animation-delay: -0.9s; }
+
+.aurora-copy {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  gap: 16px;
+  width: min(100%, 840px);
+  margin: 8px auto 0;
+  text-align: center;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.58);
+}
+
+.aurora-copy > .eyebrow {
+  justify-self: center;
+  margin: 0;
+}
+
+.aurora-copy h1 {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 72px;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.aurora-lede {
+  max-width: 640px;
+  margin: 8px auto;
+  color: #eef3f4;
+  font-size: 18px;
+  line-height: 28px;
+  text-wrap: pretty;
+}
+
+.aurora-cta {
+  justify-self: center;
+  margin-top: 8px;
+  text-shadow: none;
+}
+
+.aurora-topics {
+  display: grid;
+  gap: 8px;
+  margin: 16px auto 0;
+}
+
+.aurora-topics > .eyebrow {
+  color: #e1f8f4;
+  font-size: 12px;
+}
+
+.aurora-topic-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aurora-topic-list li {
+  color: #eef3f4;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.aurora-hero .hero-mobile-nav {
+  position: absolute;
+  z-index: 6;
+  top: 12px;
+  right: auto;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(calc(100% - 32px), 1280px);
+  min-height: 56px;
+  margin: 0;
+  padding: 8px 12px 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  background: rgba(24, 24, 24, 0.56);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform: translateX(-50%);
+}
+
+.aurora-hero .hero-mobile-nav .brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.aurora-hero .hero-mobile-nav .menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes aurora-photo-drift {
+  from { transform: scale(1.01) translateX(-0.4%); }
+  to { transform: scale(1.06) translateX(0.5%); }
+}
+
+@keyframes aurora-sway {
+  from { opacity: 0.58; transform: translate(-18px, 5px) scale(1.01); }
+  to { opacity: 0.95; transform: translate(20px, -9px) scale(1.03); }
+}
+
+@keyframes aurora-thread-shift {
+  from { opacity: 0.36; transform: translateX(-14px); }
+  to { opacity: 0.82; transform: translateX(18px); }
+}
+
+@keyframes aurora-star-pulse {
+  from { opacity: 0.3; transform: scale(0.8); }
+  to { opacity: 0.9; transform: scale(1.12); }
+}
+
+@media (max-width: 1050px) {
+  .aurora-copy h1 { font-size: 60px; }
+}
+
+@media (max-width: 760px) {
+  .approved-hero.aurora-hero {
+    min-height: max(100svh, 680px);
+    padding: 96px 16px 48px;
+  }
+
+  .aurora-photo { object-position: 50% 38%; }
+  .aurora-shade { background: rgba(0, 0, 0, 0.22); }
+  .aurora-art { transform: translateY(-10%); }
+
+  .aurora-hero .hero-mobile-nav {
+    position: fixed;
+    z-index: 31;
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: none;
+  }
+
+  .aurora-hero .hero-mobile-nav .brand-mark {
+    width: 40px;
+    height: 28px;
+  }
+
+  .aurora-hero .hero-mobile-nav .brand-name { font-size: 14px; }
+  .aurora-hero .hero-mobile-nav .brand-note { font-size: 12px; }
+
+  .aurora-copy {
+    width: min(100%, 560px);
+    margin-top: 0;
+    gap: 16px;
+  }
+
+  .aurora-copy h1 {
+    max-width: 560px;
+    font-size: 36px;
+    letter-spacing: -0.045em;
+    line-height: 40px;
+  }
+
+  .aurora-lede {
+    margin: 0 auto 8px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .aurora-cta {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .aurora-topics {
+    width: min(100%, 440px);
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .aurora-topic-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+    gap: 8px 16px;
+  }
+
+  .aurora-topic-list li { font-size: 14px; }
+}
+
+@media (max-width: 390px) {
+  .aurora-copy { gap: 12px; }
+  .aurora-copy h1 { font-size: 30px; line-height: 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-photo,
+  .aurora-ribbon,
+  .aurora-thread,
+  .aurora-star {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .aurora-ribbon--one { opacity: 0.8; }
+  .aurora-ribbon--two { opacity: 0.7; }
+  .aurora-thread { opacity: 0.58; }
+  .aurora-star { opacity: 0.62; }
+}
