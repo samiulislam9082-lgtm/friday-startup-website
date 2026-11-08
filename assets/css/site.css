@@ -349,6 +349,30 @@ main {
   object-fit: contain;
 }
 
+.hero-frame[data-hero-video-frame] .hero-still {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  opacity: 1;
+  transition: opacity 500ms var(--curve);
+}
+
+.hero-video {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 500ms var(--curve);
+  pointer-events: none;
+}
+
+.hero-frame.is-playing .hero-still { opacity: 0; }
+.hero-frame.is-playing .hero-video { opacity: 1; }
+
 .hero-fixed-marker-cover,
 .hero-motion-marker {
   position: absolute;
@@ -409,6 +433,10 @@ main {
   inset: 0;
 }
 
+.hero-frame[data-hero-video-frame] .hero-hotspots {
+  z-index: 2;
+}
+
 .hero-hotspots a {
   position: absolute;
   display: block;
@@ -455,6 +483,13 @@ main {
   left: 42.5%;
   width: 15.2%;
   height: 8.7%;
+}
+
+.hero-frame[data-hero-video-frame] .hero-hotspot-cta {
+  top: 69%;
+  left: 38%;
+  width: 24%;
+  height: 12%;
 }
 
 .hero-mobile-nav,
@@ -1347,6 +1382,10 @@ main {
     clip-path: inset(12% 0 0);
   }
 
+  .hero-frame[data-hero-video-frame] .hero-still {
+    clip-path: none;
+  }
+
   .hero-hotspots {
     display: none;
   }
@@ -1632,6 +1671,15 @@ main {
 
   .hero-frame {
     animation: none;
+  }
+
+  .hero-video {
+    display: none;
+    opacity: 0;
+  }
+
+  .hero-frame[data-hero-video-frame] .hero-still {
+    opacity: 1;
   }
 
   .hero-motion-marker {
