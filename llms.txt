@@ -18,6 +18,12 @@ No AI product launch, named customer story, case study, traffic figure, savings 
 - [News](https://www.fridaystartup.cyou/news.html): no public updates or product announcements are available yet.
 - [Help Center](https://www.fridaystartup.cyou/help/): answers about current public service descriptions, future plans, contact and official accounts.
 
+## Current service pages
+
+- [Venture building](https://www.fridaystartup.cyou/venture-building/): current service description for shaping a focused digital venture.
+- [Growth partnerships](https://www.fridaystartup.cyou/growth-partnerships/): current service description for focused growth questions.
+- [Business recovery support](https://www.fridaystartup.cyou/business-recovery/): current service description for understanding pressure and exploring bounded options.
+
 ## Current public service descriptions
 
 - Venture building: explore customer needs, shape focused digital products, prepare a first version and learn before adding complexity.
