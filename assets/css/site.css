@@ -2081,3 +2081,19 @@ main {
     transform: none !important;
   }
 }
+
+/* Group labels keep current services distinct from future directions in the shared navigation. */
+.nav-group-label { color: var(--muted, #9b9b9b); font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.08em; text-transform: uppercase; margin-left: 0.5rem; }
+@media (max-width: 760px) { .nav-group-label { display: block; margin: 1rem 0 0.25rem; } }
+.service-card-link { display: block; color: inherit; text-decoration: none; }
+.service-card-link:focus-visible { outline: 2px solid currentColor; outline-offset: 8px; }
+.current-service main { padding-top: 96px; }
+.current-service .page-hero { min-height: 0; padding-block: 48px 64px; }
+.current-service .page-hero h1 { font-size: 48px; line-height: 1; text-wrap: balance; }
+.current-service .page-hero-photo { height: 480px; min-height: 0; }
+.current-service .page-hero-photo img { height: 100%; min-height: 0; }
+@media (max-width: 760px) {
+  .current-service .page-hero { padding-block: 32px 48px; }
+  .current-service .page-hero h1 { font-size: 36px; line-height: 40px; }
+  .current-service .page-hero-photo { height: 320px; }
+}
