@@ -7,6 +7,9 @@ COPY privacy.html /usr/share/nginx/html/privacy.html
 COPY terms.html /usr/share/nginx/html/terms.html
 COPY ai-innovation/index.html /usr/share/nginx/html/ai-innovation/index.html
 COPY business-automation/index.html /usr/share/nginx/html/business-automation/index.html
+COPY business-recovery/index.html /usr/share/nginx/html/business-recovery/index.html
+COPY growth-partnerships/index.html /usr/share/nginx/html/growth-partnerships/index.html
+COPY venture-building/index.html /usr/share/nginx/html/venture-building/index.html
 COPY help/index.html /usr/share/nginx/html/help/index.html
 COPY assets/ /usr/share/nginx/html/assets/
 COPY robots.txt /usr/share/nginx/html/robots.txt
