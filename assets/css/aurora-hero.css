@@ -1,16 +1,16 @@
-/* Aurora Horizon: a web-native, hero-only atmospheric animation. */
+/* Aurora Horizon: Premium Cinematic Hero Architecture */
+
 .approved-hero.aurora-hero {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: auto;
-  min-height: min(100svh, 810px);
-  aspect-ratio: auto;
-  padding: 112px 24px 64px;
+  min-height: min(100svh, 940px);
+  padding: 120px 24px 80px;
   overflow: hidden;
   isolation: isolate;
-  background: #000000;
+  background: #030508;
 }
 
 .aurora-scene {
@@ -23,14 +23,13 @@
 
 .aurora-photo {
   position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
   object-fit: cover;
-  object-position: 50% 38%;
-  filter: brightness(0.76) saturate(1.1);
-  animation: aurora-photo-drift 28s var(--curve) infinite alternate;
+  object-position: 50% 30%;
+  filter: brightness(0.68) contrast(1.15) saturate(1.2);
+  animation: aurora-photo-drift 34s var(--curve) infinite alternate;
   will-change: transform;
 }
 
@@ -38,18 +37,33 @@
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: rgba(0, 0, 0, 0.16);
+  background: radial-gradient(circle at 50% 40%, rgba(3, 5, 8, 0.4) 0%, rgba(3, 5, 8, 0.85) 75%, #030508 100%),
+              linear-gradient(180deg, rgba(3, 5, 8, 0.6) 0%, transparent 40%, rgba(3, 5, 8, 0.95) 100%);
+}
+
+.aurora-glow-orb {
+  position: absolute;
+  z-index: 2;
+  top: 30%;
+  left: 50%;
+  width: 650px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.32) 0%, rgba(99, 102, 241, 0.18) 45%, transparent 75%);
+  filter: blur(65px);
+  pointer-events: none;
+  animation: aurora-orb-pulse 11s infinite alternate ease-in-out;
 }
 
 .aurora-art {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
-  transform: translateY(-6%);
+  opacity: 0.85;
 }
 
 .aurora-ribbon,
@@ -65,239 +79,298 @@
 }
 
 .aurora-ribbon--two {
-  animation: aurora-sway 31s var(--curve) -9s infinite alternate;
+  animation: aurora-sway 32s var(--curve) -8s infinite alternate;
 }
 
 .aurora-thread {
-  animation: aurora-thread-shift 18s var(--curve) infinite alternate;
+  animation: aurora-thread-shift 20s var(--curve) infinite alternate;
 }
 
 .aurora-star {
-  animation: aurora-star-pulse 4.2s var(--curve) infinite alternate;
+  animation: aurora-star-pulse 3.8s var(--curve) infinite alternate;
 }
 
-.aurora-star--two { animation-delay: -1.8s; }
-.aurora-star--three { animation-delay: -2.7s; }
-.aurora-star--four { animation-delay: -0.9s; }
+.aurora-star--two { animation-delay: -1.6s; }
+.aurora-star--three { animation-delay: -2.4s; }
+.aurora-star--four { animation-delay: -0.8s; }
 
+/* Subtle Animated Ambient Shimmer & Particles */
+.aurora-ambient-particles {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 20% 35%, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+    radial-gradient(circle at 75% 25%, rgba(103, 232, 249, 0.8) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 45% 65%, rgba(129, 140, 248, 0.7) 1px, transparent 1px),
+    radial-gradient(circle at 85% 70%, rgba(255, 255, 255, 0.6) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 15% 80%, rgba(52, 211, 153, 0.7) 1px, transparent 1px);
+  background-size: 550px 550px;
+  animation: particles-drift 40s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes particles-drift {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-550px) rotate(3deg); }
+}
+
+/* Aurora Copy Layer */
 .aurora-copy {
   position: relative;
-  z-index: 4;
-  display: grid;
-  gap: 16px;
-  width: min(100%, 840px);
-  margin: 8px auto 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 980px);
+  margin-inline: auto;
   text-align: center;
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.58);
 }
 
-.aurora-copy > .eyebrow {
-  justify-self: center;
-  margin: 0;
+.aurora-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  margin-bottom: 24px;
+  border-radius: var(--radius-pill);
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  backdrop-filter: blur(14px);
+  color: var(--accent-soft);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(34, 211, 238, 0.2);
+  animation: badge-float 5s ease-in-out infinite alternate;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.aurora-badge:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(34, 211, 238, 0.35);
+}
+
+@keyframes badge-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+.aurora-badge__dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+.aurora-badge__dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.7;
+  animation: dot-ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes dot-ripple {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
 
 .aurora-copy h1 {
-  max-width: 680px;
-  margin: 0 auto;
-  font-size: 72px;
-  font-weight: 600;
-  letter-spacing: -0.06em;
-  line-height: 1;
+  font-size: clamp(42px, 6.4vw, 84px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1.04;
   text-wrap: balance;
+  margin-bottom: 22px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Subtle Shimmering Gradient for Main Heading */
+.aurora-copy h1.text-gradient-accent {
+  background: linear-gradient(120deg, #ffffff 0%, #a5f3fc 20%, #67e8f9 45%, #818cf8 70%, #ffffff 95%);
+  background-size: 250% auto;
+  animation: heading-shimmer 12s linear infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes heading-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .aurora-lede {
-  max-width: 640px;
-  margin: 8px auto;
-  color: #eef3f4;
-  font-size: 18px;
-  line-height: 28px;
+  max-width: 700px;
+  margin-inline: auto;
+  color: #e2e8f0;
+  font-size: clamp(16px, 2.1vw, 20px);
+  line-height: 1.6;
   text-wrap: pretty;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+
+.aurora-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
 }
 
 .aurora-cta {
-  justify-self: center;
-  margin-top: 8px;
-  text-shadow: none;
+  min-height: 52px;
+  padding: 14px 32px;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
 }
 
-.aurora-topics {
-  display: grid;
-  gap: 8px;
-  margin: 16px auto 0;
-}
-
-.aurora-topics > .eyebrow {
-  color: #e1f8f4;
-  font-size: 12px;
-}
-
-.aurora-topic-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.aurora-topic-list li {
-  color: #eef3f4;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.aurora-hero .hero-mobile-nav {
+.aurora-cta::after {
+  content: "";
   position: absolute;
-  z-index: 6;
-  top: 12px;
-  right: auto;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  animation: button-shine 6s ease-in-out infinite;
+}
+
+@keyframes button-shine {
+  0%, 75% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Ticker / Stats Strip with Subtle Card Elevation */
+.aurora-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  width: min(calc(100% - 32px), 1280px);
-  min-height: 56px;
-  margin: 0;
-  padding: 8px 12px 8px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 9999px;
-  background: rgba(24, 24, 24, 0.56);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transform: translateX(-50%);
+  width: 100%;
+  max-width: 940px;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.aurora-hero .hero-mobile-nav .brand {
-  display: inline-flex;
+.aurora-stat-item {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(14, 17, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  transition: transform 300ms var(--curve), border-color 300ms var(--curve), background-color 300ms var(--curve);
 }
 
-.aurora-hero .hero-mobile-nav .menu-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.aurora-stat-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(34, 211, 238, 0.35);
+  background: rgba(20, 24, 36, 0.85);
 }
 
+.aurora-stat-item strong {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.aurora-stat-item span {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* Keyframe Animations */
 @keyframes aurora-photo-drift {
-  from { transform: scale(1.01) translateX(-0.4%); }
-  to { transform: scale(1.06) translateX(0.5%); }
+  from { transform: scale(1.02) translate3d(-0.5%, 0, 0); }
+  to { transform: scale(1.08) translate3d(0.5%, -0.5%, 0); }
+}
+
+@keyframes aurora-orb-pulse {
+  from { opacity: 0.65; transform: translate(-50%, -50%) scale(0.92); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1.18); }
 }
 
 @keyframes aurora-sway {
-  from { opacity: 0.58; transform: translate(-18px, 5px) scale(1.01); }
-  to { opacity: 0.95; transform: translate(20px, -9px) scale(1.03); }
+  from { opacity: 0.6; transform: translate(-20px, 8px) scale(1.01); }
+  to { opacity: 0.98; transform: translate(25px, -12px) scale(1.04); }
 }
 
 @keyframes aurora-thread-shift {
-  from { opacity: 0.36; transform: translateX(-14px); }
-  to { opacity: 0.82; transform: translateX(18px); }
+  from { opacity: 0.35; transform: translateX(-16px); }
+  to { opacity: 0.85; transform: translateX(20px); }
 }
 
 @keyframes aurora-star-pulse {
   from { opacity: 0.3; transform: scale(0.8); }
-  to { opacity: 0.9; transform: scale(1.12); }
+  to { opacity: 1; transform: scale(1.25); }
 }
 
+/* Responsive adjustments */
 @media (max-width: 1050px) {
-  .aurora-copy h1 { font-size: 60px; }
+  .aurora-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 760px) {
   .approved-hero.aurora-hero {
     min-height: max(100svh, 680px);
-    padding: 96px 16px 48px;
-  }
-
-  .aurora-photo { object-position: 50% 38%; }
-  .aurora-shade { background: rgba(0, 0, 0, 0.22); }
-  .aurora-art { transform: translateY(-10%); }
-
-  .aurora-hero .hero-mobile-nav {
-    position: fixed;
-    z-index: 31;
-    top: 12px;
-    right: 12px;
-    left: 12px;
-    width: auto;
-    min-height: 44px;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    transform: none;
-  }
-
-  .aurora-hero .hero-mobile-nav .brand-mark {
-    width: 40px;
-    height: 28px;
-  }
-
-  .aurora-hero .hero-mobile-nav .brand-name { font-size: 14px; }
-  .aurora-hero .hero-mobile-nav .brand-note { font-size: 12px; }
-
-  .aurora-copy {
-    width: min(100%, 560px);
-    margin-top: 0;
-    gap: 16px;
+    padding: 100px 16px 56px;
   }
 
   .aurora-copy h1 {
-    max-width: 560px;
-    font-size: 36px;
-    letter-spacing: -0.045em;
-    line-height: 40px;
+    font-size: 38px;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
   }
 
   .aurora-lede {
-    margin: 0 auto 8px;
-    font-size: 16px;
-    line-height: 24px;
-  }
-
-  .aurora-cta {
-    min-height: 48px;
     font-size: 16px;
   }
 
-  .aurora-topics {
-    width: min(100%, 440px);
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  .aurora-actions {
+    flex-direction: column;
+    width: 100%;
   }
 
-  .aurora-topic-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
-    gap: 8px 16px;
+  .aurora-actions .button {
+    width: 100%;
   }
 
-  .aurora-topic-list li { font-size: 14px; }
-}
-
-@media (max-width: 390px) {
-  .aurora-copy { gap: 12px; }
-  .aurora-copy h1 { font-size: 30px; line-height: 36px; }
+  .aurora-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 36px;
+    padding-top: 24px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .aurora-photo,
+  .aurora-glow-orb,
   .aurora-ribbon,
   .aurora-thread,
-  .aurora-star {
+  .aurora-star,
+  .aurora-ambient-particles,
+  .aurora-badge,
+  .aurora-copy h1.text-gradient-accent,
+  .aurora-cta::after {
     animation: none !important;
     transform: none !important;
-    will-change: auto;
   }
-
-  .aurora-ribbon--one { opacity: 0.8; }
-  .aurora-ribbon--two { opacity: 0.7; }
-  .aurora-thread { opacity: 0.58; }
-  .aurora-star { opacity: 0.62; }
 }
