@@ -1,49 +1,35 @@
 # Friday Startup
 
-> Friday Startup is a venture building company whose current public service descriptions cover venture building, growth partnerships and business recovery support. AI innovation and business automation are future directions, not launched products or outcomes already delivered.
+> Friday Startup supports founders and businesses through venture building, growth partnerships, business recovery support and business automation. AI innovation is a future direction.
 
-## Company overview
+## Current services
 
-Friday Startup has two future directions: AI innovation and business automation. These are intended directions, not a list of products or outcomes already delivered.
-
-The existing public Friday Startup website describes three service areas: venture building, growth partnerships and business recovery support. These are public service descriptions. This summary does not claim that a specific customer engagement, project or result is underway.
-
-No AI product launch, named customer story, case study, traffic figure, savings figure or business outcome is announced on the website.
-
-## Official pages
-
-- [Home](https://www.fridaystartup.cyou/): company overview, current public service descriptions, future direction, approach and answers.
-- [AI Innovation](https://www.fridaystartup.cyou/ai-innovation/): the intended direction for exploring AI products, digital ideas and ventures.
-- [Business Automation](https://www.fridaystartup.cyou/business-automation/): the intended direction for exploring how AI or automation could assist business workflows.
-- [News](https://www.fridaystartup.cyou/news.html): no public updates or product announcements are available yet.
-- [Help Center](https://www.fridaystartup.cyou/help/): answers about current public service descriptions, future plans, contact and official accounts.
-
-## Current service pages
-
-- [Venture building](https://www.fridaystartup.cyou/venture-building/): current service description for shaping a focused digital venture.
-- [Growth partnerships](https://www.fridaystartup.cyou/growth-partnerships/): current service description for focused growth questions.
-- [Business recovery support](https://www.fridaystartup.cyou/business-recovery/): current service description for understanding pressure and exploring bounded options.
-
-## Current public service descriptions
-
-- Venture building: explore customer needs, shape focused digital products, prepare a first version and learn before adding complexity.
-- Growth partnerships: positioning, go to market foundations, customer acquisition experiments, customer journeys and retention opportunities.
-- Business recovery support: assess what is driving a challenge and explore relevant digital, product or process options. Recovery, profit and turnaround are not guaranteed.
+- Venture building: explore customer needs, shape a focused digital venture, consider a useful first version and learn before adding complexity.
+- Growth partnerships: work on positioning, go to market foundations, customer acquisition experiments, customer journeys and retention opportunities.
+- Business recovery support: understand what is driving a business challenge and explore relevant digital, product or process options. Recovery and financial outcomes are not guaranteed.
+- Business automation: discuss business workflows and whether a bounded automation approach is suitable. People remain involved in decisions that need judgment. Scope is confirmed directly; no specific outcome is promised.
 
 ## Future direction
 
-- AI innovation: explore real needs, shape useful AI product ideas and consider future digital ventures.
-- Business automation: examine how work happens and explore where AI or automation could assist, with human review where appropriate.
-- No specific AI model provider, launched agent, integration or customer deployment has been announced.
+- AI innovation: exploring useful AI product ideas and possible digital ventures.
+
+## Official pages
+
+- [Home](https://www.fridaystartup.cyou/): company overview and current services.
+- [Venture building](https://www.fridaystartup.cyou/venture-building/)
+- [Growth partnerships](https://www.fridaystartup.cyou/growth-partnerships/)
+- [Business recovery support](https://www.fridaystartup.cyou/business-recovery/)
+- [Business automation](https://www.fridaystartup.cyou/business-automation/)
+- [AI innovation](https://www.fridaystartup.cyou/ai-innovation/): future direction.
+- [Help Center](https://www.fridaystartup.cyou/help/)
 
 ## Official contact and accounts
 
 - Email: fridaystartup1@gmail.com
-- Facebook page name: Friday Start Up
+- Facebook: Friday Start Up
 - Instagram: @friday_startup
 - X: @Fridaystartup
-- The website does not publish a contact form, WhatsApp or LinkedIn link.
 
 ## Accuracy note
 
-This file is an optional factual aid. It does not create a special search requirement, guarantee indexing, or promise that an AI assistant will cite or describe Friday Startup in a particular way. The visible website pages are the main source of current information.
+This is an optional plain-language summary for systems that choose to use it. Google Search does not require llms.txt for AI features, and Google says maintaining it does not improve or reduce search visibility or rankings. The visible website pages remain the main source of information. No indexing or citation is guaranteed.
