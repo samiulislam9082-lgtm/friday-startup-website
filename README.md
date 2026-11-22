@@ -28,13 +28,13 @@ The published contact details are the official email address `fridaystartup@frid
 
 Do not add other account profiles or contact methods without an explicit site-owner request.
 
-### Homepage structure and motion ("Agents at work" redesign)
+### Homepage structure and motion ("Next" redesign)
 
-- Identity: deep evergreen surfaces with a single lime signal colour (plus sky, violet and peach to tell the four agents apart). General Sans (Fontshare) for headings and body, Instrument Serif italic for emphasis, IBM Plex Mono for labels.
+- Identity: night-black immersive sections alternating with warm porcelain sections, and a single cobalt → violet → coral → amber "prism" accent. Clash Display for headings and Switzer for text (both self-hosted in `assets/fonts/`), Geist Mono for labels.
 - The homepage is standalone: `index.html` loads only `assets/css/home.css` and `assets/js/home.js`.
-- Sections: floating pill header that hides on scroll down, with a **command palette** (Ctrl/⌘ + K) → hero with an interactive **agent console**: type a task or pick an example and the matching agent plans it step by step, then waits for your approval → services ticker → **Business Agents** bento (Marketing, Website, Social Media, Growth) with animated mini-visuals → **How it works**, a scroll-driven horizontal track (Discover, Design, Deploy, Develop) → **One studio. Many services.** cards with a pointer spotlight, ending with "In the lab" for upcoming solutions → **What's new** news carousel with social links → FAQ → contact card with copy-email, call link, social links and a quick project brief that opens a pre-filled email → footer.
-- Inner pages keep `site.css`, `premium.css` and `site.js`, plus `assets/css/theme.css`, which applies the same type, evergreen background and lime accent.
-- Motion is disabled for visitors with `prefers-reduced-motion` (the console shows its final state, the how-it-works track becomes a normal list); content stays readable without JavaScript.
+- Sections: floating glass header that switches between dark and light with the section beneath it → hero with an interactive 3D particle orb (canvas, follows the pointer) and orbiting service labels → services marquee → **Our vision** manifesto whose words light up on scroll, plus three principles → **AI assistants** simulator: six tabs (Receptionist, Phone, Booking, Sales, Reviews, WhatsApp) play example conversations in a device frame, with a Custom AI Agent call-out → **Eighteen services. One team.** filterable catalogue (AI assistants, Web & search, Marketing, Systems) where each card can be added to a plan; a floating plan tray follows the visitor → **SEO · AEO · GEO** explainer that switches between a search result, a direct answer and an AI chat recommendation → **How we work** timeline that fills on scroll → **Friday Lab**, ideas in progress for future solutions → **News** with social links → FAQ → contact card with copy-email, call link, social links and a plan form that opens a pre-filled email → footer.
+- Inner pages keep `site.css`, `premium.css` and `site.js`, plus `assets/css/theme.css`, which applies the same fonts, night palette and accent.
+- Animations pause off-screen and are disabled for visitors with `prefers-reduced-motion`; content stays readable without JavaScript.
 
 ### News and launches
 

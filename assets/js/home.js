@@ -5,283 +5,331 @@
   const hasIO = 'IntersectionObserver' in window;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const EMAIL = 'fridaystartup@fridaystartup.cyou';
 
-  requestAnimationFrame(() => requestAnimationFrame(() => { const h = $('.hero'); if (h) h.classList.add('is-ready'); }));
+  const hero = $('.hero');
+  requestAnimationFrame(() => requestAnimationFrame(() => hero && hero.classList.add('is-ready')));
+  const yr = $('[data-year]'); if (yr) yr.textContent = String(new Date().getFullYear());
 
   // ---------- Toast ----------
-  const toastEl = $('[data-toast]');
-  let toastT = 0;
-  const toast = (msg) => {
-    if (!toastEl) return;
-    toastEl.textContent = msg; toastEl.classList.add('is-on');
-    clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('is-on'), 2200);
-  };
+  const toastEl = $('[data-toast]'); let toastT = 0;
+  const toast = (m) => { if (!toastEl) return; toastEl.textContent = m; toastEl.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('is-on'), 2200); };
 
-  // ---------- Nav: scrolled state, hide on scroll down, mobile menu, current link ----------
-  const nav = $('[data-nav]');
-  const menuBtn = $('.nav__menu');
+  // ---------- Header ----------
+  const top = $('[data-top]'), menu = $('.top__menu');
+  const darkSecs = $$('.hero, .marq, .agents, .lab');
   let lastY = window.scrollY;
-  const onScroll = () => {
+  const headerState = () => {
     const y = window.scrollY;
-    nav.classList.toggle('is-scrolled', y > 12);
-    if (!nav.classList.contains('is-open')) nav.classList.toggle('is-hidden', y > 500 && y > lastY + 4);
-    if (y < lastY - 4) nav.classList.remove('is-hidden');
+    const probe = 44;
+    const onDark = darkSecs.some((s) => { const r = s.getBoundingClientRect(); return r.top <= probe && r.bottom >= probe; });
+    top.classList.toggle('is-light', !onDark);
+    if (!top.classList.contains('is-open')) {
+      if (y > 600 && y > lastY + 6) top.classList.add('is-hidden');
+      else if (y < lastY - 6 || y < 600) top.classList.remove('is-hidden');
+    }
     lastY = y;
   };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-  const setMenu = (open) => {
-    nav.classList.toggle('is-open', open);
-    menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  };
-  if (menuBtn) {
-    menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
-    $$('.nav__links a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
-  }
-  const links = $$('.nav__links a[href^="#"]');
+  const setMenu = (o) => { top.classList.toggle('is-open', o); menu.setAttribute('aria-expanded', String(o)); menu.setAttribute('aria-label', o ? 'Close menu' : 'Open menu'); };
+  menu.addEventListener('click', () => setMenu(!top.classList.contains('is-open')));
+  $$('.top__nav a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && top.classList.contains('is-open')) { setMenu(false); menu.focus(); } });
+  const navLinks = $$('.top__nav a[href^="#"]:not(.top__navcta)');
   if (hasIO) {
-    const io = new IntersectionObserver((ents) => ents.forEach((en) => {
-      if (en.isIntersecting) links.forEach((a) => a.classList.toggle('is-current', a.getAttribute('href') === '#' + en.target.id));
-    }), { rootMargin: '-45% 0px -50% 0px' });
-    links.forEach((a) => { const el = $(a.getAttribute('href')); if (el) io.observe(el); });
+    const io = new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting) navLinks.forEach((a) => a.classList.toggle('is-current', a.getAttribute('href') === '#' + en.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+    navLinks.forEach((a) => { const t = $(a.getAttribute('href')); if (t) io.observe(t); });
   }
 
   // ---------- Reveal ----------
-  $$('.bento, .cards').forEach((g) => $$('.reveal', g).forEach((el, i) => el.style.setProperty('--i', String(i))));
+  $$('.grid, .tenets, .labs, .steps, .stories').forEach((g) => $$('.reveal', g).forEach((el, i) => el.style.setProperty('--i', String(i % 6))));
   const reveals = $$('.reveal');
+  let revealIO = null;
   if (!hasIO || reduce) reveals.forEach((el) => el.classList.add('is-in'));
   else {
-    const io = new IntersectionObserver((ents) => ents.forEach((en) => {
-      if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
-    }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    reveals.forEach((el) => io.observe(el));
+    revealIO = new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-in'); revealIO.unobserve(en.target); } }), { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
+    reveals.forEach((el) => revealIO.observe(el));
   }
 
-  // ---------- Hero glow follows pointer ----------
-  const hero = $('.hero'), glow = $('.hero__glow');
-  if (hero && glow && !reduce && window.matchMedia('(pointer: fine)').matches) {
-    hero.addEventListener('pointermove', (e) => {
-      const r = hero.getBoundingClientRect();
-      glow.style.setProperty('--gx', `${((e.clientX - r.left) / r.width) * 100}%`);
-      glow.style.setProperty('--gy', `${((e.clientY - r.top) / r.height) * 70}%`);
-    });
+  // ---------- Manifesto: words light up with scroll ----------
+  const mani = $('[data-manifesto]');
+  let maniWords = [];
+  if (mani) {
+    const hl = new Set(['next', 'generation', 'real', 'value']);
+    mani.innerHTML = mani.textContent.trim().split(/\s+/).map((w) => `<span class="w${hl.has(w.replace(/[^a-z]/gi, '').toLowerCase()) ? ' w--hl' : ''}">${w}</span>`).join(' ');
+    maniWords = $$('.w', mani);
+    if (reduce) maniWords.forEach((w) => w.classList.add('is-on'));
   }
-
-  // ---------- Agent console demo ----------
-  const PLANS = {
-    mkt: { name: 'Marketing Agent', letter: 'M', color: 'var(--lime)', steps: ['Read your latest offers and past emails', 'Drafted this week’s newsletter in your tone', 'Picked the best send time for your list', { ask: 'Newsletter ready to send' }] },
-    web: { name: 'Website Agent', letter: 'W', color: 'var(--sky)', steps: ['Checked speed on your key pages', 'Found and fixed 3 broken links', 'Backed up the site', { ask: 'New opening hours ready to publish' }] },
-    soc: { name: 'Social Media Agent', letter: 'S', color: 'var(--violet)', steps: ['Planned 3 posts for Facebook, Instagram and X', 'Wrote captions and picked images', 'Scheduled posts for the best times', { ask: 'One customer reply needs your personal touch' }] },
-    grw: { name: 'Growth Agent', letter: 'G', color: 'var(--peach)', steps: ['Collected new enquiries from website and social', 'Scored and sorted leads by fit', 'Drafted follow-ups for each lead', { ask: 'Follow-up emails ready to send' }] },
+  const maniUpdate = () => {
+    if (!mani || reduce) return;
+    const r = mani.getBoundingClientRect(), vh = window.innerHeight;
+    const p = Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+    const n = Math.round(p * maniWords.length);
+    maniWords.forEach((w, i) => w.classList.toggle('is-on', i < n));
   };
-  const pick = (text) => {
-    const t = text.toLowerCase();
-    if (/newsletter|e-?mail|campaign|blog|content|offer|promo/.test(t)) return 'mkt';
-    if (/insta|facebook|social|post|tiktok|reel|comment|twitter|\bx\b|linkedin/.test(t)) return 'soc';
-    if (/web|site|page|seo|speed|link|backup|domain|hosting/.test(t)) return 'web';
-    if (/lead|sale|grow|report|customer|crm|enquir|follow/.test(t)) return 'grw';
-    return 'mkt';
+
+  // ---------- Steps line ----------
+  const steps = $('[data-steps]'), stepCards = steps ? $$('.stepc', steps) : [];
+  const stepsUpdate = () => {
+    if (!steps) return;
+    const r = steps.getBoundingClientRect(), vh = window.innerHeight;
+    const p = reduce ? 1 : Math.max(0, Math.min(1, (vh * 0.75 - r.top) / (vh * 0.5)));
+    steps.style.setProperty('--p', p.toFixed(3));
+    stepCards.forEach((c, i) => c.classList.toggle('is-on', p >= (i + 0.2) / stepCards.length || p === 1));
   };
-  const cons = $('[data-console]');
-  if (cons) {
-    const form = $('[data-ask]', cons), input = $('#ask-input'), chips = $$('[data-chip]', cons);
-    const avatar = $('[data-avatar]', cons), agentName = $('[data-agent-name]', cons), taskEl = $('[data-task]', cons);
-    const stateEl = $('[data-state]', cons), stepsEl = $('[data-steps]', cons), out = $('[data-out]', cons);
-    let run = 0, auto = true, timers = [];
-    const later = (fn, ms) => timers.push(setTimeout(fn, reduce ? 0 : ms));
-    const clear = () => { timers.forEach(clearTimeout); timers = []; };
-    const setState = (cls, txt) => { stateEl.className = 'plan__state ' + cls; stateEl.textContent = txt; };
 
-    const plan = (text) => {
-      clear(); const id = ++run;
-      const key = pick(text), p = PLANS[key];
-      out.style.setProperty('--a', p.color);
-      avatar.textContent = p.letter; agentName.textContent = p.name; taskEl.textContent = '“' + text + '”';
-      chips.forEach((c) => c.classList.toggle('is-active', c.dataset.chip === text));
-      setState('is-busy', 'Planning');
-      stepsEl.innerHTML = '';
-      const items = p.steps.map((s) => {
-        const li = document.createElement('li');
-        const ico = document.createElement('span'); ico.className = 'plan__ico'; ico.setAttribute('aria-hidden', 'true');
-        const body = document.createElement('div');
-        const label = document.createElement('span'); label.textContent = typeof s === 'string' ? s : s.ask;
-        const bar = document.createElement('span'); bar.className = 'plan__bar'; bar.innerHTML = '<i></i>';
-        body.append(label, bar); li.append(ico, body); stepsEl.appendChild(li);
-        return { li, ico, body, ask: typeof s !== 'string' };
-      });
-      items.forEach((it, i) => {
-        later(() => { if (id !== run) return; it.li.classList.add('is-in', 'is-run'); }, 250 + i * 900);
-        later(() => {
-          if (id !== run) return;
-          it.li.classList.remove('is-run');
-          if (!it.ask) { it.li.classList.add('is-ok'); it.ico.textContent = '✓'; return; }
-          it.li.classList.add('is-wait'); it.ico.textContent = '!';
-          it.body.querySelector('.plan__bar').remove();
-          setState('is-ask', 'Needs you');
-          const wrap = document.createElement('div'); wrap.className = 'plan__approve';
-          const ok = document.createElement('button'); ok.type = 'button'; ok.textContent = 'Approve';
-          const edit = document.createElement('button'); edit.type = 'button'; edit.textContent = 'Request changes';
-          ok.addEventListener('click', () => {
-            auto = false; wrap.remove(); it.li.classList.remove('is-wait'); it.li.classList.add('is-ok'); it.ico.textContent = '✓';
-            it.body.firstChild.textContent += ' · approved by you'; setState('is-done', 'Done');
-          });
-          edit.addEventListener('click', () => { auto = false; wrap.remove(); it.body.firstChild.textContent += ' · sent back with your notes'; setState('', 'Revising'); });
-          wrap.append(ok, edit); it.body.appendChild(wrap);
-          if (auto) later(() => { if (id === run && auto) cycle(); }, 4200);
-        }, 250 + i * 900 + 750);
-      });
+  let ticking = false;
+  const onScroll = () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { ticking = false; headerState(); maniUpdate(); stepsUpdate(); }); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  headerState(); maniUpdate(); stepsUpdate();
+
+  // ---------- Hero orb (canvas particle sphere) ----------
+  const cv = $('[data-orb]'), orbit = $('[data-orbit]');
+  if (cv && cv.getContext) {
+    const ctx = cv.getContext('2d');
+    const N = window.innerWidth < 700 ? 650 : 1150;
+    const pts = [];
+    const ga = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < N; i++) {
+      const y = 1 - (i / (N - 1)) * 2, rad = Math.sqrt(1 - y * y), th = ga * i;
+      pts.push([Math.cos(th) * rad, y, Math.sin(th) * rad]);
+    }
+    const ring = [];
+    for (let i = 0; i < 220; i++) { const a = (i / 220) * Math.PI * 2; ring.push([Math.cos(a) * 1.45, 0, Math.sin(a) * 1.45]); }
+    const stops = [[74, 92, 255], [154, 107, 255], [255, 111, 97], [255, 181, 71]];
+    const col = (t) => { t = Math.max(0, Math.min(0.999, t)) * (stops.length - 1); const i = Math.floor(t), f = t - i, a = stops[i], b = stops[i + 1]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; };
+    let W = 0, H = 0, dpr = 1, rot = 0.4, tx = 0, ty = 0, cx = 0, cy = 0, running = true, raf = 0;
+    const labels = orbit ? $$('span', orbit) : [];
+    const size = () => { const r = cv.getBoundingClientRect(); dpr = Math.min(2, window.devicePixelRatio || 1); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    const proj = (p, ry, rx, R) => {
+      let [x, y, z] = p;
+      const cY = Math.cos(ry), sY = Math.sin(ry); [x, z] = [x * cY - z * sY, x * sY + z * cY];
+      const cX = Math.cos(rx), sX = Math.sin(rx); [y, z] = [y * cX - z * sX, y * sX + z * cX];
+      const s = 2.6 / (2.6 + z);
+      return [W / 2 + x * R * s, H / 2 + y * R * s, z, s];
     };
-
-    // Type a chip's text into the input, then plan it
-    const typeIn = (text, then) => {
-      if (reduce) { input.value = text; then(); return; }
-      input.value = ''; let i = 0; const id = run;
-      const step = () => { if (id !== run || !auto) return; input.value = text.slice(0, ++i); if (i < text.length) later(step, 28); else later(then, 300); };
-      step();
-    };
-    let ci = 0;
-    const cycle = () => { const text = chips[ci % chips.length].dataset.chip; ci++; typeIn(text, () => plan(text)); };
-
-    const stopAuto = () => { auto = false; };
-    chips.forEach((c) => c.addEventListener('click', () => { stopAuto(); input.value = c.dataset.chip; plan(c.dataset.chip); }));
-    form.addEventListener('submit', (e) => { e.preventDefault(); stopAuto(); const v = input.value.trim(); if (!v) { input.focus(); return; } plan(v); });
-    input.addEventListener('focus', () => { if (auto) { stopAuto(); clear(); run++; input.value = ''; } });
-
-    if (hasIO) {
-      let started = false;
-      new IntersectionObserver(([en]) => { if (en.isIntersecting && !started) { started = true; setTimeout(cycle, reduce ? 0 : 900); } }, { threshold: 0.4 }).observe(cons);
-    } else cycle();
-  }
-
-  // ---------- How it works: horizontal scroll ----------
-  const how = $('[data-how]'), track = $('[data-how-track]'), howBar = $('[data-how-bar]');
-  if (how && track) {
-    const steps = $$('.step', track);
-    const wide = () => window.matchMedia('(min-width: 861px)').matches && !reduce;
-    const update = () => {
-      const r = how.getBoundingClientRect();
-      const total = how.offsetHeight - window.innerHeight;
-      let p;
-      if (wide()) {
-        p = Math.max(0, Math.min(1, -r.top / Math.max(1, total)));
-        const dist = Math.max(0, track.scrollWidth - window.innerWidth);
-        track.style.setProperty('--tx', `${(-dist * p).toFixed(1)}px`);
-      } else {
-        p = Math.max(0, Math.min(1, (window.innerHeight * 0.7 - r.top) / r.height));
+    const draw = (t) => {
+      ctx.clearRect(0, 0, W, H);
+      const R = Math.min(W, H) * 0.3;
+      cx += (tx - cx) * 0.05; cy += (ty - cy) * 0.05;
+      const ry = rot + cx * 0.6, rx = -0.35 + cy * 0.3;
+      const breathe = 1 + Math.sin(t / 1400) * 0.02;
+      for (let i = 0; i < pts.length; i++) {
+        const [x, y, z, s] = proj(pts[i], ry, rx, R * breathe);
+        const depth = (1 - z) / 2;
+        const c = col((pts[i][1] + 1) / 2 * 0.85 + Math.sin(i * 0.5 + t / 2000) * 0.06);
+        ctx.fillStyle = `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${0.15 + depth * 0.85})`;
+        const sz = (0.6 + depth * 1.7) * s;
+        ctx.fillRect(x - sz / 2, y - sz / 2, sz, sz);
       }
-      if (howBar) howBar.style.setProperty('--p', p.toFixed(3));
-      const active = Math.min(steps.length - 1, Math.floor(p * steps.length * 0.999));
-      steps.forEach((s, i) => s.classList.toggle('is-on', i <= active));
+      for (let i = 0; i < ring.length; i++) {
+        const [x, y, z] = proj(ring[i], ry * 0.5 + t / 9000, rx + 1.15, R);
+        ctx.fillStyle = `rgba(255,255,255,${0.08 + (1 - z) * 0.18})`;
+        ctx.fillRect(x - 0.7, y - 0.7, 1.4, 1.4);
+      }
+      if (labels.length && W > 0) {
+        const cr = cv.getBoundingClientRect(), hr = hero.getBoundingClientRect();
+        labels.forEach((el, i) => {
+          const a = (i / labels.length) * Math.PI * 2 + t / 14000;
+          const [x, y, z, s] = proj([Math.cos(a) * 1.45, 0, Math.sin(a) * 1.45], ry * 0.5 + t / 9000, rx + 1.15, R);
+          const front = (1 - z) / 2;
+          el.style.transform = `translate(${(cr.left - hr.left + x).toFixed(1)}px, ${(cr.top - hr.top + y).toFixed(1)}px) translate(-50%, -50%) scale(${(0.8 + front * 0.3).toFixed(3)})`;
+          const ax = cr.left - hr.left + x, safe = hr.width * 0.56;
+          const fade = hr.width < 960 ? 1 : Math.max(0, Math.min(1, (ax - safe) / 80));
+          el.style.opacity = ((0.15 + front * 0.85) * fade).toFixed(2);
+          el.style.zIndex = front > 0.5 ? '2' : '0';
+        });
+      }
     };
-    let ticking = false;
-    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } }, { passive: true });
-    window.addEventListener('resize', update);
-    update();
+    const loop = (t) => { rot += 0.0022; draw(t); if (running) raf = requestAnimationFrame(loop); };
+    size(); window.addEventListener('resize', size);
+    if (reduce) draw(0);
+    else {
+      raf = requestAnimationFrame(loop);
+      if (hasIO) new IntersectionObserver(([en]) => { const v = en.isIntersecting; if (v && !running) { running = true; raf = requestAnimationFrame(loop); } else if (!v) { running = false; cancelAnimationFrame(raf); } }).observe(hero);
+      hero.addEventListener('pointermove', (e) => { tx = (e.clientX / window.innerWidth - 0.5) * 2; ty = (e.clientY / window.innerHeight - 0.5) * 2; });
+      hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; });
+    }
   }
 
-  // ---------- Service cards spotlight ----------
-  $$('[data-spot] .card').forEach((card) => {
-    card.addEventListener('pointermove', (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
-  });
-
-  // ---------- News carousel ----------
-  const news = $('[data-news]');
-  if (news) {
-    const prev = $('[data-news-prev]'), next = $('[data-news-next]');
-    const stepW = () => { const c = news.firstElementChild; return c ? c.getBoundingClientRect().width + 16 : 300; };
-    const sync = () => {
-      prev.disabled = news.scrollLeft < 4;
-      next.disabled = news.scrollLeft + news.clientWidth >= news.scrollWidth - 4;
-      prev.parentElement.style.visibility = news.scrollWidth - news.clientWidth > 24 ? '' : 'hidden';
+  // ---------- Assistant simulator ----------
+  const SIMS = {
+    recept: { t: 'AI Receptionist', a: 'R', s: 'Online 24/7 · replies instantly', d: 'Answers enquiries on your website and channels 24/7, captures details and hands over to your team.', m: [
+      ['sys', '11:42 pm · Website chat'], ['in', 'Hi, are you open on Sunday? And do you do teeth whitening?'], ['out', 'Hi! We are open Sunday 10am to 4pm, and yes, we offer whitening. Would you like prices or a booking?'], ['in', 'Prices please'], ['out', 'Whitening starts from our standard package. I have sent the full price list to you and noted your interest for the team.'] ] },
+    phone: { t: 'AI Phone Assistant', a: 'P', s: 'On a call', d: 'Picks up every incoming call and makes configured outgoing calls, such as reminders and confirmations.', m: [
+      ['sys', 'Incoming call · 09:03'], ['card', '<small>Live call</small><b>Caller asking about delivery</b><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>'], ['in', '“Hi, I ordered yesterday, when will it arrive?”'], ['out', '“Thanks for calling. Your order is packed and arrives tomorrow before noon. Can I help with anything else?”'], ['sys', 'Call summary sent to your team'] ] },
+    book: { t: 'AI Booking Assistant', a: 'B', s: 'Checking your calendar', d: 'Schedules, moves and confirms appointments automatically, synced with your calendar.', m: [
+      ['in', 'Can I book a haircut this Thursday after work?'], ['out', 'Of course. Here are the free slots on Thursday:'], ['card', '<small>Thursday</small><b>Choose a time</b><div class="slots"><span>4:30 pm</span><span class="is-pick">5:30 pm</span><span>6:15 pm</span></div>'], ['in', '5:30 works'], ['out', 'Booked for Thursday 5:30 pm. You will get a reminder the day before.'] ] },
+    sales: { t: 'AI Sales Assistant', a: 'S', s: 'Qualifying a new lead', d: 'Qualifies every new lead, answers questions and follows up until they are ready to talk to you.', m: [
+      ['sys', 'New lead from Facebook ad'], ['out', 'Hi Sara, thanks for your interest. What size is your team, and when are you hoping to start?'], ['in', 'About 12 people, ideally next month'], ['card', '<small>Lead score</small><b>Warm lead · ready for a call</b>'], ['out', 'Great fit. I have shared two times for a quick call with our team. I will check back in 2 days if you are busy.'] ] },
+    review: { t: 'AI Review Assistant', a: 'V', s: 'Managing reviews', d: 'Asks happy customers for reviews at the right moment and drafts replies for you to approve.', m: [
+      ['sys', 'Visit completed · 2 hours ago'], ['out', 'Thanks for visiting today. If you enjoyed it, would you leave us a quick review?'], ['card', '<small>New review</small><b><span class="stars">★★★★★</span></b>“Friendly staff and quick service.”'], ['out', 'Draft reply ready: “Thank you so much, we are glad you had a great visit.” Approve to post?'], ['sys', 'Approved by owner · posted'] ] },
+    wa: { t: 'AI WhatsApp Assistant', a: 'W', s: 'WhatsApp · online', d: 'Runs natural WhatsApp conversations: questions, orders, reminders and updates, any time of day.', m: [
+      ['in', 'Hello, is the blue jacket still in stock in medium?'], ['out', 'Yes, medium is in stock. Would you like it delivered or held for pickup?', 'wa'], ['in', 'Delivery please'], ['out', 'Done. Here is your secure payment link. Delivery is 1 to 2 days.', 'wa'], ['sys', 'Order created · team notified'] ] },
+  };
+  const simRoot = $('[data-sim-root]');
+  if (simRoot) {
+    const tabs = $$('[data-sim]', simRoot), feed = $('[data-sim-feed]'), title = $('[data-sim-title]'), status = $('[data-sim-status]'), av = $('[data-sim-av]'), desc = $('[data-sim-desc]');
+    const screen = $('#sim-screen');
+    let timers = [], cur = 0, auto = !reduce, visible = false, started = false;
+    const clear = () => { timers.forEach(clearTimeout); timers = []; };
+    const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+    const play = (i, fromUser) => {
+      clear(); cur = i;
+      const key = tabs[i].dataset.sim, sim = SIMS[key];
+      tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === i)); t.tabIndex = j === i ? 0 : -1; t.classList.remove('is-playing'); });
+      screen.setAttribute('aria-labelledby', tabs[i].id);
+      title.textContent = sim.t; status.textContent = sim.s; av.textContent = sim.a;
+      desc.classList.add('is-swap'); later(() => { desc.textContent = sim.d; desc.classList.remove('is-swap'); }, 220);
+      feed.innerHTML = '';
+      const step = reduce ? 0 : 1100;
+      let tt = 300;
+      sim.m.forEach(([type, txt, v]) => {
+        if (type === 'out' && !reduce) {
+          const at = tt; later(() => { const ty = document.createElement('li'); ty.className = 'msg msg--in msg--typing is-in'; ty.innerHTML = '<i></i><i></i><i></i>'; ty.dataset.typing = '1'; feed.appendChild(ty); }, at);
+          tt += 700;
+        }
+        const at2 = tt;
+        later(() => {
+          const t = feed.querySelector('[data-typing]'); if (t) t.remove();
+          const li = document.createElement('li'); li.className = `msg msg--${type}${v ? ' msg--' + v : ''}${key === 'wa' && type === 'out' ? ' msg--wa' : ''}`;
+          if (type === 'card') li.innerHTML = txt; else li.textContent = txt;
+          feed.appendChild(li); requestAnimationFrame(() => li.classList.add('is-in'));
+        }, at2);
+        tt += step;
+      });
+      if (auto && !fromUser) {
+        const dur = tt + 2400;
+        tabs[i].style.setProperty('--dur', dur + 'ms');
+        void tabs[i].offsetWidth; tabs[i].classList.add('is-playing');
+        later(() => { if (auto && visible) play((i + 1) % tabs.length); }, dur);
+      }
     };
-    prev.addEventListener('click', () => news.scrollBy({ left: -stepW(), behavior: reduce ? 'auto' : 'smooth' }));
-    next.addEventListener('click', () => news.scrollBy({ left: stepW(), behavior: reduce ? 'auto' : 'smooth' }));
-    news.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync);
-    sync();
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => { auto = false; play(i, true); });
+      t.addEventListener('keydown', (e) => {
+        const k = e.key; let n = -1;
+        if (k === 'ArrowDown' || k === 'ArrowRight') n = (i + 1) % tabs.length;
+        if (k === 'ArrowUp' || k === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+        if (n > -1) { e.preventDefault(); auto = false; tabs[n].focus(); play(n, true); }
+      });
+    });
+    if (hasIO) new IntersectionObserver(([en]) => {
+      visible = en.isIntersecting;
+      if (visible && !started) { started = true; play(0); }
+      else if (visible && auto && !timers.length) play(cur);
+    }, { threshold: 0.35 }).observe(simRoot);
+    else play(0);
+  }
+
+  // ---------- Services: filter, spotlight, plan ----------
+  const grid = $('[data-grid]');
+  const plan = new Set();
+  const tray = $('[data-tray]'), trayCount = $('[data-tray-count]'), trayNames = $('[data-tray-names]');
+  const planList = $('[data-plan-list]'), planEmpty = $('[data-plan-empty]');
+  const renderPlan = () => {
+    const names = [...plan];
+    $$('[data-add]').forEach((b) => { const on = plan.has(b.dataset.add); b.setAttribute('aria-pressed', String(on)); $('.svc__lbl', b).textContent = on ? 'Added' : 'Add to plan'; b.closest('.svc').classList.toggle('is-picked', on); });
+    if (tray) {
+      tray.hidden = names.length === 0;
+      trayCount.textContent = String(names.length);
+      trayCount.classList.remove('is-bump'); void trayCount.offsetWidth; trayCount.classList.add('is-bump');
+      trayNames.textContent = names.join(', ');
+    }
+    if (planList) {
+      $$('.tag', planList).forEach((t) => t.remove());
+      planEmpty.hidden = names.length > 0;
+      names.forEach((n) => {
+        const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = n;
+        const x = document.createElement('button'); x.type = 'button'; x.textContent = '×'; x.setAttribute('aria-label', `Remove ${n}`);
+        x.addEventListener('click', () => { plan.delete(n); renderPlan(); });
+        tag.appendChild(x); planList.appendChild(tag);
+      });
+    }
+  };
+  if (grid) {
+    const cards = $$('.svc', grid), chips = $$('[data-filter]');
+    const filter = (cat) => {
+      chips.forEach((c) => { const on = c.dataset.filter === cat; c.classList.toggle('is-on', on); c.setAttribute('aria-pressed', String(on)); });
+      let n = 0;
+      cards.forEach((c) => {
+        const show = cat === 'all' || c.dataset.cat === cat;
+        c.classList.toggle('is-hide', !show);
+        if (show) { c.style.setProperty('--i', String(n++ % 6)); if (!reduce) { c.classList.remove('is-in'); requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add('is-in'))); } }
+      });
+    };
+    chips.forEach((c) => c.addEventListener('click', () => filter(c.dataset.filter)));
+    $$('[data-jump]').forEach((a) => a.addEventListener('click', () => filter(a.dataset.jump)));
+    cards.forEach((card) => card.addEventListener('pointermove', (e) => { const r = card.getBoundingClientRect(); card.style.setProperty('--mx', `${e.clientX - r.left}px`); card.style.setProperty('--my', `${e.clientY - r.top}px`); }));
+    $$('[data-add]', grid).forEach((b) => b.addEventListener('click', () => {
+      const n = b.dataset.add;
+      if (plan.has(n)) plan.delete(n); else { plan.add(n); toast(`${n} added to your plan`); }
+      renderPlan();
+    }));
+  }
+  const clearBtn = $('[data-tray-clear]'); if (clearBtn) clearBtn.addEventListener('click', () => { plan.clear(); renderPlan(); });
+  $$('a[href="#contact"]').forEach((a) => a.addEventListener('click', () => { if (tray) tray.hidden = true; }));
+  // Hide tray while contact is on screen
+  const contact = $('#contact');
+  if (hasIO && contact && tray) new IntersectionObserver(([en]) => { tray.hidden = en.isIntersecting || plan.size === 0; }, { threshold: 0.2 }).observe(contact);
+
+  // ---------- Search modes ----------
+  const scr = $('[data-screen]');
+  if (scr) {
+    const modes = $$('[data-mode]'), q = $('[data-q]', scr);
+    const Q = { seo: 'best dental clinic near me', aeo: 'is there a dentist open today?', geo: 'which clinic nearby can see me this week?' };
+    let mt = [], mi = 0, mauto = !reduce, mvis = false;
+    const mclear = () => { mt.forEach(clearTimeout); mt = []; };
+    const type = (txt) => { if (reduce) { q.textContent = txt; return; } q.textContent = ''; let i = 0; const s = () => { q.textContent = txt.slice(0, ++i); if (i < txt.length) mt.push(setTimeout(s, 32)); }; s(); };
+    const show = (i, user) => {
+      mclear(); mi = i; const k = modes[i].dataset.mode;
+      modes.forEach((m, j) => { m.setAttribute('aria-selected', String(j === i)); m.tabIndex = j === i ? 0 : -1; m.classList.remove('is-playing'); });
+      scr.dataset.show = k; type(Q[k]);
+      if (mauto && !user) { void modes[i].offsetWidth; modes[i].classList.add('is-playing'); mt.push(setTimeout(() => { if (mauto && mvis) show((i + 1) % modes.length); }, 6000)); }
+    };
+    modes.forEach((m, i) => {
+      m.addEventListener('click', () => { mauto = false; show(i, true); });
+      m.addEventListener('keydown', (e) => { let n = -1; if (e.key === 'ArrowDown' || e.key === 'ArrowRight') n = (i + 1) % modes.length; if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') n = (i - 1 + modes.length) % modes.length; if (n > -1) { e.preventDefault(); mauto = false; modes[n].focus(); show(n, true); } });
+    });
+    if (hasIO) new IntersectionObserver(([en]) => { const was = mvis; mvis = en.isIntersecting; if (mvis && !was && mauto) show(mi); }, { threshold: 0.4 }).observe(scr);
+    else show(0, true);
+  }
+
+  // ---------- Lab tilt ----------
+  if (!reduce && window.matchMedia('(pointer: fine)').matches) {
+    $$('[data-tilt]').forEach((c) => {
+      c.addEventListener('pointermove', (e) => { const r = c.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; c.style.transform = `rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) translateZ(0)`; });
+      c.addEventListener('pointerleave', () => { c.style.transform = ''; });
+    });
   }
 
   // ---------- Copy email ----------
   $$('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
     const v = b.dataset.copy;
-    try { await navigator.clipboard.writeText(v); }
-    catch (_) { const t = document.createElement('textarea'); t.value = v; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); }
+    try { await navigator.clipboard.writeText(v); } catch (_) { const t = document.createElement('textarea'); t.value = v; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); }
     b.textContent = 'Copied'; b.classList.add('is-done'); toast('Email address copied');
     setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('is-done'); }, 1800);
   }));
 
-  // ---------- Project brief -> email ----------
+  // ---------- Brief -> email ----------
   const brief = $('[data-brief]');
   if (brief) {
-    const hint = $('[data-brief-hint]', brief);
-    const defaultHint = hint.textContent;
+    const hint = $('[data-brief-hint]', brief), def = hint.textContent;
+    const reset = () => { brief.name.removeAttribute('aria-invalid'); hint.textContent = def; hint.classList.remove('is-error'); };
+    brief.name.addEventListener('input', reset);
     brief.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = brief.name.value.trim();
       if (!name) { brief.name.setAttribute('aria-invalid', 'true'); hint.textContent = 'Please add your name so we know who to reply to.'; hint.classList.add('is-error'); brief.name.focus(); return; }
-      brief.name.removeAttribute('aria-invalid'); hint.textContent = defaultHint; hint.classList.remove('is-error');
-      const needs = $$('input[name="need"]:checked', brief).map((i) => i.value);
+      reset();
       const company = brief.company.value.trim(), msg = brief.msg.value.trim();
-      const subject = `Project brief from ${name}${company ? ' (' + company + ')' : ''}`;
-      const body = [`Name: ${name}`, company && `Company: ${company}`, `Agents needed: ${needs.length ? needs.join(', ') : 'Not sure yet'}`, '', msg || '(No extra details)'].filter((l) => l !== '' || true).filter(Boolean).join('\n');
-      window.location.href = `mailto:fridaystartup@fridaystartup.cyou?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const subject = `New project plan from ${name}${company ? ' (' + company + ')' : ''}`;
+      const lines = [`Name: ${name}`];
+      if (company) lines.push(`Business: ${company}`);
+      lines.push(`Services: ${plan.size ? [...plan].join(', ') : 'Not sure yet'}`, '', msg || '(No extra details)');
+      window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
       toast('Opening your email app…');
     });
-    brief.name.addEventListener('input', () => { brief.name.removeAttribute('aria-invalid'); hint.textContent = defaultHint; hint.classList.remove('is-error'); });
   }
-
-  // ---------- Back to top ----------
-  const topBtn = $('[data-top]');
-  if (topBtn) topBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); $('.nav__brand').focus(); });
-
-  // ---------- Command palette ----------
-  const pal = $('[data-palette]');
-  if (pal && typeof pal.showModal === 'function') {
-    const input = $('[data-palette-input]', pal), list = $('[data-palette-list]', pal), empty = $('[data-palette-empty]', pal);
-    const items = $$('li', list);
-    items.forEach((li, i) => { li.id = 'pal-' + i; });
-    let visible = items, idx = 0;
-    const mark = () => {
-      items.forEach((li) => li.setAttribute('aria-selected', 'false'));
-      if (visible[idx]) { visible[idx].setAttribute('aria-selected', 'true'); input.setAttribute('aria-activedescendant', visible[idx].id); visible[idx].scrollIntoView({ block: 'nearest' }); }
-      else input.removeAttribute('aria-activedescendant');
-    };
-    const filter = () => {
-      const q = input.value.trim().toLowerCase();
-      visible = items.filter((li) => { const on = !q || (li.textContent + ' ' + li.dataset.group).toLowerCase().includes(q); li.hidden = !on; return on; });
-      empty.hidden = visible.length > 0; idx = 0; mark();
-    };
-    const go = (li) => {
-      if (!li) return;
-      const href = li.dataset.href;
-      pal.close();
-      if (href.startsWith('#')) { const el = $(href); if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); history.replaceState(null, '', href); }
-      else if (/^https?:/.test(href)) window.open(href, '_blank', 'noopener');
-      else window.location.href = href;
-    };
-    const open = () => { input.value = ''; filter(); pal.showModal(); input.focus(); };
-    $$('[data-palette-open]').forEach((b) => b.addEventListener('click', open));
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); pal.open ? pal.close() : open(); }
-    });
-    input.addEventListener('input', filter);
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowDown') { e.preventDefault(); idx = Math.min(visible.length - 1, idx + 1); mark(); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); idx = Math.max(0, idx - 1); mark(); }
-      else if (e.key === 'Enter') { e.preventDefault(); go(visible[idx]); }
-    });
-    items.forEach((li) => {
-      li.addEventListener('click', () => go(li));
-      li.addEventListener('pointermove', () => { const j = visible.indexOf(li); if (j !== idx) { idx = j; mark(); } });
-    });
-    pal.addEventListener('click', (e) => { if (e.target === pal) pal.close(); });
-  } else {
-    $$('[data-palette-open]').forEach((b) => { b.hidden = true; });
-  }
+  renderPlan();
 })();
