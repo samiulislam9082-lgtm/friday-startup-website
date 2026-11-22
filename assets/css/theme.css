@@ -1,0 +1,58 @@
+/* Theme bridge: brings inner pages in line with the homepage
+   (Clash Display + Switzer, night surfaces, cobalt-to-amber prism accent). */
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap');
+@font-face { font-family: "Clash Display"; src: url(/assets/fonts/clash-display-500.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Clash Display"; src: url(/assets/fonts/clash-display-600.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Switzer"; src: url(/assets/fonts/switzer-400.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Switzer"; src: url(/assets/fonts/switzer-500.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Switzer"; src: url(/assets/fonts/switzer-600.woff2) format("woff2"); font-weight: 600 700; font-display: swap; }
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface-raised: #191922;
+  --surface-elevated: #21212c;
+  --surface-deep: #07070b;
+  --text: #f3f1ec;
+  --muted: #a6a5b1;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.22);
+  --accent: #c9a46a;
+  --accent-soft: #d8bd8a;
+  --primary: #a8854f;
+}
+body {
+  font-family: "Switzer", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+code, kbd, .eyebrow, [class*="mono"] { font-family: "Geist Mono", ui-monospace, Menlo, monospace; }
+h1, h2, h3, h4 { font-family: "Clash Display", "Switzer", ui-sans-serif, sans-serif; font-weight: 600; letter-spacing: -0.02em; color: #f3f1ec; }
+.eyebrow { color: #d8bd8a; letter-spacing: 0.12em; }
+.text-gradient-accent, .text-gradient {
+  background: none !important;
+  -webkit-text-fill-color: #f3f1ec !important;
+  color: #f3f1ec !important;
+  text-shadow: none;
+}
+.button:not(.button--quiet) {
+  background: #fbfaf7;
+  color: #0e0e13;
+  border-color: #fbfaf7;
+  border-radius: 999px;
+  box-shadow: none;
+  text-shadow: none;
+  transition: transform 400ms cubic-bezier(.22,1,.36,1), box-shadow 400ms ease;
+}
+.button:not(.button--quiet):hover { transform: translateY(-2px); box-shadow: 0 14px 40px -12px rgba(201, 164, 106, 0.6); }
+.button--quiet { border-color: var(--line-strong); color: #f3f1ec; border-radius: 999px; }
+.button--quiet:hover { border-color: rgba(255, 255, 255, 0.6); }
+.site-header { background: rgba(10, 10, 15, 0.78); border-color: var(--line); backdrop-filter: blur(18px) saturate(1.4); }
+a:focus-visible, button:focus-visible { outline: 2px solid #a8854f; outline-offset: 3px; }
+.site-nav a[aria-current="page"] { background: rgba(201, 164, 106, 0.14); border-color: rgba(201, 164, 106, 0.45); color: #fff; }
+.site-nav .nav-cta-btn, .site-header .site-nav .nav-cta-btn, .nav-cta-btn { background: #fbfaf7 !important; color: #0e0e13 !important; border-color: #fbfaf7 !important; box-shadow: none !important; border-radius: 999px !important; }
+.site-nav .nav-cta-btn:hover { background: #fff !important; }
+.badge-chip { background: rgba(201, 164, 106, 0.1); border-color: rgba(201, 164, 106, 0.35); color: #e9d9bb; }
+.badge-chip__dot { background: linear-gradient(100deg, #a8854f, #f4ead6); box-shadow: 0 0 0 4px rgba(201, 164, 106, 0.18); }
+::selection { background: #a8854f; color: #fff; }
+@font-face { font-family: "Boska"; src: url("/assets/fonts/boska-400i.woff2") format("woff2"); font-style: italic; font-weight: 400; font-display: swap; }
+h1 em, h2 em, .gradient-text { font-family: "Boska", Georgia, serif; font-style: italic; font-weight: 400; }
