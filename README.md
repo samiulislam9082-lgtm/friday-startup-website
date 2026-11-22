@@ -18,15 +18,22 @@ Open `http://localhost:8080`.
 - `news.html` — separate News & updates page, including confirmed product previews and dated studio news.
 - `assets/site-config.js` — the published email address, the four approved account links, approved news stories, and product launch details.
 - `assets/friday-startup-emblem.png` — an exact copy of the supplied original logo image. The page renders “Friday Startup” beside it as live text; the logo file is not redrawn or altered.
-- `assets/social-*.svg` — Facebook, Instagram, X, and Gmail marks used for the official account links.
+- `assets/social-*.svg` — Facebook, Instagram, X, email and phone marks used for the official contact links.
 - `robots.txt`, `sitemap.xml`, and `llms.txt` — crawler access, canonical page discovery, and an accurate source-of-truth summary for AI systems.
 - `assets/*.jpg` — Pexels photography; credits and source pages are below.
 
 ### Help & contact
 
-The single published email address is `fridaystartup@fridaystartup.cyou`. The Gmail button opens a Gmail compose window addressed to that inbox; the address is also shown in the contact section. There is no contact form. Use Gmail to contact Friday Startup; Facebook, Instagram, and X link to the supplied official accounts.
+The published contact details are the official email address `fridaystartup@fridaystartup.cyou` (opened via `mailto:` links) and the phone number `+1 (740) 206-9647` (opened via `tel:+17402069647`). Both appear in the homepage Contact section, the Help Center and the footer of every page. Facebook, Instagram and X link to the official accounts. There is no contact form.
 
-Only Facebook, Instagram, X, and Gmail are published as account links. Do not add other account profiles or contact methods without an explicit site-owner request.
+Do not add other account profiles or contact methods without an explicit site-owner request.
+
+### Homepage structure and motion
+
+- Hero → services marquee → **Business Agents** (core service: interactive orbit, agent tabs for Marketing, Website, Social Media and Growth, and a four-step process) → diverse services with a "More innovative solutions are on the way" band → approach → news & updates with social links → FAQ → contact.
+- `assets/css/premium.css` holds the motion layer (header condensing, scroll progress, blurred staggered reveals, card spotlights, magnetic buttons) and the new homepage sections. It is loaded on every page.
+- `assets/js/site.js` drives the Business Agents tabs (auto-cycles while in view and stops after the visitor interacts; arrow-key navigation supported).
+- All motion is disabled for visitors with `prefers-reduced-motion`, and content stays visible without JavaScript.
 
 ### News and launches
 

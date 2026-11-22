@@ -147,4 +147,132 @@
       }
     });
   });
+  // 6. Premium motion: header state, scroll progress, spotlight, magnetic buttons
+  const header = document.querySelector('[data-site-header]');
+  const progress = document.querySelector('[data-scroll-progress]');
+  let ticking = false;
+  const onScroll = () => {
+    const y = window.scrollY;
+    if (header) header.classList.toggle('is-scrolled', y > 24);
+    if (progress) {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.setProperty('--progress', max > 0 ? Math.min(1, y / max).toFixed(4) : 0);
+    }
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+  if (finePointer) {
+    document.querySelectorAll('.spotlight').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+    if (!reduceMotion) {
+      document.querySelectorAll('.magnetic').forEach((el) => {
+        el.addEventListener('pointermove', (e) => {
+          const r = el.getBoundingClientRect();
+          el.style.setProperty('--tx', `${((e.clientX - r.left) / r.width - 0.5) * 10}px`);
+          el.style.setProperty('--ty', `${((e.clientY - r.top) / r.height - 0.5) * 8}px`);
+        });
+        el.addEventListener('pointerleave', () => {
+          el.style.setProperty('--tx', '0px');
+          el.style.setProperty('--ty', '0px');
+        });
+      });
+    }
+  }
+
+  // Steps progress line
+  const steps = document.querySelector('[data-steps]');
+  if (steps) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      steps.classList.add('is-visible');
+    } else {
+      new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) { steps.classList.add('is-visible'); obs.disconnect(); }
+        });
+      }, { threshold: 0.3 }).observe(steps);
+    }
+  }
+
+  // 7. Business Agents interactive orbit + tabs (auto-cycles until the visitor interacts)
+  const agents = document.querySelector('[data-agents]');
+  if (agents) {
+    const tabs = [...agents.querySelectorAll('[data-agent-tab]')];
+    const panels = [...agents.querySelectorAll('[data-agent-panel]')];
+    const nodes = [...agents.querySelectorAll('[data-agent-node]')];
+    const links = [...agents.querySelectorAll('[data-link]')];
+    const CYCLE = 6000;
+    let current = 0;
+    let timer = null;
+    let userPaused = false;
+    let inView = false;
+
+    panels.forEach((panel) => {
+      const bar = document.createElement('span');
+      bar.className = 'agent-progress';
+      bar.setAttribute('aria-hidden', 'true');
+      bar.style.setProperty('--cycle', `${CYCLE}ms`);
+      panel.appendChild(bar);
+    });
+
+    const select = (index, focus = false) => {
+      current = index;
+      tabs.forEach((tab, i) => {
+        const on = i === index;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        if (on && focus) tab.focus();
+      });
+      panels.forEach((panel, i) => {
+        const on = i === index;
+        panel.hidden = !on;
+        panel.classList.toggle('is-active', on);
+        const bar = panel.querySelector('.agent-progress');
+        if (bar) {
+          bar.classList.remove('is-running');
+          if (on && !userPaused && !reduceMotion && inView) { void bar.offsetWidth; bar.classList.add('is-running'); }
+        }
+      });
+      nodes.forEach((node, i) => node.classList.toggle('is-active', i === index));
+      links.forEach((link, i) => link.classList.toggle('is-active', i === index));
+    };
+
+    const stop = () => { clearInterval(timer); timer = null; };
+    const start = () => {
+      stop();
+      if (userPaused || reduceMotion || !inView) return;
+      timer = setInterval(() => select((current + 1) % tabs.length), CYCLE);
+      select(current);
+    };
+    const userSelect = (i, focus) => { userPaused = true; stop(); select(i, focus); };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => userSelect(i));
+      tab.addEventListener('keydown', (e) => {
+        const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+        if (e.key in keys) {
+          e.preventDefault();
+          userSelect((i + keys[e.key] + tabs.length) % tabs.length, true);
+        } else if (e.key === 'Home') { e.preventDefault(); userSelect(0, true); }
+        else if (e.key === 'End') { e.preventDefault(); userSelect(tabs.length - 1, true); }
+      });
+    });
+    nodes.forEach((node, i) => node.addEventListener('click', () => userSelect(i)));
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => { inView = entry.isIntersecting; inView ? start() : stop(); });
+      }, { threshold: 0.35 }).observe(agents);
+    }
+    select(0);
+  }
 })();
