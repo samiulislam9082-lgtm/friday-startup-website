@@ -14,7 +14,7 @@ Open `http://localhost:8080`.
 
 ## Update the site
 
-- `index.html` — homepage content, design, navigation, venture portfolio, approach, FAQs, and Help.
+- `index.html` — homepage content and structure (styled by `assets/css/home.css`, scripted by `assets/js/home.js`).
 - `news.html` — separate News & updates page, including confirmed product previews and dated studio news.
 - `assets/site-config.js` — the published email address, the four approved account links, approved news stories, and product launch details.
 - `assets/friday-startup-emblem.png` — an exact copy of the supplied original logo image. The page renders “Friday Startup” beside it as live text; the logo file is not redrawn or altered.
@@ -28,12 +28,13 @@ The published contact details are the official email address `fridaystartup@frid
 
 Do not add other account profiles or contact methods without an explicit site-owner request.
 
-### Homepage structure and motion
+### Homepage structure and motion (2026 redesign)
 
-- Hero → services marquee → **Business Agents** (core service: interactive orbit, agent tabs for Marketing, Website, Social Media and Growth, and a four-step process) → diverse services with a "More innovative solutions are on the way" band → approach → news & updates with social links → FAQ → contact.
-- `assets/css/premium.css` holds the motion layer (header condensing, scroll progress, blurred staggered reveals, card spotlights, magnetic buttons) and the new homepage sections. It is loaded on every page.
-- `assets/js/site.js` drives the Business Agents tabs (auto-cycles while in view and stops after the visitor interacts; arrow-key navigation supported).
-- All motion is disabled for visitors with `prefers-reduced-motion`, and content stays visible without JavaScript.
+- The homepage is standalone: `index.html` loads only `assets/css/home.css` and `assets/js/home.js` (Geist and Geist Mono from Google Fonts).
+- Sections: hero (animated character field, white headline, "Start a Project" / "Book a Call") → services ticker → **Business Agents** (Marketing, Website, Social Media and Growth tiles with animated light UI mockups) → "Real workflows. Real automation." (lead routing, pipeline, support chat) → process → services with a "More innovative solutions are on the way" band → news & updates with social links → FAQ → contact → footer.
+- Navigation is a floating pill dock fixed to the bottom of the screen; on phones it opens a menu sheet.
+- Inner pages keep `site.css`, `premium.css` and `site.js`, plus `assets/css/theme.css`, which brings them in line with the new palette and type.
+- Motion pauses off-screen and is disabled for visitors with `prefers-reduced-motion`; content stays visible without JavaScript.
 
 ### News and launches
 
