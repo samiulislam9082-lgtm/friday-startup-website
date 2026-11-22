@@ -28,12 +28,12 @@ The published contact details are the official email address `fridaystartup@frid
 
 Do not add other account profiles or contact methods without an explicit site-owner request.
 
-### Homepage structure and motion (2026 redesign)
+### Homepage structure and motion ("Keep your Friday" redesign)
 
-- The homepage is standalone: `index.html` loads only `assets/css/home.css` and `assets/js/home.js` (Geist and Geist Mono from Google Fonts).
-- Sections: hero (animated character field, white headline, "Start a Project" / "Book a Call") → services ticker → **Business Agents** (Marketing, Website, Social Media and Growth tiles with animated light UI mockups) → "Real workflows. Real automation." (lead routing, pipeline, support chat) → process → services with a "More innovative solutions are on the way" band → news & updates with social links → FAQ → contact → footer.
-- Navigation is a floating pill dock fixed to the bottom of the screen; on phones it opens a menu sheet.
-- Inner pages keep `site.css`, `premium.css` and `site.js`, plus `assets/css/theme.css`, which brings them in line with the new palette and type.
+- Concept: your Business Agents work Monday to Thursday, and you keep Friday. Light paper-and-ink palette with a single orange signal colour; Cabinet Grotesk (display) and Satoshi (body) from Fontshare, JetBrains Mono for labels.
+- The homepage is standalone: `index.html` loads only `assets/css/home.css` and `assets/js/home.js`.
+- Sections: sticky header with a live clock → hero with an animated **week board** (four agents fill Mon–Thu tasks as a "now" line sweeps; Friday stays free) → **Business Agents** roster with an interactive activity log and approval buttons → "Four Fridays" process with a scroll-linked progress bar → **More than agents** service index, ending with the "Next launch" row for upcoming solutions → **The Friday Edition** news and updates with social links → FAQ → orange contact section (email, phone, socials) → footer.
+- Inner pages keep `site.css`, `premium.css` and `site.js`, plus `assets/css/theme.css`, which applies the same type, warm ink background and orange accent.
 - Motion pauses off-screen and is disabled for visitors with `prefers-reduced-motion`; content stays visible without JavaScript.
 
 ### News and launches

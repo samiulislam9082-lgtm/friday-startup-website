@@ -1,36 +1,50 @@
-/* 2026 theme bridge: brings inner pages in line with the new homepage
-   (Geist type, deep-blue palette, white headlines, violet CTA). */
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap');
+/* Theme bridge: brings inner pages in line with the "Keep your Friday" homepage
+   (Cabinet Grotesk + Satoshi, warm ink and paper, one orange signal colour). */
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 :root {
-  --bg: #060918;
-  --surface: #0b1030;
-  --surface-raised: #0f1640;
-  --surface-elevated: #141c4c;
-  --surface-deep: #04060f;
-  --muted: #a3acd3;
-  --line: rgba(165, 180, 252, 0.14);
-  --line-strong: rgba(165, 180, 252, 0.3);
-  --accent: #93c5fd;
-  --accent-soft: #bfdbfe;
-  --primary: #8b5cf6;
+  --bg: #16140f;
+  --surface: #1e1b15;
+  --surface-raised: #26221b;
+  --surface-elevated: #2e2a21;
+  --surface-deep: #100e0a;
+  --text: #f4f1ea;
+  --muted: #b9b2a4;
+  --line: rgba(244, 241, 234, 0.12);
+  --line-strong: rgba(244, 241, 234, 0.26);
+  --accent: #ff7a4d;
+  --accent-soft: #ffb08f;
+  --primary: #ff5420;
 }
 body {
-  font-family: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  background:
-    radial-gradient(80% 50% at 50% 0%, rgba(44, 76, 255, 0.28), transparent 70%) no-repeat,
-    var(--bg);
+  font-family: "Satoshi", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
-code, kbd, .eyebrow, [class*="mono"] { font-family: "Geist Mono", ui-monospace, Menlo, monospace; }
-h1, h2, h3 { letter-spacing: -0.03em; }
+code, kbd, .eyebrow, [class*="mono"] { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+h1, h2, h3, h4 { font-family: "Cabinet Grotesk", "Satoshi", ui-sans-serif, sans-serif; font-weight: 800; letter-spacing: -0.025em; color: #f4f1ea; }
+.eyebrow { color: #ff7a4d; }
 .text-gradient-accent, .text-gradient {
   background: none !important;
-  -webkit-text-fill-color: #fff !important;
-  color: #fff !important;
-  text-shadow: 0 0 40px rgba(170, 190, 255, 0.3);
+  -webkit-text-fill-color: #ff5420 !important;
+  color: #ff5420 !important;
+  text-shadow: none;
 }
 .button:not(.button--quiet) {
-  background: linear-gradient(100deg, #5eead4 0%, #818cf8 50%, #f0abfc 100%);
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(20, 20, 60, 0.35);
+  background: #ff5420;
+  color: #16140f;
+  border-color: #ff5420;
+  box-shadow: 4px 4px 0 #f4f1ea;
+  text-shadow: none;
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
-.site-header { background: rgba(10, 13, 34, 0.78); border-color: var(--line-strong); }
+.button:not(.button--quiet):hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #f4f1ea; }
+.button--quiet { border-color: var(--line-strong); color: #f4f1ea; }
+.site-header { background: rgba(22, 20, 15, 0.86); border-color: var(--line-strong); }
+a:focus-visible, button:focus-visible { outline: 2px solid #ff5420; outline-offset: 3px; }
+.text-gradient-accent, .text-gradient { -webkit-text-fill-color: #f4f1ea !important; color: #f4f1ea !important; }
+.site-nav a[aria-current="page"] { background: rgba(255, 84, 32, 0.14); border-color: rgba(255, 84, 32, 0.5); color: #fff; }
+.site-nav .nav-cta-btn, .site-header .site-nav .nav-cta-btn, .nav-cta-btn { background: #ff5420 !important; color: #16140f !important; box-shadow: none !important; }
+.site-nav .nav-cta-btn:hover { background: #ff7a4d !important; }
+.badge-chip { background: rgba(255, 84, 32, 0.1); border-color: rgba(255, 84, 32, 0.35); color: #ffb08f; }
+.badge-chip__dot { background: #ff5420; box-shadow: 0 0 0 4px rgba(255, 84, 32, 0.18); }
