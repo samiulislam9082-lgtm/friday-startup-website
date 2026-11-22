@@ -275,4 +275,105 @@
     }
     select(0);
   }
+
+  // Glyph field: drifting monospace characters with a cursor spotlight
+  (() => {
+    const canvases = document.querySelectorAll('[data-glyph-field]');
+    if (!canvases.length) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const CHARS = 'S$80X0S$S8X0';
+    canvases.forEach((canvas) => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      const host = canvas.parentElement;
+      let w = 0, h = 0, cols = 0, rows = 0, cells = [], dpr = 1, running = false, raf = 0;
+      const size = () => (window.innerWidth < 760 ? 13 : 16);
+      let mx = -9999, my = -9999;
+      const build = () => {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = canvas.clientWidth; h = canvas.clientHeight;
+        canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const fs = size();
+        cols = Math.ceil(w / (fs * 0.95)); rows = Math.ceil(h / (fs * 1.25));
+        cells = [];
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            cells.push({
+              ch: CHARS[(Math.random() * CHARS.length) | 0],
+              base: Math.random() * 0.22 + 0.04,
+              phase: Math.random() * Math.PI * 2,
+              speed: 0.4 + Math.random() * 1.2,
+              on: Math.random() > 0.35,
+            });
+          }
+        }
+      };
+      const draw = (t) => {
+        const fs = size();
+        const cw = fs * 0.95, ch = fs * 1.25;
+        ctx.clearRect(0, 0, w, h);
+        ctx.font = `500 ${fs}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+        ctx.textBaseline = 'top';
+        const time = t / 1000;
+        const wave = (time * 60) % (h + 300) - 150;
+        for (let i = 0; i < cells.length; i++) {
+          const cell = cells[i];
+          if (!cell.on) continue;
+          const x = (i % cols) * cw, y = ((i / cols) | 0) * ch;
+          let a = cell.base * (0.6 + 0.4 * Math.sin(time * cell.speed + cell.phase));
+          const dy = Math.abs(y - wave);
+          if (dy < 120) a += (1 - dy / 120) * 0.18;
+          const dx = x - mx, dyy = y - my, d2 = dx * dx + dyy * dyy;
+          if (d2 < 32000) a += (1 - d2 / 32000) * 0.55;
+          if (a < 0.03) continue;
+          ctx.fillStyle = `rgba(147, 197, 253, ${Math.min(a, 0.9).toFixed(3)})`;
+          ctx.fillText(cell.ch, x, y);
+          if (!reduce && Math.random() < 0.0009) cell.ch = CHARS[(Math.random() * CHARS.length) | 0];
+        }
+      };
+      const loop = (t) => { draw(t); if (running) raf = requestAnimationFrame(loop); };
+      build(); draw(0);
+      window.addEventListener('resize', () => { build(); draw(performance.now()); });
+      host.addEventListener('pointermove', (e) => {
+        const r = canvas.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top;
+        if (reduce) draw(performance.now());
+      });
+      host.addEventListener('pointerleave', () => { mx = my = -9999; if (reduce) draw(0); });
+      if (reduce || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && !running) { running = true; raf = requestAnimationFrame(loop); }
+        else if (!entry.isIntersecting && running) { running = false; cancelAnimationFrame(raf); }
+      }).observe(canvas);
+    });
+  })();
+
+  // Workflow lead tags cycle, with a moving highlight
+  (() => {
+    const list = document.querySelector('.wf-leads');
+    if (!list) return;
+    const rows = [...list.querySelectorAll('.wf-lead')];
+    const state = (txt) => (/hot/i.test(txt) ? 'hot' : /qualified/i.test(txt) ? 'qualified' : 'cold');
+    rows.forEach((row) => { const tag = row.querySelector('.wf-tag'); tag.dataset.state = state(tag.textContent); tag.dataset.idx = '0'; });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let active = 1, timer = 0;
+    const step = () => {
+      rows[active].classList.remove('is-active');
+      active = (active + 1) % rows.length;
+      const row = rows[active];
+      row.classList.add('is-active');
+      const tag = row.querySelector('.wf-tag');
+      const opts = tag.dataset.tags.split(',');
+      const next = (Number(tag.dataset.idx) + 1) % opts.length;
+      tag.classList.add('is-swapping');
+      setTimeout(() => {
+        tag.textContent = opts[next]; tag.dataset.idx = String(next); tag.dataset.state = state(opts[next]);
+        tag.classList.remove('is-swapping');
+      }, 250);
+    };
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !timer) timer = setInterval(step, 1800);
+      else if (!e.isIntersecting && timer) { clearInterval(timer); timer = 0; }
+    }).observe(list);
+  })();
 })();
