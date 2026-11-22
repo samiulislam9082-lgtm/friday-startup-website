@@ -80,6 +80,7 @@
       </nav>
       <button class="top__menu" type="button" aria-expanded="false" aria-controls="top-nav">Menu</button>
     </div>
+    <span class="top__progress" aria-hidden="true" data-progress></span>
   </header>
 
   <main id="main">
@@ -100,6 +101,8 @@
           </div>
         </div>
 
+        <div class="stage" data-stage>
+        <span class="sun" aria-hidden="true"></span>
         <figure class="board" aria-label="Example week: Business Agents completing tasks from Monday to Thursday, Friday left free" data-board>
           <figcaption class="board__head">
             <span>This week · on duty</span>
@@ -134,10 +137,15 @@
             <span class="board__now" aria-hidden="true"></span>
           </div>
         </figure>
+        <p class="toast" aria-hidden="true" data-toast><span class="toast__dot"></span><span class="toast__who" data-toast-who>Marketing Agent</span><span class="toast__what" data-toast-what>Emails sent</span></p>
+        </div>
       </div>
 
-      <div class="shell strip">
-        <span>Marketing</span><i></i><span>Website management</span><i></i><span>Social media</span><i></i><span>Growth</span><i></i><span>Venture building</span><i></i><span>Recovery support</span>
+      <div class="marquee" aria-label="Our services">
+        <div class="marquee__track">
+          <div class="marquee__set"><span>Business Agents</span><i></i><span>Marketing</span><i></i><span>Website management</span><i></i><span>Social media</span><i></i><span>Growth</span><i></i><span>Venture building</span><i></i><span>Growth partnerships</span><i></i><span>Recovery support</span><i></i><span>More coming soon</span><i></i></div>
+          <div class="marquee__set" aria-hidden="true"><span>Business Agents</span><i></i><span>Marketing</span><i></i><span>Website management</span><i></i><span>Social media</span><i></i><span>Growth</span><i></i><span>Venture building</span><i></i><span>Growth partnerships</span><i></i><span>Recovery support</span><i></i><span>More coming soon</span><i></i></div>
+        </div>
       </div>
     </section>
 
@@ -183,18 +191,45 @@
       </div>
     </section>
 
+    <!-- BEFORE / AFTER -->
+    <section class="sec sec--tight" id="week" aria-labelledby="week-title">
+      <div class="shell">
+        <header class="sec__head sec__head--row">
+          <div>
+            <p class="kicker"><span>No. 03</span> Before and after</p>
+            <h2 id="week-title" class="split">Same week.<br>Different Friday.</h2>
+          </div>
+          <p class="sec__lede">Drag the handle to compare a typical week run by hand with the same week run by Business Agents.</p>
+        </header>
+        <div class="compare" data-compare style="--pos: 50%">
+          <div class="compare__pane compare__pane--before" role="group" aria-label="A week without Business Agents: 20 tasks on your plate, Friday spent catching up">
+            <p class="compare__label"><span>Without agents</span><b>20 tasks on your plate</b></p>
+            <div class="wk"><div class="wk__col"><span class="wk__day">Mon</span><span class="wk__chip">Write newsletter</span><span class="wk__chip">Post on Instagram</span><span class="wk__chip">Reply to messages</span><span class="wk__chip">Fix a website typo</span></div><div class="wk__col"><span class="wk__day">Tue</span><span class="wk__chip">Plan the week’s posts</span><span class="wk__chip">Update prices page</span><span class="wk__chip">Chase new leads</span><span class="wk__chip">Reply to comments</span></div><div class="wk__col"><span class="wk__day">Wed</span><span class="wk__chip">Write a blog post</span><span class="wk__chip">Reply to messages</span><span class="wk__chip">Check site speed</span><span class="wk__chip">Send follow-ups</span></div><div class="wk__col"><span class="wk__day">Thu</span><span class="wk__chip">Offer email</span><span class="wk__chip">Film a reel</span><span class="wk__chip">Back up the site</span><span class="wk__chip">Build lead list</span></div><div class="wk__col"><span class="wk__day">Fri</span><span class="wk__chip is-late">Weekly report</span><span class="wk__chip is-late">Late replies</span><span class="wk__chip is-late">Catch up</span><span class="wk__chip is-late">Catch up</span></div></div>
+          </div>
+          <div class="compare__pane compare__pane--after" role="group" aria-label="The same week with Business Agents: one approval for you, Friday free">
+            <p class="compare__label"><span>With Business Agents</span><b>1 approval on your plate</b></p>
+            <div class="wk"><div class="wk__col"><span class="wk__day">Mon</span><span class="wk__chip is-agent" style="--a:var(--c-mkt)">Newsletter sent</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Posts queued</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Messages answered</span><span class="wk__chip is-agent" style="--a:var(--c-web)">Typo fixed</span></div><div class="wk__col"><span class="wk__day">Tue</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Week planned</span><span class="wk__chip is-agent" style="--a:var(--c-web)">Prices updated</span><span class="wk__chip is-agent" style="--a:var(--c-grw)">Leads scored</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Comments handled</span></div><div class="wk__col"><span class="wk__day">Wed</span><span class="wk__chip is-agent" style="--a:var(--c-mkt)">Blog post live</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Messages answered</span><span class="wk__chip is-agent" style="--a:var(--c-web)">Speed checked</span><span class="wk__chip is-agent" style="--a:var(--c-grw)">Follow-ups sent</span></div><div class="wk__col"><span class="wk__day">Thu</span><span class="wk__chip is-you">You: approve offer</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Reel published</span><span class="wk__chip is-agent" style="--a:var(--c-web)">Backup done</span><span class="wk__chip is-agent" style="--a:var(--c-grw)">Report ready</span></div><div class="wk__col"><span class="wk__day">Fri</span><span class="wk__free"><b>Yours.</b><small>Nothing on your plate</small></span></div></div>
+          </div>
+          <span class="compare__handle" aria-hidden="true"><span>&#8596;</span></span>
+          <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Compare a week without and with Business Agents">
+        </div>
+        <p class="compare__note">Illustrative example. Your agents, tasks and approvals are agreed with you.</p>
+      </div>
+    </section>
+
     <!-- HOW IT WORKS -->
     <section class="sec sec--ink" id="process" aria-labelledby="process-title">
       <div class="shell">
         <header class="sec__head">
-          <p class="kicker kicker--light"><span>No. 03</span> How we work</p>
+          <p class="kicker kicker--light"><span>No. 04</span> How we work</p>
           <h2 id="process-title" class="split">Four Fridays<br>to a running setup.</h2>
+          <p class="sec__lede sec__lede--light">A clear path from first conversation to agents working in your business. One step a week, reviewed together.</p>
         </header>
         <ol class="fridays" data-fridays>
-          <li><span class="fridays__date">Friday 1</span><h3>Listen</h3><p>We learn how your marketing, website and social channels run today and where the hours go.</p></li>
-          <li><span class="fridays__date">Friday 2</span><h3>Shape</h3><p>We choose the workflow with the most impact and agree the rules, tools and approvals.</p></li>
-          <li><span class="fridays__date">Friday 3</span><h3>Launch</h3><p>Your first agents go live, connected to your tools, with your team signing off what matters.</p></li>
-          <li><span class="fridays__date">Friday 4</span><h3>Grow</h3><p>We review results together, then add agents as your business grows.</p></li>
+          <li><span class="fridays__num" aria-hidden="true">01</span><span class="fridays__date">Friday 1</span><h3>Listen</h3><p>We learn how your marketing, website and social channels run today and where the hours go.</p></li>
+          <li><span class="fridays__num" aria-hidden="true">02</span><span class="fridays__date">Friday 2</span><h3>Shape</h3><p>We choose the workflow with the most impact and agree the rules, tools and approvals.</p></li>
+          <li><span class="fridays__num" aria-hidden="true">03</span><span class="fridays__date">Friday 3</span><h3>Launch</h3><p>Your first agents go live, connected to your tools, with your team signing off what matters.</p></li>
+          <li><span class="fridays__num" aria-hidden="true">04</span><span class="fridays__date">Friday 4</span><h3>Grow</h3><p>We review results together, then add agents as your business grows.</p></li>
         </ol>
         <div class="fridays__track" aria-hidden="true"><span data-fridays-bar></span></div>
       </div>
@@ -205,7 +240,7 @@
       <div class="shell">
         <header class="sec__head sec__head--row">
           <div>
-            <p class="kicker"><span>No. 04</span> A multi-service company</p>
+            <p class="kicker"><span>No. 05</span> A multi-service company</p>
             <h2 id="services-title" class="split">More than agents.</h2>
           </div>
           <p class="sec__lede">Business Agents are the core. Around them sits a wider range of services for founders and operating businesses, from first idea to next stage.</p>
@@ -231,17 +266,20 @@
         </div>
         <div class="paper">
           <article class="paper__lead">
+            <div class="cover cover--sun" aria-hidden="true"><span class="cover__tag">Issue 01</span><span class="cover__sun"></span><span class="cover__lines"></span></div>
             <p class="paper__cat">Announcement</p>
             <h3><a href="/news.html">Introducing Business Agents for marketing, website and social media</a></h3>
             <p>Business Agents are now our core service, helping companies run marketing, website management, social media and growth from one connected setup.</p>
             <a class="paper__more" href="/news.html">Read in the newsroom →</a>
           </article>
           <article>
+            <div class="cover cover--rings" aria-hidden="true"><span class="cover__tag">Coming soon</span><i></i><i></i><i></i></div>
             <p class="paper__cat">Roadmap</p>
             <h3><a href="/news.html">More innovative solutions are in development</a></h3>
             <p>We're expanding our range of services. Follow our news and social channels to hear about new launches first.</p>
           </article>
           <article>
+            <div class="cover cover--path" aria-hidden="true"><span class="cover__tag">Guide</span><svg viewBox="0 0 200 120" preserveAspectRatio="none"><path d="M14 100 L60 72 L96 84 L140 40 L186 22" /></svg></div>
             <p class="paper__cat">Founder guide</p>
             <h3><a href="/news.html">From customer problem to first version: the lean path</a></h3>
             <p>Key lessons on testing digital venture ideas without over-engineering the first version.</p>
@@ -262,7 +300,7 @@
     <section class="sec" id="help" aria-labelledby="faq-title">
       <div class="shell faq">
         <header>
-          <p class="kicker"><span>No. 06</span> Help</p>
+          <p class="kicker"><span>No. 07</span> Help</p>
           <h2 id="faq-title" class="split">Good questions.</h2>
           <a class="btn btn--line" href="/help/">Visit the Help Center</a>
         </header>
@@ -279,8 +317,14 @@
     <!-- CONTACT -->
     <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="shell">
-        <p class="kicker kicker--light"><span>No. 07</span> Contact</p>
-        <h2 id="contact-title" class="contact__title split">Say hello<br>before Friday.</h2>
+        <p class="kicker kicker--light"><span>No. 08</span> Contact</p>
+        <div class="contact__top">
+          <h2 id="contact-title" class="contact__title split">Say hello<br>before Friday.</h2>
+          <a class="badge" href="tel:+17402069647" aria-label="Book a call: +1 (740) 206-9647">
+            <svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#badge-circle" textLength="486" lengthAdjust="spacing">Book a call · Keep your Friday · Book a call · Keep your Friday · </textPath></text></svg>
+            <span class="badge__arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </div>
         <div class="contact__grid">
           <a class="contact__big" href="mailto:fridaystartup@fridaystartup.cyou"><small>Email</small><span>fridaystartup@<wbr>fridaystartup.cyou</span></a>
           <a class="contact__big" href="tel:+17402069647"><small>Phone</small><span>+1 (740) 206-9647</span></a>
@@ -318,7 +362,7 @@
         <a href="tel:+17402069647">+1 (740) 206-9647</a>
       </div>
     </div>
-    <div class="shell foot__word" aria-hidden="true">Friday<span>Startup</span></div>
+    <div class="shell foot__word" aria-hidden="true" data-word><i style="--i:0">F</i><i style="--i:1">r</i><i style="--i:2">i</i><i style="--i:3">d</i><i style="--i:4">a</i><i style="--i:5">y</i><span><i style="--i:6">S</i><i style="--i:7">t</i><i style="--i:8">a</i><i style="--i:9">r</i><i style="--i:10">t</i><i style="--i:11">u</i><i style="--i:12">p</i></span></div>
     <div class="shell foot__base"><span>© Friday Startup. All rights reserved.</span><span>Built to give you your Fridays back.</span></div>
   </footer>
 

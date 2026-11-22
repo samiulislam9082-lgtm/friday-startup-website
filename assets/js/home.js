@@ -81,10 +81,27 @@
     const nowLine = $('.board__now', board);
     const counter = $('[data-done]', board);
     const total = tasks.length;
+    const toast = $('[data-toast]');
+    const who = $('[data-toast-who]'), what = $('[data-toast-what]');
+    let toastTimer = 0;
+    const DONE = { Emails: 'Emails sent', 'Speed check': 'Speed check passed', 'New pages': 'New pages published', '3 posts': '3 posts scheduled', 'Blog post': 'Blog post live', Replies: 'Replies handled', 'Leads scored': 'New leads scored', 'Offer email': 'Offer email ready for you', Backup: 'Backup complete', Reel: 'Reel published', Report: 'Weekly report ready' };
+    const announce = (t) => {
+      if (!toast || reduce) return;
+      const row = t.previousElementSibling && [...t.parentElement.children].slice(0, [...t.parentElement.children].indexOf(t)).reverse().find((el) => el.classList.contains('board__agent'));
+      const nm = row ? row.textContent : ''; who.textContent = (nm === 'Social' ? 'Social Media' : nm || 'Business') + ' Agent';
+      what.textContent = DONE[t.textContent] || t.textContent + ' done';
+      toast.style.setProperty('--a', t.style.getPropertyValue('--a'));
+      toast.classList.add('is-on');
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('is-on'), 1500);
+    };
     const setProgress = (p) => {
       // p: 0..4 across Mon-Thu, 4 = start of Friday
       let done = 0;
-      tasks.forEach((t) => { const on = p > Number(t.dataset.day) + 0.55; t.classList.toggle('is-done', on); if (on) done++; });
+      tasks.forEach((t) => {
+        const on = p > Number(t.dataset.day) + 0.55;
+        if (on && !t.classList.contains('is-done')) announce(t);
+        t.classList.toggle('is-done', on); if (on) done++;
+      });
       if (counter) counter.textContent = String(done);
       const i = Math.min(Math.floor(p), 3);
       const a = dayEls[i], b = dayEls[i + 1];
@@ -208,5 +225,64 @@
     update();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
+  }
+
+  // ---------- Scroll progress + sun parallax ----------
+  const prog = $('[data-progress]');
+  const sun = $('.sun');
+  let ticking = false;
+  const onFrame = () => {
+    ticking = false;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (prog) prog.style.setProperty('--sp', max > 0 ? (window.scrollY / max).toFixed(4) : '0');
+    if (sun && !reduce && window.scrollY < window.innerHeight * 1.2) sun.style.setProperty('--sy', `${window.scrollY * -0.18}px`);
+  };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onFrame); } }, { passive: true });
+  onFrame();
+
+  // ---------- Board tilt (fine pointers only) ----------
+  const stage = $('[data-stage]');
+  if (stage && board && !reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    stage.addEventListener('pointermove', (e) => {
+      const r = stage.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      board.style.setProperty('--ry', `${(x * 8).toFixed(2)}deg`);
+      board.style.setProperty('--rx', `${(y * -6).toFixed(2)}deg`);
+    });
+    stage.addEventListener('pointerleave', () => { board.style.setProperty('--ry', '0deg'); board.style.setProperty('--rx', '0deg'); });
+  }
+
+  // ---------- Before / after compare ----------
+  const cmp = $('[data-compare]');
+  if (cmp) {
+    const range = $('.compare__range', cmp);
+    const set = (v) => cmp.style.setProperty('--pos', `${v}%`);
+    range.addEventListener('input', () => set(range.value));
+    range.addEventListener('pointerdown', () => cmp.classList.add('is-drag'));
+    window.addEventListener('pointerup', () => cmp.classList.remove('is-drag'));
+    // Gentle hint: sweep once when it first comes into view
+    if (hasIO && !reduce) {
+      const io = new IntersectionObserver(([en]) => {
+        if (!en.isIntersecting) return;
+        io.disconnect();
+        const t0 = performance.now();
+        const sweep = (now) => {
+          if (cmp.classList.contains('is-drag')) return;
+          const k = Math.min(1, (now - t0) / 1800);
+          const v = 50 + Math.sin(k * Math.PI * 2) * 22 * (1 - k);
+          set(v.toFixed(1)); range.value = v;
+          if (k < 1) requestAnimationFrame(sweep); else { set(50); range.value = 50; }
+        };
+        requestAnimationFrame(sweep);
+      }, { threshold: 0.5 });
+      io.observe(cmp);
+    }
+  }
+
+  // ---------- Footer wordmark ----------
+  const word = $('[data-word]');
+  if (word) {
+    if (!hasIO || reduce) word.classList.add('is-in');
+    else new IntersectionObserver(([en], o) => { if (en.isIntersecting) { word.classList.add('is-in'); o.disconnect(); } }, { threshold: 0.3 }).observe(word);
   }
 })();
