@@ -36,6 +36,8 @@ Do not add other account profiles or contact methods without an explicit site-ow
 - Inner pages keep `site.css`, `premium.css` and `site.js`, plus `assets/css/theme.css`, which applies the same fonts, night palette and accent.
 - Animations pause off-screen and are disabled for visitors with `prefers-reduced-motion`; content stays readable without JavaScript.
 
+- Premium layer: restrained champagne-and-ivory palette, Boska serif italic for accent words, subtle film grain, a short "Friday Startup" intro curtain (first visit per session only, skipped for reduced motion), a custom cursor with magnetic buttons on mouse/trackpad devices, and soft blur reveals on section headings. Inner pages share the champagne accents via `assets/css/theme.css`.
+
 ### News and launches
 
 Add an approved studio story to `newsItems` in `assets/site-config.js` with a title, summary, category, and ISO 8601 `publishAt` value. It appears on `news.html` at or after that time. Product teasers use `launches`: enter an approved name, accurate summary, real local logo path, timezone-aware `launchAt`, and optional HTTPS URL. A product preview appears in News only during the 48 hours before launch; after launch, the product and its logo appear in the homepage portfolio. Do not add a product or date until it is approved.

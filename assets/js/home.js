@@ -8,7 +8,35 @@
   const EMAIL = 'fridaystartup@fridaystartup.cyou';
 
   const hero = $('.hero');
-  requestAnimationFrame(() => requestAnimationFrame(() => hero && hero.classList.add('is-ready')));
+  const ready = () => requestAnimationFrame(() => requestAnimationFrame(() => hero && hero.classList.add('is-ready')));
+
+  // ---------- Intro curtain (first visit per session) ----------
+  let seen = false; try { seen = sessionStorage.getItem('fs-intro') === '1'; sessionStorage.setItem('fs-intro', '1'); } catch (_) {}
+  if (!reduce && !seen) {
+    const intro = document.createElement('div');
+    intro.className = 'intro'; intro.setAttribute('aria-hidden', 'true');
+    intro.innerHTML = '<div class="intro__in"><p class="intro__word"><span>Friday Startup</span></p><span class="intro__line"><i></i></span></div>';
+    document.body.appendChild(intro);
+    setTimeout(() => { intro.classList.add('is-done'); setTimeout(ready, 350); setTimeout(() => intro.remove(), 1500); }, 1250);
+  } else ready();
+
+  // ---------- Custom cursor + magnetic buttons (fine pointers only) ----------
+  if (!reduce && window.matchMedia('(pointer: fine)').matches) {
+    const ring = document.createElement('div'), dot = document.createElement('div');
+    ring.className = 'cursor'; dot.className = 'cursor-dot';
+    ring.setAttribute('aria-hidden', 'true'); dot.setAttribute('aria-hidden', 'true');
+    document.body.append(ring, dot);
+    let mx = -100, my = -100, rx = -100, ry = -100;
+    window.addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; root.classList.add('has-cursor'); dot.style.transform = `translate(${mx}px, ${my}px)`; }, { passive: true });
+    document.addEventListener('pointerleave', () => root.classList.remove('has-cursor'));
+    const follow = () => { rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18; ring.style.transform = `translate(${rx.toFixed(1)}px, ${ry.toFixed(1)}px)`; requestAnimationFrame(follow); };
+    requestAnimationFrame(follow);
+    document.addEventListener('pointerover', (e) => { ring.classList.toggle('is-hover', !!e.target.closest('a, button, summary, input, textarea, label')); });
+    $$('.btn, .top__cta, .tray__go').forEach((b) => {
+      b.addEventListener('pointermove', (e) => { const r = b.getBoundingClientRect(); const x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2; b.style.transform = `translate(${(x * 0.18).toFixed(1)}px, ${(y * 0.28).toFixed(1)}px)`; });
+      b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+    });
+  }
   const yr = $('[data-year]'); if (yr) yr.textContent = String(new Date().getFullYear());
 
   // ---------- Toast ----------
@@ -42,6 +70,7 @@
 
   // ---------- Reveal ----------
   $$('.grid, .tenets, .labs, .steps, .stories').forEach((g) => $$('.reveal', g).forEach((el, i) => el.style.setProperty('--i', String(i % 6))));
+  $$('.head h2').forEach((h) => h.classList.add('reveal'));
   const reveals = $$('.reveal');
   let revealIO = null;
   if (!hasIO || reduce) reveals.forEach((el) => el.classList.add('is-in'));
@@ -96,7 +125,7 @@
     }
     const ring = [];
     for (let i = 0; i < 220; i++) { const a = (i / 220) * Math.PI * 2; ring.push([Math.cos(a) * 1.45, 0, Math.sin(a) * 1.45]); }
-    const stops = [[74, 92, 255], [154, 107, 255], [255, 111, 97], [255, 181, 71]];
+    const stops = [[120, 108, 150], [168, 133, 79], [216, 189, 138], [248, 238, 218]];
     const col = (t) => { t = Math.max(0, Math.min(0.999, t)) * (stops.length - 1); const i = Math.floor(t), f = t - i, a = stops[i], b = stops[i + 1]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; };
     let W = 0, H = 0, dpr = 1, rot = 0.4, tx = 0, ty = 0, cx = 0, cy = 0, running = true, raf = 0;
     const labels = orbit ? $$('span', orbit) : [];
