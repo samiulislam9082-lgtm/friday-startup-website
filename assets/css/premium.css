@@ -108,10 +108,13 @@
 .hero-line {
   display: block;
   overflow: hidden;
-  padding: 0.04em 0.06em 0.1em;
+  padding: 0.04em 0.08em 0.22em;
+  margin-bottom: -0.14em;
 }
 .hero-line > span {
   display: inline-block;
+  padding: 0 0.04em 0.16em;
+  margin-bottom: -0.16em;
 }
 .aurora-copy .hero-title .text-gradient-accent {
   text-shadow: none;
