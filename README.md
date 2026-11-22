@@ -24,7 +24,7 @@ Open `http://localhost:8080`.
 
 ### Help & contact
 
-The single published email address is `fridaystartup1@gmail.com`. The Gmail button opens a Gmail compose window addressed to that inbox; the address is also shown in the contact section. There is no contact form. Use Gmail to contact Friday Startup; Facebook, Instagram, and X link to the supplied official accounts.
+The single published email address is `fridaystartup@fridaystartup.cyou`. The Gmail button opens a Gmail compose window addressed to that inbox; the address is also shown in the contact section. There is no contact form. Use Gmail to contact Friday Startup; Facebook, Instagram, and X link to the supplied official accounts.
 
 Only Facebook, Instagram, X, and Gmail are published as account links. Do not add other account profiles or contact methods without an explicit site-owner request.
 
