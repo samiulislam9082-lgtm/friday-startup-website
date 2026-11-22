@@ -11,10 +11,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=satoshi@400,500,700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="/assets/css/home.css">
-  <meta name="theme-color" content="#f4f1ea">
+  <meta name="theme-color" content="#0b1411">
   <title>Friday Startup | Business Agents, Automation and Growth Services</title>
   
   <meta property="og:type" content="website">
@@ -64,283 +64,325 @@
 <body>
   <a class="skip" href="#main">Skip to main content</a>
 
-  <header class="top" data-top>
-    <div class="top__in">
-      <a class="brand" href="/" aria-label="Friday Startup home">
-        <img src="/assets/friday-startup-emblem-lossless.webp" width="40" height="27" alt="">
-        <span class="brand__name">Friday Startup</span>
+  <header class="nav" data-nav>
+    <div class="nav__bar">
+      <a class="nav__brand" href="/" aria-label="Friday Startup home">
+        <img src="/assets/friday-startup-emblem-lossless.webp" width="36" height="24" alt="">
+        <span>Friday Startup</span>
       </a>
-      <p class="top__status" aria-live="off"><span class="live-dot"></span><span data-clock>Agents on duty</span></p>
-      <nav class="top__nav" id="top-nav" aria-label="Primary navigation">
+      <nav class="nav__links" id="nav-links" aria-label="Primary navigation">
         <a href="#agents">Business Agents</a>
+        <a href="#how">How it works</a>
         <a href="#services">Services</a>
-        <a href="#edition">News</a>
+        <a href="#news">News</a>
         <a href="/help/">Help</a>
-        <a class="top__cta" href="#contact">Contact us</a>
       </nav>
-      <button class="top__menu" type="button" aria-expanded="false" aria-controls="top-nav">Menu</button>
+      <button class="nav__search" type="button" data-palette-open aria-haspopup="dialog">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5 18 18"/></svg>
+        <span>Jump to</span><kbd>⌘K</kbd>
+      </button>
+      <a class="nav__cta" href="#contact">Start a project</a>
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span></span><span></span></button>
     </div>
-    <span class="top__progress" aria-hidden="true" data-progress></span>
   </header>
 
   <main id="main">
     <!-- HERO -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="shell hero__grid">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap hero__grid">
         <div class="hero__copy">
-          <p class="kicker"><span>No. 01</span> Business Agents &amp; Business Automation</p>
-          <h1 class="hero__title" id="hero-title">
-            <span class="line"><span>Your agents</span></span>
-            <span class="line"><span>work the week.</span></span>
-            <span class="line"><span>You keep <em>Friday.</em></span></span>
+          <p class="eyebrow"><span class="dot"></span>Business Agents &amp; Business Automation</p>
+          <h1 id="hero-title" class="hero__title">
+            <span class="w">Hire</span> <span class="w">agents,</span><br>
+            <span class="w"><em>not more</em></span> <span class="w"><em>hours.</em></span>
           </h1>
-          <p class="hero__lede">Friday Startup builds Business Agents that handle your marketing, website, social media and growth tasks Monday to Thursday, and check with you before anything important goes out.</p>
+          <p class="hero__lede">Friday Startup sets up Business Agents that run your marketing, website, social media and growth work, so your team can focus on the decisions only people can make.</p>
           <div class="hero__actions">
-            <a class="btn btn--ink" href="#contact">Start a project <span aria-hidden="true">→</span></a>
-            <a class="btn btn--line" href="tel:+17402069647">Call +1 (740) 206-9647</a>
+            <a class="btn btn--lime" href="#contact">Start a project <span aria-hidden="true">→</span></a>
+            <a class="btn btn--ghost" href="tel:+17402069647">Call +1 (740) 206-9647</a>
           </div>
+          <ul class="hero__tags" aria-label="What our agents handle">
+            <li>Marketing</li><li>Website management</li><li>Social media</li><li>Growth</li>
+          </ul>
         </div>
 
-        <div class="stage" data-stage>
-        <span class="sun" aria-hidden="true"></span>
-        <figure class="board" aria-label="Example week: Business Agents completing tasks from Monday to Thursday, Friday left free" data-board>
-          <figcaption class="board__head">
-            <span>This week · on duty</span>
-            <span class="board__count"><b data-done>0</b>/11 done</span>
-          </figcaption>
-          <div class="board__grid">
-            <span class="board__corner"></span>
-            <span class="board__day">Mon</span><span class="board__day">Tue</span><span class="board__day">Wed</span><span class="board__day">Thu</span><span class="board__day board__day--fri">Fri</span>
-
-            <span class="board__agent" style="--a:var(--c-mkt)">Marketing</span>
-            <span class="task" data-day="0" style="--a:var(--c-mkt)">Emails</span><span class="slot"></span>
-            <span class="task" data-day="2" style="--a:var(--c-mkt)">Blog post</span>
-            <span class="task" data-day="3" style="--a:var(--c-mkt)">Offer email</span>
-
-            <span class="board__agent" style="--a:var(--c-web)">Website</span>
-            <span class="task" data-day="0" style="--a:var(--c-web)">Speed check</span>
-            <span class="task" data-day="1" style="--a:var(--c-web)">New pages</span><span class="slot"></span>
-            <span class="task" data-day="3" style="--a:var(--c-web)">Backup</span>
-
-            <span class="board__agent" style="--a:var(--c-soc)">Social</span>
-            <span class="slot"></span>
-            <span class="task" data-day="1" style="--a:var(--c-soc)">3 posts</span>
-            <span class="task" data-day="2" style="--a:var(--c-soc)">Replies</span>
-            <span class="task" data-day="3" style="--a:var(--c-soc)">Reel</span>
-
-            <span class="board__agent" style="--a:var(--c-grw)">Growth</span>
-            <span class="slot"></span><span class="slot"></span>
-            <span class="task" data-day="2" style="--a:var(--c-grw)">Leads scored</span>
-            <span class="task" data-day="3" style="--a:var(--c-grw)">Report</span>
-
-            <span class="board__free"><b>Yours.</b><small>Nothing scheduled</small></span>
-            <span class="board__now" aria-hidden="true"></span>
+        <!-- Interactive agent console (demo) -->
+        <div class="console" data-console>
+          <div class="console__top">
+            <span class="console__lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="console__name">Agent console</span>
+            <span class="pill pill--muted">Live demo</span>
           </div>
-        </figure>
-        <p class="toast" aria-hidden="true" data-toast><span class="toast__dot"></span><span class="toast__who" data-toast-who>Marketing Agent</span><span class="toast__what" data-toast-what>Emails sent</span></p>
+          <form class="console__ask" data-ask>
+            <label class="sr-only" for="ask-input">Describe a task for an agent</label>
+            <input id="ask-input" type="text" autocomplete="off" placeholder="Describe a task, e.g. post on Instagram 3× a week" maxlength="120">
+            <button type="submit" aria-label="Plan this task"><span aria-hidden="true">↵</span></button>
+          </form>
+          <div class="console__chips" role="group" aria-label="Example tasks">
+            <button type="button" data-chip="Send a weekly newsletter to our customers">Weekly newsletter</button>
+            <button type="button" data-chip="Keep our website fast and up to date">Website upkeep</button>
+            <button type="button" data-chip="Post on Instagram and Facebook three times a week">Social posts</button>
+            <button type="button" data-chip="Follow up every new lead within a day">Lead follow-up</button>
+          </div>
+          <div class="console__out" data-out aria-live="polite">
+            <div class="plan__head">
+              <span class="plan__avatar" data-avatar aria-hidden="true">M</span>
+              <div>
+                <p class="plan__agent" data-agent-name>Marketing Agent</p>
+                <p class="plan__task" data-task>Waiting for a task…</p>
+              </div>
+              <span class="plan__state" data-state>Idle</span>
+            </div>
+            <ol class="plan__steps" data-steps></ol>
+          </div>
+          <p class="console__note">Demo only. Real agents follow the rules and approvals you agree with us.</p>
         </div>
       </div>
 
-      <div class="marquee" aria-label="Our services">
-        <div class="marquee__track">
-          <div class="marquee__set"><span>Business Agents</span><i></i><span>Marketing</span><i></i><span>Website management</span><i></i><span>Social media</span><i></i><span>Growth</span><i></i><span>Venture building</span><i></i><span>Growth partnerships</span><i></i><span>Recovery support</span><i></i><span>More coming soon</span><i></i></div>
-          <div class="marquee__set" aria-hidden="true"><span>Business Agents</span><i></i><span>Marketing</span><i></i><span>Website management</span><i></i><span>Social media</span><i></i><span>Growth</span><i></i><span>Venture building</span><i></i><span>Growth partnerships</span><i></i><span>Recovery support</span><i></i><span>More coming soon</span><i></i></div>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span>Marketing agents</span><span>✦</span><span>Website management</span><span>✦</span><span>Social media</span><span>✦</span><span>Growth</span><span>✦</span><span>Venture building</span><span>✦</span><span>Growth partnerships</span><span>✦</span><span>Business recovery</span><span>✦</span><span>More launching soon</span><span>✦</span>
+          <span>Marketing agents</span><span>✦</span><span>Website management</span><span>✦</span><span>Social media</span><span>✦</span><span>Growth</span><span>✦</span><span>Venture building</span><span>✦</span><span>Growth partnerships</span><span>✦</span><span>Business recovery</span><span>✦</span><span>More launching soon</span><span>✦</span>
         </div>
       </div>
     </section>
 
     <!-- AGENTS -->
     <section class="sec" id="agents" aria-labelledby="agents-title">
-      <div class="shell">
-        <header class="sec__head">
-          <p class="kicker"><span>No. 02</span> Our core service</p>
-          <h2 id="agents-title" class="split">Four agents.<br>One quiet operation.</h2>
-          <p class="sec__lede">Each Business Agent owns one part of running your business. Pick one to see a typical day in its activity log.</p>
+      <div class="wrap">
+        <header class="head">
+          <p class="eyebrow">Our core service</p>
+          <h2 id="agents-title" class="reveal">Meet your <em>Business Agents.</em></h2>
+          <p class="head__lede reveal">Four specialised agents, set up around the way your business already works. Start with one, add the rest when you're ready.</p>
         </header>
 
-        <div class="roster">
-          <div class="roster__list" role="tablist" aria-label="Business Agents">
-            <button role="tab" id="tab-mkt" aria-controls="log" aria-selected="true" data-agent="mkt" style="--a:var(--c-mkt)">
-              <span class="roster__num">A1</span><span class="roster__name">Marketing Agent</span><span class="roster__role">Campaigns, emails, content</span>
-            </button>
-            <button role="tab" id="tab-web" aria-controls="log" aria-selected="false" tabindex="-1" data-agent="web" style="--a:var(--c-web)">
-              <span class="roster__num">A2</span><span class="roster__name">Website Agent</span><span class="roster__role">Updates, checks, upkeep</span>
-            </button>
-            <button role="tab" id="tab-soc" aria-controls="log" aria-selected="false" tabindex="-1" data-agent="soc" style="--a:var(--c-soc)">
-              <span class="roster__num">A3</span><span class="roster__name">Social Media Agent</span><span class="roster__role">Posts, replies, scheduling</span>
-            </button>
-            <button role="tab" id="tab-grw" aria-controls="log" aria-selected="false" tabindex="-1" data-agent="grw" style="--a:var(--c-grw)">
-              <span class="roster__num">A4</span><span class="roster__name">Growth Agent</span><span class="roster__role">Leads, reports, next steps</span>
-            </button>
-          </div>
-
-          <div class="log" id="log" role="tabpanel" aria-labelledby="tab-mkt" data-log>
-            <div class="log__bar">
-              <span class="log__title" data-log-title>Marketing Agent</span>
-              <span class="log__state"><span class="live-dot"></span>Running</span>
+        <div class="bento">
+          <article class="agent agent--mkt reveal" style="--c: var(--lime)">
+            <div class="agent__viz viz-mail" aria-hidden="true"><span></span><span></span><span></span><b></b></div>
+            <p class="agent__tag">01 · Marketing</p>
+            <h3>Marketing Agent</h3>
+            <p>Plans campaigns, drafts emails and content, and keeps your calendar moving.</p>
+            <ul class="agent__list"><li>Newsletters &amp; email campaigns</li><li>Blog and content drafts</li><li>Campaign calendar</li></ul>
+          </article>
+          <article class="agent agent--web reveal" style="--c: var(--sky)">
+            <div class="agent__viz viz-web" aria-hidden="true">
+              <div class="viz-web__bar"><i></i><i></i><i></i></div>
+              <div class="viz-web__body"><span></span><span></span><span></span><svg viewBox="0 0 120 30" preserveAspectRatio="none"><path d="M0 22 L16 20 L28 24 L42 12 L58 16 L72 8 L88 14 L104 6 L120 10"/></svg></div>
             </div>
-            <ol class="log__lines" data-log-lines>
-              <li><time>08:02</time><span>Drafted this week's newsletter from your latest offers</span></li>
-              <li><time>09:15</time><span>Scheduled blog post "Five questions to ask before you hire"</span></li>
-              <li class="is-ask"><time>11:40</time><span>Offer email ready, waiting for your approval</span></li>
-              <li><time>14:05</time><span>Updated the campaign calendar for next week</span></li>
-            </ol>
-            <p class="log__foot">Example log. Your agents follow the rules and approvals you set with us.</p>
-          </div>
+            <p class="agent__tag">02 · Website</p>
+            <h3>Website Agent</h3>
+            <p>Keeps pages current, checks speed and links, and handles routine updates.</p>
+            <ul class="agent__list"><li>Page and content updates</li><li>Speed and broken-link checks</li><li>Backups and upkeep</li></ul>
+          </article>
+          <article class="agent agent--soc reveal" style="--c: var(--violet)">
+            <div class="agent__viz viz-soc" aria-hidden="true"><span></span><span></span><span></span><i>♥</i><i>♥</i><i>♥</i></div>
+            <p class="agent__tag">03 · Social media</p>
+            <h3>Social Media Agent</h3>
+            <p>Prepares and schedules posts, and answers routine comments in your voice.</p>
+            <ul class="agent__list"><li>Facebook, Instagram and X posts</li><li>Scheduling at the right times</li><li>Routine replies, flagged exceptions</li></ul>
+          </article>
+          <article class="agent agent--grw reveal" style="--c: var(--peach)">
+            <div class="agent__viz viz-grw" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+            <p class="agent__tag">04 · Growth</p>
+            <h3>Growth Agent</h3>
+            <p>Sorts new enquiries, follows up on time, and reports what's working.</p>
+            <ul class="agent__list"><li>Lead sorting and follow-up</li><li>Weekly growth reports</li><li>Next-step suggestions</li></ul>
+          </article>
+        </div>
+
+        <div class="approve reveal">
+          <span class="approve__icon" aria-hidden="true">✓</span>
+          <p><strong>You stay in control.</strong> Anything important, like an offer email, a price change or a sensitive reply, waits for your approval before it goes out.</p>
         </div>
       </div>
     </section>
 
-    <!-- BEFORE / AFTER -->
-    <section class="sec sec--tight" id="week" aria-labelledby="week-title">
-      <div class="shell">
-        <header class="sec__head sec__head--row">
-          <div>
-            <p class="kicker"><span>No. 03</span> Before and after</p>
-            <h2 id="week-title" class="split">Same week.<br>Different Friday.</h2>
-          </div>
-          <p class="sec__lede">Drag the handle to compare a typical week run by hand with the same week run by Business Agents.</p>
-        </header>
-        <div class="compare" data-compare style="--pos: 50%">
-          <div class="compare__pane compare__pane--before" role="group" aria-label="A week without Business Agents: 20 tasks on your plate, Friday spent catching up">
-            <p class="compare__label"><span>Without agents</span><b>20 tasks on your plate</b></p>
-            <div class="wk"><div class="wk__col"><span class="wk__day">Mon</span><span class="wk__chip">Write newsletter</span><span class="wk__chip">Post on Instagram</span><span class="wk__chip">Reply to messages</span><span class="wk__chip">Fix a website typo</span></div><div class="wk__col"><span class="wk__day">Tue</span><span class="wk__chip">Plan the week’s posts</span><span class="wk__chip">Update prices page</span><span class="wk__chip">Chase new leads</span><span class="wk__chip">Reply to comments</span></div><div class="wk__col"><span class="wk__day">Wed</span><span class="wk__chip">Write a blog post</span><span class="wk__chip">Reply to messages</span><span class="wk__chip">Check site speed</span><span class="wk__chip">Send follow-ups</span></div><div class="wk__col"><span class="wk__day">Thu</span><span class="wk__chip">Offer email</span><span class="wk__chip">Film a reel</span><span class="wk__chip">Back up the site</span><span class="wk__chip">Build lead list</span></div><div class="wk__col"><span class="wk__day">Fri</span><span class="wk__chip is-late">Weekly report</span><span class="wk__chip is-late">Late replies</span><span class="wk__chip is-late">Catch up</span><span class="wk__chip is-late">Catch up</span></div></div>
-          </div>
-          <div class="compare__pane compare__pane--after" role="group" aria-label="The same week with Business Agents: one approval for you, Friday free">
-            <p class="compare__label"><span>With Business Agents</span><b>1 approval on your plate</b></p>
-            <div class="wk"><div class="wk__col"><span class="wk__day">Mon</span><span class="wk__chip is-agent" style="--a:var(--c-mkt)">Newsletter sent</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Posts queued</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Messages answered</span><span class="wk__chip is-agent" style="--a:var(--c-web)">Typo fixed</span></div><div class="wk__col"><span class="wk__day">Tue</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Week planned</span><span class="wk__chip is-agent" style="--a:var(--c-web)">Prices updated</span><span class="wk__chip is-agent" style="--a:var(--c-grw)">Leads scored</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Comments handled</span></div><div class="wk__col"><span class="wk__day">Wed</span><span class="wk__chip is-agent" style="--a:var(--c-mkt)">Blog post live</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Messages answered</span><span class="wk__chip is-agent" style="--a:var(--c-web)">Speed checked</span><span class="wk__chip is-agent" style="--a:var(--c-grw)">Follow-ups sent</span></div><div class="wk__col"><span class="wk__day">Thu</span><span class="wk__chip is-you">You: approve offer</span><span class="wk__chip is-agent" style="--a:var(--c-soc)">Reel published</span><span class="wk__chip is-agent" style="--a:var(--c-web)">Backup done</span><span class="wk__chip is-agent" style="--a:var(--c-grw)">Report ready</span></div><div class="wk__col"><span class="wk__day">Fri</span><span class="wk__free"><b>Yours.</b><small>Nothing on your plate</small></span></div></div>
-          </div>
-          <span class="compare__handle" aria-hidden="true"><span>&#8596;</span></span>
-          <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Compare a week without and with Business Agents">
+    <!-- HOW IT WORKS: horizontal scroll on desktop -->
+    <section class="how" id="how" aria-labelledby="how-title" data-how>
+      <div class="how__sticky">
+        <div class="wrap how__head">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">From first call to <em>agents at work.</em></h2>
+          <div class="how__meter" aria-hidden="true"><span data-how-bar></span></div>
         </div>
-        <p class="compare__note">Illustrative example. Your agents, tasks and approvals are agreed with you.</p>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="sec sec--ink" id="process" aria-labelledby="process-title">
-      <div class="shell">
-        <header class="sec__head">
-          <p class="kicker kicker--light"><span>No. 04</span> How we work</p>
-          <h2 id="process-title" class="split">Four Fridays<br>to a running setup.</h2>
-          <p class="sec__lede sec__lede--light">A clear path from first conversation to agents working in your business. One step a week, reviewed together.</p>
-        </header>
-        <ol class="fridays" data-fridays>
-          <li><span class="fridays__num" aria-hidden="true">01</span><span class="fridays__date">Friday 1</span><h3>Listen</h3><p>We learn how your marketing, website and social channels run today and where the hours go.</p></li>
-          <li><span class="fridays__num" aria-hidden="true">02</span><span class="fridays__date">Friday 2</span><h3>Shape</h3><p>We choose the workflow with the most impact and agree the rules, tools and approvals.</p></li>
-          <li><span class="fridays__num" aria-hidden="true">03</span><span class="fridays__date">Friday 3</span><h3>Launch</h3><p>Your first agents go live, connected to your tools, with your team signing off what matters.</p></li>
-          <li><span class="fridays__num" aria-hidden="true">04</span><span class="fridays__date">Friday 4</span><h3>Grow</h3><p>We review results together, then add agents as your business grows.</p></li>
+        <ol class="how__track" data-how-track>
+          <li class="step"><span class="step__n">01</span><h3>Discover</h3><p>We map how your marketing, website, social and sales work runs today, and where the hours go.</p><span class="step__chip">Call &amp; workflow review</span></li>
+          <li class="step"><span class="step__n">02</span><h3>Design</h3><p>We pick the first workflow with the most impact and agree the rules, tools and approvals together.</p><span class="step__chip">Clear scope</span></li>
+          <li class="step"><span class="step__n">03</span><h3>Deploy</h3><p>Your first agent goes live, connected to your tools, with your team signing off on what matters.</p><span class="step__chip">First agent live</span></li>
+          <li class="step"><span class="step__n">04</span><h3>Develop</h3><p>We review results with you, tune the agent, and add new agents as your business grows.</p><span class="step__chip">Ongoing support</span></li>
         </ol>
-        <div class="fridays__track" aria-hidden="true"><span data-fridays-bar></span></div>
       </div>
     </section>
 
     <!-- SERVICES -->
     <section class="sec" id="services" aria-labelledby="services-title">
-      <div class="shell">
-        <header class="sec__head sec__head--row">
+      <div class="wrap">
+        <header class="head head--split">
           <div>
-            <p class="kicker"><span>No. 05</span> A multi-service company</p>
-            <h2 id="services-title" class="split">More than agents.</h2>
+            <p class="eyebrow">A multi-service company</p>
+            <h2 id="services-title" class="reveal">One studio. <em>Many services.</em></h2>
           </div>
-          <p class="sec__lede">Business Agents are the core. Around them sits a wider range of services for founders and operating businesses, from first idea to next stage.</p>
+          <p class="head__lede reveal">Business Agents are where we start. Around them, we help founders and companies build, grow and recover.</p>
         </header>
-
-        <ul class="index">
-          <li><a href="/business-automation/"><span class="index__n">01</span><span class="index__t">Business Agents &amp; Automation <em>Core</em></span><span class="index__d">Marketing, website, social media and growth agents, scoped around your workflows.</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a href="/venture-building/"><span class="index__n">02</span><span class="index__t">Venture Building</span><span class="index__d">Turn ideas into validated digital products with a lean first version.</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a href="/growth-partnerships/"><span class="index__n">03</span><span class="index__t">Growth Partnerships</span><span class="index__d">Positioning, acquisition tests, conversion and retention.</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li><a href="/business-recovery/"><span class="index__n">04</span><span class="index__t">Business Recovery Support</span><span class="index__d">Clear diagnosis and practical steps when a business is under pressure.</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-          <li class="index__next"><a href="/ai-innovation/"><span class="index__n">05</span><span class="index__t">Next launch<span class="cursor" aria-hidden="true"></span></span><span class="index__d">More innovative solutions are on the way, including future AI innovation. New launches are announced in our news and on social first.</span><span class="index__go" aria-hidden="true">↗</span></a></li>
-        </ul>
+        <div class="cards" data-spot>
+          <a class="card card--core reveal" href="/business-automation/">
+            <span class="pill pill--lime">Core service</span>
+            <h3>Business Agents &amp; Automation</h3>
+            <p>Agents for marketing, website management, social media and growth, scoped around your workflows.</p>
+            <span class="card__go" aria-hidden="true">→</span>
+          </a>
+          <a class="card reveal" href="/venture-building/">
+            <span class="pill">Available</span>
+            <h3>Venture Building</h3>
+            <p>Turn an idea into a validated digital product with a lean first version.</p>
+            <span class="card__go" aria-hidden="true">→</span>
+          </a>
+          <a class="card reveal" href="/growth-partnerships/">
+            <span class="pill">Available</span>
+            <h3>Growth Partnerships</h3>
+            <p>Positioning, acquisition tests, conversion and retention, worked through with you.</p>
+            <span class="card__go" aria-hidden="true">→</span>
+          </a>
+          <a class="card reveal" href="/business-recovery/">
+            <span class="pill">Available</span>
+            <h3>Business Recovery Support</h3>
+            <p>Clear diagnosis and practical next steps when a business is under pressure.</p>
+            <span class="card__go" aria-hidden="true">→</span>
+          </a>
+          <a class="card card--lab reveal" href="/ai-innovation/">
+            <span class="pill pill--violet"><span class="dot dot--violet"></span>In the lab</span>
+            <h3>More innovative solutions are on the way</h3>
+            <p>We're developing new products, including future AI innovation. New launches are announced in our news and on social first.</p>
+            <span class="card__go" aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- NEWS: The Friday Edition -->
-    <section class="sec sec--paper2" id="edition" aria-labelledby="edition-title">
-      <div class="shell">
-        <div class="mast">
-          <span>News &amp; updates</span>
-          <h2 id="edition-title">The Friday Edition</h2>
-          <span data-today>Latest issue</span>
-        </div>
-        <div class="paper">
-          <article class="paper__lead">
-            <div class="cover cover--sun" aria-hidden="true"><span class="cover__tag">Issue 01</span><span class="cover__sun"></span><span class="cover__lines"></span></div>
-            <p class="paper__cat">Announcement</p>
+    <!-- NEWS -->
+    <section class="sec sec--alt" id="news" aria-labelledby="news-title">
+      <div class="wrap">
+        <header class="head head--split">
+          <div>
+            <p class="eyebrow">News &amp; updates</p>
+            <h2 id="news-title" class="reveal">What's <em>new.</em></h2>
+          </div>
+          <div class="news__ctrl">
+            <button type="button" class="round" data-news-prev aria-label="Previous stories">←</button>
+            <button type="button" class="round" data-news-next aria-label="Next stories">→</button>
+          </div>
+        </header>
+        <div class="news" data-news tabindex="0" aria-label="News stories, scroll horizontally">
+          <article class="story story--feature">
+            <div class="story__art art-a" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <p class="story__meta"><span class="pill pill--lime">Announcement</span></p>
             <h3><a href="/news.html">Introducing Business Agents for marketing, website and social media</a></h3>
             <p>Business Agents are now our core service, helping companies run marketing, website management, social media and growth from one connected setup.</p>
-            <a class="paper__more" href="/news.html">Read in the newsroom →</a>
           </article>
-          <article>
-            <div class="cover cover--rings" aria-hidden="true"><span class="cover__tag">Coming soon</span><i></i><i></i><i></i></div>
-            <p class="paper__cat">Roadmap</p>
+          <article class="story">
+            <div class="story__art art-b" aria-hidden="true"><i></i><i></i><i></i></div>
+            <p class="story__meta"><span class="pill pill--violet">Roadmap</span></p>
             <h3><a href="/news.html">More innovative solutions are in development</a></h3>
             <p>We're expanding our range of services. Follow our news and social channels to hear about new launches first.</p>
           </article>
-          <article>
-            <div class="cover cover--path" aria-hidden="true"><span class="cover__tag">Guide</span><svg viewBox="0 0 200 120" preserveAspectRatio="none"><path d="M14 100 L60 72 L96 84 L140 40 L186 22" /></svg></div>
-            <p class="paper__cat">Founder guide</p>
+          <article class="story">
+            <div class="story__art art-c" aria-hidden="true"><svg viewBox="0 0 200 100" preserveAspectRatio="none"><path d="M10 85 C 50 80, 60 40, 100 50 S 160 20, 190 12"/></svg></div>
+            <p class="story__meta"><span class="pill">Founder guide</span></p>
             <h3><a href="/news.html">From customer problem to first version: the lean path</a></h3>
             <p>Key lessons on testing digital venture ideas without over-engineering the first version.</p>
           </article>
-        </div>
-        <div class="paper__foot">
-          <a class="btn btn--line" href="/news.html">All news &amp; updates</a>
-          <p>Follow along:
-            <a href="https://www.facebook.com/share/1BN3iJyHXs/" target="_blank" rel="noopener">Facebook</a>
-            <a href="https://instagram.com/friday_startup?obrf=MWU1YmhocDRiYWo2aw%3D%3D" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://x.com/Fridaystartup" target="_blank" rel="noopener">X</a>
-          </p>
+          <article class="story story--social">
+            <p class="story__meta"><span class="pill">Follow along</span></p>
+            <h3>Get updates where you already are.</h3>
+            <div class="social">
+              <a href="https://www.facebook.com/share/1BN3iJyHXs/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v7h4v-7H17l.5-4h-4V8.8c0-.5.3-.8.5-.8Z"/></svg>Facebook</a>
+              <a href="https://instagram.com/friday_startup?obrf=MWU1YmhocDRiYWo2aw%3D%3D" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2"/></svg>Instagram</a>
+              <a href="https://x.com/Fridaystartup" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h4.5l4 5.6L17.3 4H20l-6.2 7.2L20.5 20H16l-4.4-6-5.2 6H3.7l6.6-7.6L4 4Z"/></svg>X</a>
+            </div>
+            <a class="btn btn--ghost btn--sm" href="/news.html">All news &amp; updates →</a>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
     <section class="sec" id="help" aria-labelledby="faq-title">
-      <div class="shell faq">
-        <header>
-          <p class="kicker"><span>No. 07</span> Help</p>
-          <h2 id="faq-title" class="split">Good questions.</h2>
-          <a class="btn btn--line" href="/help/">Visit the Help Center</a>
+      <div class="wrap faq">
+        <header class="head">
+          <p class="eyebrow">Help</p>
+          <h2 id="faq-title" class="reveal">Questions, <em>answered.</em></h2>
+          <p class="head__lede">Can't find what you need? Visit the <a href="/help/">Help Center</a> or get in touch.</p>
         </header>
         <div class="faq__list">
-          <details open><summary>What are Business Agents?</summary><p>Business Agents are our core service. We set up automation that supports your marketing, website management, social media and growth work, scoped around your workflows. Your team stays involved in approvals and decisions that need judgment.</p></details>
-          <details><summary>What services does Friday Startup offer?</summary><p>Business Agents and business automation, venture building, growth partnerships and business recovery support. We're also developing more innovative solutions, including future AI innovation.</p></details>
-          <details><summary>Do you guarantee financial or growth outcomes?</summary><p>No. We don't make generic promises about cost savings, customer numbers or turnaround success. Real outcomes depend on your business context, market conditions and how we work together.</p></details>
-          <details><summary>Do you work with companies worldwide?</summary><p>Yes. We welcome conversations with founders and operating businesses globally. Scope, schedules and availability are confirmed directly by email or phone.</p></details>
-          <details><summary>How can I contact Friday Startup?</summary><p>Email <a href="mailto:fridaystartup@fridaystartup.cyou">fridaystartup@fridaystartup.cyou</a> or call <a href="tel:+17402069647">+1 (740) 206-9647</a>. You can also find us on Facebook, Instagram and X.</p></details>
+          <details open><summary>What are Business Agents?</summary><div class="faq__a"><p>Business Agents are our core service. We set up automation that supports your marketing, website management, social media and growth work, scoped around your workflows. Your team stays involved in approvals and decisions that need judgment.</p></div></details>
+          <details><summary>What services does Friday Startup offer?</summary><div class="faq__a"><p>Business Agents and business automation, venture building, growth partnerships and business recovery support. We're also developing more innovative solutions, including future AI innovation.</p></div></details>
+          <details><summary>Do you guarantee financial or growth outcomes?</summary><div class="faq__a"><p>No. We don't make generic promises about cost savings, customer numbers or turnaround success. Real outcomes depend on your business context, market conditions and how we work together.</p></div></details>
+          <details><summary>Do you work with companies worldwide?</summary><div class="faq__a"><p>Yes. We welcome conversations with founders and operating businesses globally. Scope, schedules and availability are confirmed directly by email or phone.</p></div></details>
+          <details><summary>How can I contact Friday Startup?</summary><div class="faq__a"><p>Email <a href="mailto:fridaystartup@fridaystartup.cyou">fridaystartup@fridaystartup.cyou</a> or call <a href="tel:+17402069647">+1 (740) 206-9647</a>. You can also find us on Facebook, Instagram and X.</p></div></details>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="contact" id="contact" aria-labelledby="contact-title">
-      <div class="shell">
-        <p class="kicker kicker--light"><span>No. 08</span> Contact</p>
-        <div class="contact__top">
-          <h2 id="contact-title" class="contact__title split">Say hello<br>before Friday.</h2>
-          <a class="badge" href="tel:+17402069647" aria-label="Book a call: +1 (740) 206-9647">
-            <svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#badge-circle" textLength="486" lengthAdjust="spacing">Book a call · Keep your Friday · Book a call · Keep your Friday · </textPath></text></svg>
-            <span class="badge__arrow" aria-hidden="true">&#8599;</span>
-          </a>
-        </div>
-        <div class="contact__grid">
-          <a class="contact__big" href="mailto:fridaystartup@fridaystartup.cyou"><small>Email</small><span>fridaystartup@<wbr>fridaystartup.cyou</span></a>
-          <a class="contact__big" href="tel:+17402069647"><small>Phone</small><span>+1 (740) 206-9647</span></a>
-          <div class="contact__social">
-            <small>Social</small>
-            <a href="https://www.facebook.com/share/1BN3iJyHXs/" target="_blank" rel="noopener">Facebook ↗</a>
-            <a href="https://instagram.com/friday_startup?obrf=MWU1YmhocDRiYWo2aw%3D%3D" target="_blank" rel="noopener">Instagram ↗</a>
-            <a href="https://x.com/Fridaystartup" target="_blank" rel="noopener">X (Twitter) ↗</a>
+    <section class="sec contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="contact__card reveal">
+          <div class="contact__intro">
+            <p class="eyebrow">Contact us</p>
+            <h2 id="contact-title">Let's put your first <em>agent to work.</em></h2>
+            <p class="head__lede">Tell us what you'd like to hand off. We'll reply by email to set up a call.</p>
+            <div class="contact__lines">
+              <div class="line">
+                <span class="line__label">Email</span>
+                <a class="line__value" href="mailto:fridaystartup@fridaystartup.cyou">fridaystartup@<wbr>fridaystartup.cyou</a>
+                <button type="button" class="copy" data-copy="fridaystartup@fridaystartup.cyou">Copy</button>
+              </div>
+              <div class="line">
+                <span class="line__label">Phone</span>
+                <a class="line__value" href="tel:+17402069647">+1 (740) 206-9647</a>
+                <a class="copy" href="tel:+17402069647">Call</a>
+              </div>
+              <div class="line line--social">
+                <span class="line__label">Social</span>
+                <span class="line__links">
+                  <a href="https://www.facebook.com/share/1BN3iJyHXs/" target="_blank" rel="noopener">Facebook</a>
+                  <a href="https://instagram.com/friday_startup?obrf=MWU1YmhocDRiYWo2aw%3D%3D" target="_blank" rel="noopener">Instagram</a>
+                  <a href="https://x.com/Fridaystartup" target="_blank" rel="noopener">X</a>
+                </span>
+              </div>
+            </div>
           </div>
+
+          <form class="brief" data-brief novalidate>
+            <p class="brief__title">Quick project brief</p>
+            <fieldset class="brief__needs">
+              <legend>What should your agents handle?</legend>
+              <label><input type="checkbox" name="need" value="Marketing"><span>Marketing</span></label>
+              <label><input type="checkbox" name="need" value="Website"><span>Website</span></label>
+              <label><input type="checkbox" name="need" value="Social media"><span>Social media</span></label>
+              <label><input type="checkbox" name="need" value="Growth"><span>Growth</span></label>
+              <label><input type="checkbox" name="need" value="Something else"><span>Something else</span></label>
+            </fieldset>
+            <div class="brief__row">
+              <label class="field"><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
+              <label class="field"><span>Company</span><input type="text" name="company" autocomplete="organization"></label>
+            </div>
+            <label class="field"><span>A few words about your business</span><textarea name="msg" rows="3"></textarea></label>
+            <button class="btn btn--lime btn--block" type="submit">Send brief by email <span aria-hidden="true">→</span></button>
+            <p class="brief__hint" data-brief-hint>Opens your email app with the brief filled in, addressed to fridaystartup@fridaystartup.cyou.</p>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="foot">
-    <div class="shell foot__grid">
+    <div class="wrap foot__grid">
+      <div class="foot__brand">
+        <a class="nav__brand" href="/"><img src="/assets/friday-startup-emblem-lossless.webp" width="36" height="24" alt=""><span>Friday Startup</span></a>
+        <p>Business Agents and business automation, plus venture building, growth partnerships and recovery support.</p>
+      </div>
       <nav aria-label="Services">
         <h3>Services</h3>
         <a href="/business-automation/">Business Agents &amp; Automation</a>
@@ -360,11 +402,47 @@
         <h3>Contact</h3>
         <a href="mailto:fridaystartup@fridaystartup.cyou">fridaystartup@<wbr>fridaystartup.cyou</a>
         <a href="tel:+17402069647">+1 (740) 206-9647</a>
+        <a href="https://www.facebook.com/share/1BN3iJyHXs/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://instagram.com/friday_startup?obrf=MWU1YmhocDRiYWo2aw%3D%3D" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://x.com/Fridaystartup" target="_blank" rel="noopener">X</a>
       </div>
     </div>
-    <div class="shell foot__word" aria-hidden="true" data-word><i style="--i:0">F</i><i style="--i:1">r</i><i style="--i:2">i</i><i style="--i:3">d</i><i style="--i:4">a</i><i style="--i:5">y</i><span><i style="--i:6">S</i><i style="--i:7">t</i><i style="--i:8">a</i><i style="--i:9">r</i><i style="--i:10">t</i><i style="--i:11">u</i><i style="--i:12">p</i></span></div>
-    <div class="shell foot__base"><span>© Friday Startup. All rights reserved.</span><span>Built to give you your Fridays back.</span></div>
+    <div class="wrap foot__base"><span>© Friday Startup. All rights reserved.</span><button type="button" class="foot__top" data-top>Back to top ↑</button></div>
   </footer>
+
+  <!-- Command palette -->
+  <dialog class="palette" data-palette aria-label="Jump to">
+    <div class="palette__box">
+      <div class="palette__search">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5 18 18"/></svg>
+        <input type="text" data-palette-input placeholder="Search sections, services, contact…" aria-label="Search" aria-controls="palette-list" autocomplete="off">
+        <kbd>Esc</kbd>
+      </div>
+      <ul class="palette__list" id="palette-list" role="listbox" data-palette-list>
+        <li role="option" data-href="#agents" data-group="Sections">Business Agents</li>
+        <li role="option" data-href="#how" data-group="Sections">How it works</li>
+        <li role="option" data-href="#services" data-group="Sections">Services</li>
+        <li role="option" data-href="#news" data-group="Sections">News &amp; updates</li>
+        <li role="option" data-href="#help" data-group="Sections">FAQ</li>
+        <li role="option" data-href="#contact" data-group="Sections">Start a project</li>
+        <li role="option" data-href="/business-automation/" data-group="Pages">Business Agents &amp; Automation</li>
+        <li role="option" data-href="/venture-building/" data-group="Pages">Venture Building</li>
+        <li role="option" data-href="/growth-partnerships/" data-group="Pages">Growth Partnerships</li>
+        <li role="option" data-href="/business-recovery/" data-group="Pages">Business Recovery Support</li>
+        <li role="option" data-href="/ai-innovation/" data-group="Pages">AI Innovation</li>
+        <li role="option" data-href="/news.html" data-group="Pages">Newsroom</li>
+        <li role="option" data-href="/help/" data-group="Pages">Help Center</li>
+        <li role="option" data-href="mailto:fridaystartup@fridaystartup.cyou" data-group="Contact">Email fridaystartup@fridaystartup.cyou</li>
+        <li role="option" data-href="tel:+17402069647" data-group="Contact">Call +1 (740) 206-9647</li>
+        <li role="option" data-href="https://www.facebook.com/share/1BN3iJyHXs/" data-group="Contact">Facebook</li>
+        <li role="option" data-href="https://instagram.com/friday_startup?obrf=MWU1YmhocDRiYWo2aw%3D%3D" data-group="Contact">Instagram</li>
+        <li role="option" data-href="https://x.com/Fridaystartup" data-group="Contact">X (Twitter)</li>
+      </ul>
+      <p class="palette__empty" data-palette-empty hidden>No matches. Try "agents", "news" or "email".</p>
+    </div>
+  </dialog>
+
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
 
   <script src="/assets/js/home.js" defer></script>
 </body>

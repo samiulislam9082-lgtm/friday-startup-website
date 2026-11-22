@@ -1,50 +1,53 @@
-/* Theme bridge: brings inner pages in line with the "Keep your Friday" homepage
-   (Cabinet Grotesk + Satoshi, warm ink and paper, one orange signal colour). */
-@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=satoshi@400,500,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+/* Theme bridge: brings inner pages in line with the homepage
+   (General Sans + Instrument Serif, deep evergreen surfaces, one lime signal colour). */
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap');
 :root {
-  --bg: #16140f;
-  --surface: #1e1b15;
-  --surface-raised: #26221b;
-  --surface-elevated: #2e2a21;
-  --surface-deep: #100e0a;
-  --text: #f4f1ea;
-  --muted: #b9b2a4;
-  --line: rgba(244, 241, 234, 0.12);
-  --line-strong: rgba(244, 241, 234, 0.26);
-  --accent: #ff7a4d;
-  --accent-soft: #ffb08f;
-  --primary: #ff5420;
+  --bg: #0b1411;
+  --surface: #12201b;
+  --surface-raised: #172822;
+  --surface-elevated: #1c3029;
+  --surface-deep: #08100d;
+  --text: #edf3ec;
+  --muted: #9aaba1;
+  --line: rgba(237, 243, 236, 0.1);
+  --line-strong: rgba(237, 243, 236, 0.22);
+  --accent: #d4ff3f;
+  --accent-soft: #e6ff8a;
+  --primary: #d4ff3f;
 }
 body {
-  font-family: "Satoshi", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "General Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
 }
-code, kbd, .eyebrow, [class*="mono"] { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
-h1, h2, h3, h4 { font-family: "Cabinet Grotesk", "Satoshi", ui-sans-serif, sans-serif; font-weight: 800; letter-spacing: -0.025em; color: #f4f1ea; }
-.eyebrow { color: #ff7a4d; }
+code, kbd, .eyebrow, [class*="mono"] { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+h1, h2, h3, h4 { font-family: "General Sans", ui-sans-serif, sans-serif; font-weight: 600; letter-spacing: -0.03em; color: #edf3ec; }
+h1 em, h2 em { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; color: #d4ff3f; letter-spacing: -0.01em; }
+.eyebrow { color: #d4ff3f; letter-spacing: 0.14em; }
 .text-gradient-accent, .text-gradient {
   background: none !important;
-  -webkit-text-fill-color: #ff5420 !important;
-  color: #ff5420 !important;
+  -webkit-text-fill-color: #edf3ec !important;
+  color: #edf3ec !important;
   text-shadow: none;
 }
 .button:not(.button--quiet) {
-  background: #ff5420;
-  color: #16140f;
-  border-color: #ff5420;
-  box-shadow: 4px 4px 0 #f4f1ea;
+  background: #d4ff3f;
+  color: #0b1411;
+  border-color: #d4ff3f;
+  border-radius: 999px;
+  box-shadow: none;
   text-shadow: none;
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  transition: transform 250ms cubic-bezier(.2,.7,.2,1), box-shadow 250ms ease, background 250ms ease;
 }
-.button:not(.button--quiet):hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #f4f1ea; }
-.button--quiet { border-color: var(--line-strong); color: #f4f1ea; }
-.site-header { background: rgba(22, 20, 15, 0.86); border-color: var(--line-strong); }
-a:focus-visible, button:focus-visible { outline: 2px solid #ff5420; outline-offset: 3px; }
-.text-gradient-accent, .text-gradient { -webkit-text-fill-color: #f4f1ea !important; color: #f4f1ea !important; }
-.site-nav a[aria-current="page"] { background: rgba(255, 84, 32, 0.14); border-color: rgba(255, 84, 32, 0.5); color: #fff; }
-.site-nav .nav-cta-btn, .site-header .site-nav .nav-cta-btn, .nav-cta-btn { background: #ff5420 !important; color: #16140f !important; box-shadow: none !important; }
-.site-nav .nav-cta-btn:hover { background: #ff7a4d !important; }
-.badge-chip { background: rgba(255, 84, 32, 0.1); border-color: rgba(255, 84, 32, 0.35); color: #ffb08f; }
-.badge-chip__dot { background: #ff5420; box-shadow: 0 0 0 4px rgba(255, 84, 32, 0.18); }
+.button:not(.button--quiet):hover { transform: translateY(-2px); background: #e2ff7a; box-shadow: 0 10px 30px -10px rgba(212, 255, 63, 0.55); }
+.button--quiet { border-color: var(--line-strong); color: #edf3ec; border-radius: 999px; }
+.button--quiet:hover { border-color: rgba(212, 255, 63, 0.5); }
+.site-header { background: rgba(11, 20, 17, 0.82); border-color: var(--line); backdrop-filter: blur(14px); }
+a:focus-visible, button:focus-visible { outline: 2px solid #d4ff3f; outline-offset: 3px; }
+.site-nav a[aria-current="page"] { background: rgba(212, 255, 63, 0.1); border-color: rgba(212, 255, 63, 0.4); color: #fff; }
+.site-nav .nav-cta-btn, .site-header .site-nav .nav-cta-btn, .nav-cta-btn { background: #d4ff3f !important; color: #0b1411 !important; border-color: #d4ff3f !important; box-shadow: none !important; border-radius: 999px !important; }
+.site-nav .nav-cta-btn:hover { background: #e2ff7a !important; }
+.badge-chip { background: rgba(212, 255, 63, 0.08); border-color: rgba(212, 255, 63, 0.3); color: #e6ff8a; }
+.badge-chip__dot { background: #d4ff3f; box-shadow: 0 0 0 4px rgba(212, 255, 63, 0.16); }
+::selection { background: #d4ff3f; color: #0b1411; }

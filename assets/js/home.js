@@ -1,288 +1,287 @@
 (() => {
-  const doc = document.documentElement;
-  doc.classList.add('js');
+  const root = document.documentElement;
+  root.classList.add('js');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hasIO = 'IntersectionObserver' in window;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  // Hero entrance
-  requestAnimationFrame(() => requestAnimationFrame(() => $('.hero') && $('.hero').classList.add('is-ready')));
+  requestAnimationFrame(() => requestAnimationFrame(() => { const h = $('.hero'); if (h) h.classList.add('is-ready'); }));
 
-  // ---------- Header ----------
-  const top = $('[data-top]');
-  const onScroll = () => top && top.classList.toggle('is-stuck', window.scrollY > 8);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  const menu = $('.top__menu');
-  const setMenu = (open) => {
-    top.classList.toggle('is-open', open);
-    menu.setAttribute('aria-expanded', String(open));
-    menu.textContent = open ? 'Close' : 'Menu';
+  // ---------- Toast ----------
+  const toastEl = $('[data-toast]');
+  let toastT = 0;
+  const toast = (msg) => {
+    if (!toastEl) return;
+    toastEl.textContent = msg; toastEl.classList.add('is-on');
+    clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('is-on'), 2200);
   };
-  if (menu) {
-    menu.addEventListener('click', () => setMenu(!top.classList.contains('is-open')));
-    $$('.top__nav a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && top.classList.contains('is-open')) { setMenu(false); menu.focus(); } });
-  }
 
-  // Current section underline
-  const links = $$('.top__nav a[href^="#"]');
+  // ---------- Nav: scrolled state, hide on scroll down, mobile menu, current link ----------
+  const nav = $('[data-nav]');
+  const menuBtn = $('.nav__menu');
+  let lastY = window.scrollY;
+  const onScroll = () => {
+    const y = window.scrollY;
+    nav.classList.toggle('is-scrolled', y > 12);
+    if (!nav.classList.contains('is-open')) nav.classList.toggle('is-hidden', y > 500 && y > lastY + 4);
+    if (y < lastY - 4) nav.classList.remove('is-hidden');
+    lastY = y;
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  const setMenu = (open) => {
+    nav.classList.toggle('is-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  if (menuBtn) {
+    menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+    $$('.nav__links a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
+  }
+  const links = $$('.nav__links a[href^="#"]');
   if (hasIO) {
     const io = new IntersectionObserver((ents) => ents.forEach((en) => {
-      if (!en.isIntersecting) return;
-      links.forEach((a) => a.classList.toggle('is-current', a.getAttribute('href') === '#' + en.target.id));
+      if (en.isIntersecting) links.forEach((a) => a.classList.toggle('is-current', a.getAttribute('href') === '#' + en.target.id));
     }), { rootMargin: '-45% 0px -50% 0px' });
     links.forEach((a) => { const el = $(a.getAttribute('href')); if (el) io.observe(el); });
   }
 
-  // Local clock in the header, and today's date on the masthead
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const clock = $('[data-clock]');
-  const tick = () => {
-    const d = new Date();
-    const t = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const day = d.getDay();
-    const note = day === 5 ? 'it’s Friday, agents on duty' : day === 0 || day === 6 ? 'agents on duty all weekend' : 'agents on duty';
-    if (clock) clock.textContent = `${days[day].slice(0, 3)} ${t} · ${note}`;
-  };
-  tick(); setInterval(tick, 30000);
-  const today = $('[data-today]');
-  if (today) today.textContent = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
-
   // ---------- Reveal ----------
-  $$('.index li, .paper article, .fridays li, details, .contact__grid > *').forEach((el, i, arr) => {
-    el.classList.add('rv');
-    const sib = [...el.parentElement.children].indexOf(el);
-    el.style.setProperty('--i', String(sib));
-  });
-  const revealables = $$('.split, .rv');
-  if (!hasIO || reduce) revealables.forEach((el) => el.classList.add('is-in'));
+  $$('.bento, .cards').forEach((g) => $$('.reveal', g).forEach((el, i) => el.style.setProperty('--i', String(i))));
+  const reveals = $$('.reveal');
+  if (!hasIO || reduce) reveals.forEach((el) => el.classList.add('is-in'));
   else {
     const io = new IntersectionObserver((ents) => ents.forEach((en) => {
-      if (!en.isIntersecting) return;
-      const t = en.target._rv || en.target;
-      t.classList.add('is-in'); io.unobserve(en.target);
-    }), { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
-    // clip-path hides .split from IntersectionObserver, so watch its parent instead
-    revealables.forEach((el) => {
-      const w = el.classList.contains('split') ? el.parentElement : el;
-      if (w !== el) w._rv = el;
-      io.observe(w);
+      if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+    }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    reveals.forEach((el) => io.observe(el));
+  }
+
+  // ---------- Hero glow follows pointer ----------
+  const hero = $('.hero'), glow = $('.hero__glow');
+  if (hero && glow && !reduce && window.matchMedia('(pointer: fine)').matches) {
+    hero.addEventListener('pointermove', (e) => {
+      const r = hero.getBoundingClientRect();
+      glow.style.setProperty('--gx', `${((e.clientX - r.left) / r.width) * 100}%`);
+      glow.style.setProperty('--gy', `${((e.clientY - r.top) / r.height) * 70}%`);
     });
   }
 
-  // ---------- Week board ----------
-  const board = $('[data-board]');
-  if (board) {
-    const tasks = $$('.task', board);
-    const dayEls = $$('.board__day', board);
-    const nowLine = $('.board__now', board);
-    const counter = $('[data-done]', board);
-    const total = tasks.length;
-    const toast = $('[data-toast]');
-    const who = $('[data-toast-who]'), what = $('[data-toast-what]');
-    let toastTimer = 0;
-    const DONE = { Emails: 'Emails sent', 'Speed check': 'Speed check passed', 'New pages': 'New pages published', '3 posts': '3 posts scheduled', 'Blog post': 'Blog post live', Replies: 'Replies handled', 'Leads scored': 'New leads scored', 'Offer email': 'Offer email ready for you', Backup: 'Backup complete', Reel: 'Reel published', Report: 'Weekly report ready' };
-    const announce = (t) => {
-      if (!toast || reduce) return;
-      const row = t.previousElementSibling && [...t.parentElement.children].slice(0, [...t.parentElement.children].indexOf(t)).reverse().find((el) => el.classList.contains('board__agent'));
-      const nm = row ? row.textContent : ''; who.textContent = (nm === 'Social' ? 'Social Media' : nm || 'Business') + ' Agent';
-      what.textContent = DONE[t.textContent] || t.textContent + ' done';
-      toast.style.setProperty('--a', t.style.getPropertyValue('--a'));
-      toast.classList.add('is-on');
-      clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('is-on'), 1500);
-    };
-    const setProgress = (p) => {
-      // p: 0..4 across Mon-Thu, 4 = start of Friday
-      let done = 0;
-      tasks.forEach((t) => {
-        const on = p > Number(t.dataset.day) + 0.55;
-        if (on && !t.classList.contains('is-done')) announce(t);
-        t.classList.toggle('is-done', on); if (on) done++;
-      });
-      if (counter) counter.textContent = String(done);
-      const i = Math.min(Math.floor(p), 3);
-      const a = dayEls[i], b = dayEls[i + 1];
-      const x = a.offsetLeft + (b.offsetLeft - a.offsetLeft) * Math.min(p - i, 1);
-      nowLine.style.setProperty('--x', `${x}px`);
-      board.classList.toggle('is-friday', p >= 4);
-    };
-    if (reduce) { setProgress(4); }
-    else {
-      const RUN = 9000, HOLD = 2800, GAP = 700, CYCLE = RUN + HOLD + GAP;
-      let start = 0, raf = 0, running = false;
-      const loop = (now) => {
-        if (!start) start = now;
-        const t = (now - start) % CYCLE;
-        if (t < RUN) { board.classList.add('is-running'); setProgress((t / RUN) * 4); }
-        else if (t < RUN + HOLD) { setProgress(4); }
-        else { board.classList.remove('is-running'); setProgress(0); }
-        if (running) raf = requestAnimationFrame(loop);
-      };
-      setProgress(0);
-      if (hasIO) new IntersectionObserver(([en]) => {
-        if (en.isIntersecting && !running) { running = true; raf = requestAnimationFrame(loop); }
-        else if (!en.isIntersecting && running) { running = false; cancelAnimationFrame(raf); }
-      }).observe(board);
-      else setProgress(4);
-    }
-  }
-
-  // ---------- Agent roster + log ----------
-  const LOGS = {
-    mkt: { name: 'Marketing Agent', color: 'var(--c-mkt)', lines: [
-      ['08:02', 'Drafted this week’s newsletter from your latest offers'],
-      ['09:15', 'Scheduled blog post “Five questions to ask before you hire”'],
-      ['11:40', 'Offer email ready for 2,400 subscribers', true],
-      ['14:05', 'Updated next week’s campaign calendar'],
-      ['16:30', 'Sent you a short summary of what went out today'],
-    ] },
-    web: { name: 'Website Agent', color: 'var(--c-web)', lines: [
-      ['07:30', 'Checked page speed on your top 10 pages'],
-      ['08:10', 'Fixed 3 broken links on the services page'],
-      ['10:45', 'Holiday opening hours drafted for the contact page', true],
-      ['13:20', 'Compressed new gallery images'],
-      ['23:00', 'Nightly backup completed'],
-    ] },
-    soc: { name: 'Social Media Agent', color: 'var(--c-soc)', lines: [
-      ['08:30', 'Prepared posts for Facebook, Instagram and X'],
-      ['09:00', 'Queued 3 posts for the best times this week'],
-      ['12:15', 'Customer question on Instagram needs a personal reply', true],
-      ['15:40', 'Replied to 6 routine comments using your saved answers'],
-      ['18:00', 'Published the evening post'],
-    ] },
-    grw: { name: 'Growth Agent', color: 'var(--c-grw)', lines: [
-      ['08:00', 'Scored 14 new enquiries from the website and social'],
-      ['08:05', 'Sent 3 hot leads to your sales inbox'],
-      ['11:00', 'Follow-up sequence for quiet leads drafted', true],
-      ['15:00', 'Compared this week with last week across channels'],
-      ['17:30', 'Weekly growth report ready'],
-    ] },
+  // ---------- Agent console demo ----------
+  const PLANS = {
+    mkt: { name: 'Marketing Agent', letter: 'M', color: 'var(--lime)', steps: ['Read your latest offers and past emails', 'Drafted this week’s newsletter in your tone', 'Picked the best send time for your list', { ask: 'Newsletter ready to send' }] },
+    web: { name: 'Website Agent', letter: 'W', color: 'var(--sky)', steps: ['Checked speed on your key pages', 'Found and fixed 3 broken links', 'Backed up the site', { ask: 'New opening hours ready to publish' }] },
+    soc: { name: 'Social Media Agent', letter: 'S', color: 'var(--violet)', steps: ['Planned 3 posts for Facebook, Instagram and X', 'Wrote captions and picked images', 'Scheduled posts for the best times', { ask: 'One customer reply needs your personal touch' }] },
+    grw: { name: 'Growth Agent', letter: 'G', color: 'var(--peach)', steps: ['Collected new enquiries from website and social', 'Scored and sorted leads by fit', 'Drafted follow-ups for each lead', { ask: 'Follow-up emails ready to send' }] },
   };
-  const tabs = $$('[role="tab"]');
-  const log = $('[data-log]');
-  if (tabs.length && log) {
-    const title = $('[data-log-title]', log);
-    const list = $('[data-log-lines]', log);
-    const render = (key) => {
-      const data = LOGS[key];
-      title.textContent = data.name;
-      log.style.setProperty('--a', data.color);
-      list.innerHTML = '';
-      data.lines.forEach(([t, text, ask], n) => {
+  const pick = (text) => {
+    const t = text.toLowerCase();
+    if (/newsletter|e-?mail|campaign|blog|content|offer|promo/.test(t)) return 'mkt';
+    if (/insta|facebook|social|post|tiktok|reel|comment|twitter|\bx\b|linkedin/.test(t)) return 'soc';
+    if (/web|site|page|seo|speed|link|backup|domain|hosting/.test(t)) return 'web';
+    if (/lead|sale|grow|report|customer|crm|enquir|follow/.test(t)) return 'grw';
+    return 'mkt';
+  };
+  const cons = $('[data-console]');
+  if (cons) {
+    const form = $('[data-ask]', cons), input = $('#ask-input'), chips = $$('[data-chip]', cons);
+    const avatar = $('[data-avatar]', cons), agentName = $('[data-agent-name]', cons), taskEl = $('[data-task]', cons);
+    const stateEl = $('[data-state]', cons), stepsEl = $('[data-steps]', cons), out = $('[data-out]', cons);
+    let run = 0, auto = true, timers = [];
+    const later = (fn, ms) => timers.push(setTimeout(fn, reduce ? 0 : ms));
+    const clear = () => { timers.forEach(clearTimeout); timers = []; };
+    const setState = (cls, txt) => { stateEl.className = 'plan__state ' + cls; stateEl.textContent = txt; };
+
+    const plan = (text) => {
+      clear(); const id = ++run;
+      const key = pick(text), p = PLANS[key];
+      out.style.setProperty('--a', p.color);
+      avatar.textContent = p.letter; agentName.textContent = p.name; taskEl.textContent = '“' + text + '”';
+      chips.forEach((c) => c.classList.toggle('is-active', c.dataset.chip === text));
+      setState('is-busy', 'Planning');
+      stepsEl.innerHTML = '';
+      const items = p.steps.map((s) => {
         const li = document.createElement('li');
-        li.style.setProperty('--n', String(n));
-        if (ask) li.classList.add('is-ask');
-        const time = document.createElement('time'); time.textContent = t;
-        const span = document.createElement('span'); span.textContent = text + (ask ? ', waiting for your approval' : '');
-        if (ask) {
-          const btn = document.createElement('button');
-          btn.type = 'button'; btn.className = 'log__approve'; btn.textContent = 'Approve';
-          btn.addEventListener('click', () => {
-            li.classList.remove('is-ask'); li.classList.add('is-approved');
-            span.textContent = text + ', approved by you';
+        const ico = document.createElement('span'); ico.className = 'plan__ico'; ico.setAttribute('aria-hidden', 'true');
+        const body = document.createElement('div');
+        const label = document.createElement('span'); label.textContent = typeof s === 'string' ? s : s.ask;
+        const bar = document.createElement('span'); bar.className = 'plan__bar'; bar.innerHTML = '<i></i>';
+        body.append(label, bar); li.append(ico, body); stepsEl.appendChild(li);
+        return { li, ico, body, ask: typeof s !== 'string' };
+      });
+      items.forEach((it, i) => {
+        later(() => { if (id !== run) return; it.li.classList.add('is-in', 'is-run'); }, 250 + i * 900);
+        later(() => {
+          if (id !== run) return;
+          it.li.classList.remove('is-run');
+          if (!it.ask) { it.li.classList.add('is-ok'); it.ico.textContent = '✓'; return; }
+          it.li.classList.add('is-wait'); it.ico.textContent = '!';
+          it.body.querySelector('.plan__bar').remove();
+          setState('is-ask', 'Needs you');
+          const wrap = document.createElement('div'); wrap.className = 'plan__approve';
+          const ok = document.createElement('button'); ok.type = 'button'; ok.textContent = 'Approve';
+          const edit = document.createElement('button'); edit.type = 'button'; edit.textContent = 'Request changes';
+          ok.addEventListener('click', () => {
+            auto = false; wrap.remove(); it.li.classList.remove('is-wait'); it.li.classList.add('is-ok'); it.ico.textContent = '✓';
+            it.body.firstChild.textContent += ' · approved by you'; setState('is-done', 'Done');
           });
-          span.appendChild(btn);
-        }
-        li.append(time, span);
-        list.appendChild(li);
+          edit.addEventListener('click', () => { auto = false; wrap.remove(); it.body.firstChild.textContent += ' · sent back with your notes'; setState('', 'Revising'); });
+          wrap.append(ok, edit); it.body.appendChild(wrap);
+          if (auto) later(() => { if (id === run && auto) cycle(); }, 4200);
+        }, 250 + i * 900 + 750);
       });
     };
-    const select = (tab, focus) => {
-      tabs.forEach((t) => { const on = t === tab; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
-      log.setAttribute('aria-labelledby', tab.id);
-      render(tab.dataset.agent);
-      if (focus) tab.focus();
+
+    // Type a chip's text into the input, then plan it
+    const typeIn = (text, then) => {
+      if (reduce) { input.value = text; then(); return; }
+      input.value = ''; let i = 0; const id = run;
+      const step = () => { if (id !== run || !auto) return; input.value = text.slice(0, ++i); if (i < text.length) later(step, 28); else later(then, 300); };
+      step();
     };
-    tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => select(tab));
-      tab.addEventListener('keydown', (e) => {
-        let j = null;
-        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') j = (i + 1) % tabs.length;
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
-        if (e.key === 'Home') j = 0;
-        if (e.key === 'End') j = tabs.length - 1;
-        if (j !== null) { e.preventDefault(); select(tabs[j], true); }
-      });
-    });
-    render('mkt');
+    let ci = 0;
+    const cycle = () => { const text = chips[ci % chips.length].dataset.chip; ci++; typeIn(text, () => plan(text)); };
+
+    const stopAuto = () => { auto = false; };
+    chips.forEach((c) => c.addEventListener('click', () => { stopAuto(); input.value = c.dataset.chip; plan(c.dataset.chip); }));
+    form.addEventListener('submit', (e) => { e.preventDefault(); stopAuto(); const v = input.value.trim(); if (!v) { input.focus(); return; } plan(v); });
+    input.addEventListener('focus', () => { if (auto) { stopAuto(); clear(); run++; input.value = ''; } });
+
+    if (hasIO) {
+      let started = false;
+      new IntersectionObserver(([en]) => { if (en.isIntersecting && !started) { started = true; setTimeout(cycle, reduce ? 0 : 900); } }, { threshold: 0.4 }).observe(cons);
+    } else cycle();
   }
 
-  // ---------- Four Fridays progress (scroll-linked) ----------
-  const fridays = $('[data-fridays]');
-  const bar = $('[data-fridays-bar]');
-  if (fridays && bar) {
-    const items = $$('li', fridays);
+  // ---------- How it works: horizontal scroll ----------
+  const how = $('[data-how]'), track = $('[data-how-track]'), howBar = $('[data-how-bar]');
+  if (how && track) {
+    const steps = $$('.step', track);
+    const wide = () => window.matchMedia('(min-width: 861px)').matches && !reduce;
     const update = () => {
-      const r = fridays.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const p = reduce ? 1 : Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
-      bar.style.setProperty('--p', p.toFixed(3));
-      items.forEach((li, i) => li.classList.toggle('is-lit', p >= (i + 0.5) / items.length));
+      const r = how.getBoundingClientRect();
+      const total = how.offsetHeight - window.innerHeight;
+      let p;
+      if (wide()) {
+        p = Math.max(0, Math.min(1, -r.top / Math.max(1, total)));
+        const dist = Math.max(0, track.scrollWidth - window.innerWidth);
+        track.style.setProperty('--tx', `${(-dist * p).toFixed(1)}px`);
+      } else {
+        p = Math.max(0, Math.min(1, (window.innerHeight * 0.7 - r.top) / r.height));
+      }
+      if (howBar) howBar.style.setProperty('--p', p.toFixed(3));
+      const active = Math.min(steps.length - 1, Math.floor(p * steps.length * 0.999));
+      steps.forEach((s, i) => s.classList.toggle('is-on', i <= active));
     };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
+    let ticking = false;
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } }, { passive: true });
     window.addEventListener('resize', update);
+    update();
   }
 
-  // ---------- Scroll progress + sun parallax ----------
-  const prog = $('[data-progress]');
-  const sun = $('.sun');
-  let ticking = false;
-  const onFrame = () => {
-    ticking = false;
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    if (prog) prog.style.setProperty('--sp', max > 0 ? (window.scrollY / max).toFixed(4) : '0');
-    if (sun && !reduce && window.scrollY < window.innerHeight * 1.2) sun.style.setProperty('--sy', `${window.scrollY * -0.18}px`);
-  };
-  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onFrame); } }, { passive: true });
-  onFrame();
-
-  // ---------- Board tilt (fine pointers only) ----------
-  const stage = $('[data-stage]');
-  if (stage && board && !reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    stage.addEventListener('pointermove', (e) => {
-      const r = stage.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-      board.style.setProperty('--ry', `${(x * 8).toFixed(2)}deg`);
-      board.style.setProperty('--rx', `${(y * -6).toFixed(2)}deg`);
+  // ---------- Service cards spotlight ----------
+  $$('[data-spot] .card').forEach((card) => {
+    card.addEventListener('pointermove', (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
     });
-    stage.addEventListener('pointerleave', () => { board.style.setProperty('--ry', '0deg'); board.style.setProperty('--rx', '0deg'); });
+  });
+
+  // ---------- News carousel ----------
+  const news = $('[data-news]');
+  if (news) {
+    const prev = $('[data-news-prev]'), next = $('[data-news-next]');
+    const stepW = () => { const c = news.firstElementChild; return c ? c.getBoundingClientRect().width + 16 : 300; };
+    const sync = () => {
+      prev.disabled = news.scrollLeft < 4;
+      next.disabled = news.scrollLeft + news.clientWidth >= news.scrollWidth - 4;
+      prev.parentElement.style.visibility = news.scrollWidth - news.clientWidth > 24 ? '' : 'hidden';
+    };
+    prev.addEventListener('click', () => news.scrollBy({ left: -stepW(), behavior: reduce ? 'auto' : 'smooth' }));
+    next.addEventListener('click', () => news.scrollBy({ left: stepW(), behavior: reduce ? 'auto' : 'smooth' }));
+    news.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
   }
 
-  // ---------- Before / after compare ----------
-  const cmp = $('[data-compare]');
-  if (cmp) {
-    const range = $('.compare__range', cmp);
-    const set = (v) => cmp.style.setProperty('--pos', `${v}%`);
-    range.addEventListener('input', () => set(range.value));
-    range.addEventListener('pointerdown', () => cmp.classList.add('is-drag'));
-    window.addEventListener('pointerup', () => cmp.classList.remove('is-drag'));
-    // Gentle hint: sweep once when it first comes into view
-    if (hasIO && !reduce) {
-      const io = new IntersectionObserver(([en]) => {
-        if (!en.isIntersecting) return;
-        io.disconnect();
-        const t0 = performance.now();
-        const sweep = (now) => {
-          if (cmp.classList.contains('is-drag')) return;
-          const k = Math.min(1, (now - t0) / 1800);
-          const v = 50 + Math.sin(k * Math.PI * 2) * 22 * (1 - k);
-          set(v.toFixed(1)); range.value = v;
-          if (k < 1) requestAnimationFrame(sweep); else { set(50); range.value = 50; }
-        };
-        requestAnimationFrame(sweep);
-      }, { threshold: 0.5 });
-      io.observe(cmp);
-    }
+  // ---------- Copy email ----------
+  $$('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
+    const v = b.dataset.copy;
+    try { await navigator.clipboard.writeText(v); }
+    catch (_) { const t = document.createElement('textarea'); t.value = v; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); }
+    b.textContent = 'Copied'; b.classList.add('is-done'); toast('Email address copied');
+    setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('is-done'); }, 1800);
+  }));
+
+  // ---------- Project brief -> email ----------
+  const brief = $('[data-brief]');
+  if (brief) {
+    const hint = $('[data-brief-hint]', brief);
+    const defaultHint = hint.textContent;
+    brief.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = brief.name.value.trim();
+      if (!name) { brief.name.setAttribute('aria-invalid', 'true'); hint.textContent = 'Please add your name so we know who to reply to.'; hint.classList.add('is-error'); brief.name.focus(); return; }
+      brief.name.removeAttribute('aria-invalid'); hint.textContent = defaultHint; hint.classList.remove('is-error');
+      const needs = $$('input[name="need"]:checked', brief).map((i) => i.value);
+      const company = brief.company.value.trim(), msg = brief.msg.value.trim();
+      const subject = `Project brief from ${name}${company ? ' (' + company + ')' : ''}`;
+      const body = [`Name: ${name}`, company && `Company: ${company}`, `Agents needed: ${needs.length ? needs.join(', ') : 'Not sure yet'}`, '', msg || '(No extra details)'].filter((l) => l !== '' || true).filter(Boolean).join('\n');
+      window.location.href = `mailto:fridaystartup@fridaystartup.cyou?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      toast('Opening your email app…');
+    });
+    brief.name.addEventListener('input', () => { brief.name.removeAttribute('aria-invalid'); hint.textContent = defaultHint; hint.classList.remove('is-error'); });
   }
 
-  // ---------- Footer wordmark ----------
-  const word = $('[data-word]');
-  if (word) {
-    if (!hasIO || reduce) word.classList.add('is-in');
-    else new IntersectionObserver(([en], o) => { if (en.isIntersecting) { word.classList.add('is-in'); o.disconnect(); } }, { threshold: 0.3 }).observe(word);
+  // ---------- Back to top ----------
+  const topBtn = $('[data-top]');
+  if (topBtn) topBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); $('.nav__brand').focus(); });
+
+  // ---------- Command palette ----------
+  const pal = $('[data-palette]');
+  if (pal && typeof pal.showModal === 'function') {
+    const input = $('[data-palette-input]', pal), list = $('[data-palette-list]', pal), empty = $('[data-palette-empty]', pal);
+    const items = $$('li', list);
+    items.forEach((li, i) => { li.id = 'pal-' + i; });
+    let visible = items, idx = 0;
+    const mark = () => {
+      items.forEach((li) => li.setAttribute('aria-selected', 'false'));
+      if (visible[idx]) { visible[idx].setAttribute('aria-selected', 'true'); input.setAttribute('aria-activedescendant', visible[idx].id); visible[idx].scrollIntoView({ block: 'nearest' }); }
+      else input.removeAttribute('aria-activedescendant');
+    };
+    const filter = () => {
+      const q = input.value.trim().toLowerCase();
+      visible = items.filter((li) => { const on = !q || (li.textContent + ' ' + li.dataset.group).toLowerCase().includes(q); li.hidden = !on; return on; });
+      empty.hidden = visible.length > 0; idx = 0; mark();
+    };
+    const go = (li) => {
+      if (!li) return;
+      const href = li.dataset.href;
+      pal.close();
+      if (href.startsWith('#')) { const el = $(href); if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); history.replaceState(null, '', href); }
+      else if (/^https?:/.test(href)) window.open(href, '_blank', 'noopener');
+      else window.location.href = href;
+    };
+    const open = () => { input.value = ''; filter(); pal.showModal(); input.focus(); };
+    $$('[data-palette-open]').forEach((b) => b.addEventListener('click', open));
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); pal.open ? pal.close() : open(); }
+    });
+    input.addEventListener('input', filter);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); idx = Math.min(visible.length - 1, idx + 1); mark(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); idx = Math.max(0, idx - 1); mark(); }
+      else if (e.key === 'Enter') { e.preventDefault(); go(visible[idx]); }
+    });
+    items.forEach((li) => {
+      li.addEventListener('click', () => go(li));
+      li.addEventListener('pointermove', () => { const j = visible.indexOf(li); if (j !== idx) { idx = j; mark(); } });
+    });
+    pal.addEventListener('click', (e) => { if (e.target === pal) pal.close(); });
+  } else {
+    $$('[data-palette-open]').forEach((b) => { b.hidden = true; });
   }
 })();

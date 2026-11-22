@@ -28,13 +28,13 @@ The published contact details are the official email address `fridaystartup@frid
 
 Do not add other account profiles or contact methods without an explicit site-owner request.
 
-### Homepage structure and motion ("Keep your Friday" redesign)
+### Homepage structure and motion ("Agents at work" redesign)
 
-- Concept: your Business Agents work Monday to Thursday, and you keep Friday. Light paper-and-ink palette with a single orange signal colour; Cabinet Grotesk (display) and Satoshi (body) from Fontshare, JetBrains Mono for labels.
+- Identity: deep evergreen surfaces with a single lime signal colour (plus sky, violet and peach to tell the four agents apart). General Sans (Fontshare) for headings and body, Instrument Serif italic for emphasis, IBM Plex Mono for labels.
 - The homepage is standalone: `index.html` loads only `assets/css/home.css` and `assets/js/home.js`.
-- Sections: sticky header with a live clock and scroll progress line → hero with an animated **week board** (four agents fill Mon–Thu tasks as a "now" line sweeps, live agent notifications, pointer tilt, a rising "Friday sun"; Friday stays free) → moving services ribbon → **Business Agents** roster with an interactive activity log and approval buttons → **Same week. Different Friday.** drag-to-compare week, also keyboard-operable → "Four Fridays" process with scroll-lit numerals → **More than agents** service index, ending with the "Next launch" row for upcoming solutions → **The Friday Edition** news with illustrated covers and social links → FAQ → orange contact section with a rotating "Book a call" badge → footer with an animated wordmark.
-- Inner pages keep `site.css`, `premium.css` and `site.js`, plus `assets/css/theme.css`, which applies the same type, warm ink background and orange accent.
-- Motion pauses off-screen and is disabled for visitors with `prefers-reduced-motion`; content stays visible without JavaScript.
+- Sections: floating pill header that hides on scroll down, with a **command palette** (Ctrl/⌘ + K) → hero with an interactive **agent console**: type a task or pick an example and the matching agent plans it step by step, then waits for your approval → services ticker → **Business Agents** bento (Marketing, Website, Social Media, Growth) with animated mini-visuals → **How it works**, a scroll-driven horizontal track (Discover, Design, Deploy, Develop) → **One studio. Many services.** cards with a pointer spotlight, ending with "In the lab" for upcoming solutions → **What's new** news carousel with social links → FAQ → contact card with copy-email, call link, social links and a quick project brief that opens a pre-filled email → footer.
+- Inner pages keep `site.css`, `premium.css` and `site.js`, plus `assets/css/theme.css`, which applies the same type, evergreen background and lime accent.
+- Motion is disabled for visitors with `prefers-reduced-motion` (the console shows its final state, the how-it-works track becomes a normal list); content stays readable without JavaScript.
 
 ### News and launches
 
